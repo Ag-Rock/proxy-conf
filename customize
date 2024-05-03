@@ -1,0 +1,64 @@
+# > 私人名单
+HOST-SUFFIX,keepersecurity.com,DIRECT
+HOST-SUFFIX,tenorshare.com,🇺🇳 Global
+HOST-SUFFIX,dmm.co.jp,🇯🇵 JP
+HOST-SUFFIX,oyunfor.com,DIRECT
+HOST-SUFFIX,oracle.com,DIRECT
+HOST-SUFFIX,oraclecloud.com,DIRECT
+HOST-SUFFIX,hilton.com,DIRECT
+HOST-SUFFIX,hilton.com.cn,DIRECT
+HOST-SUFFIX,hiltonhonors.com,DIRECT
+HOST-SUFFIX,marriott.com,DIRECT
+HOST-SUFFIX,giffgaff.com,🇬🇧 GB
+HOST-KEYWORD,giffgaff,🇬🇧 GB
+HOST-SUFFIX,openai.com,🇺🇳 Global
+HOST-SUFFIX,qlogo.cn,DIRECT
+HOST-SUFFIX,qpic.cn,DIRECT
+HOST-SUFFIX,amap.com,DIRECT
+HOST-SUFFIX,onedrive.live.com,Bing
+HOST-SUFFIX,flyert.com,DIRECT
+HOST-SUFFIX,speedtest.net,DIRECT
+HOST-SUFFIX,udemycdn.com,🇺🇳 Global
+HOST-SUFFIX,udemy.com,DIRECT
+HOST-SUFFIX,tradingview.com,🇺🇳 Global
+# 盈透证券
+HOST-SUFFIX,interactivebrokers.com,DIRECT
+HOST-SUFFIX,ibkr.com,DIRECT
+# 嘉信理财
+# HOST-SUFFIX,schwab.com,DIRECT
+HOST-SUFFIX,ifastgb.com,DIRECT
+HOST-SUFFIX,skrill.com,DIRECT
+HOST-SUFFIX,sticpay.com,DIRECT
+HOST-SUFFIX,tapngo.com.hk,🇭🇰 HK
+HOST-SUFFIX,alipayhk.com,🇭🇰 HK
+HOST-SUFFIX,alipay.hk,🇭🇰 HK
+HOST-SUFFIX,mifinity.com,🇭🇰 HK
+HOST-SUFFIX,tech26.de,DIRECT
+HOST-SUFFIX,number26.de,DIRECT
+HOST-SUFFIX,n26.com,DIRECT
+
+# # Swissquote MT4 香港103.6.130.223
+# IP-CIDR,103.6.130.0/24,DIRECT
+# # Swissquote MT4 荷兰176.56.182.243
+# IP-CIDR,176.56.182.0/24,DIRECT
+# # Swissquote MT4 俄罗斯195.189.123.201
+# IP-CIDR,195.189.123.0/24,DIRECT
+# # Swissquote MT4 美国98.158.104.90
+# IP-CIDR,98.158.104.0/24,DIRECT
+# # Swissquote MT4 广东120.77.44.225
+# IP-CIDR,120.77.44.0/24,DIRECT
+# # Dukascopy MT4 40.83.74.162
+# IP-CIDR,40.83.74.0/24,DIRECT
+# # 福汇 MT4
+# HOST-SUFFIX,mt4r09.fxcorporate.com,DIRECT
+# # Swissquote MT5 185.212.168.30
+# IP-CIDR,185.212.168.0/24,DIRECT
+# # XGLOBAL MT5 52.236.176.200
+# IP-CIDR,52.236.176.0/24,DIRECT
+
+# HOST-SUFFIX,uk,🇬🇧 GB
+# HOST-SUFFIX,hk,🇭🇰 HK
+# HOST-SUFFIX,jp,🇯🇵 JP
+# HOST-SUFFIX,sg,🇸🇬 SG
+# HOST-SUFFIX,tw,🇼🇸 TW
+# HOST-SUFFIX,us,🇺🇸 US
