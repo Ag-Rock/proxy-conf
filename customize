@@ -5,15 +5,15 @@ HOST-SUFFIX,dmm.co.jp,🇯🇵 JP
 HOST-SUFFIX,oyunfor.com,DIRECT
 HOST-SUFFIX,oracle.com,DIRECT
 HOST-SUFFIX,oraclecloud.com,DIRECT
-# HOST-SUFFIX,hilton.com,DIRECT
-# HOST-SUFFIX,hilton.com.cn,DIRECT
-# HOST-SUFFIX,hiltonhonors.com,DIRECT
-# HOST-SUFFIX,marriott.com,DIRECT
+HOST-SUFFIX,hilton.com,DIRECT
+HOST-SUFFIX,hilton.com.cn,DIRECT
+HOST-SUFFIX,hiltonhonors.com,DIRECT
+HOST-SUFFIX,marriott.com,DIRECT
 HOST-SUFFIX,giffgaff.com,🇬🇧 GB
 HOST-KEYWORD,giffgaff,🇬🇧 GB
 HOST-SUFFIX,openai.com,🇺🇳 Global
-HOST-SUFFIX,qlogo.cn,DIRECT
-HOST-SUFFIX,qpic.cn,DIRECT
+# HOST-SUFFIX,qlogo.cn,DIRECT
+# HOST-SUFFIX,qpic.cn,DIRECT
 HOST-SUFFIX,amap.com,DIRECT
 HOST-SUFFIX,onedrive.live.com,Bing
 HOST-SUFFIX,flyert.com,DIRECT
