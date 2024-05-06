@@ -11,11 +11,8 @@ HOST-SUFFIX,hiltonhonors.com,DIRECT
 HOST-SUFFIX,marriott.com,DIRECT
 HOST-SUFFIX,giffgaff.com,🇬🇧 GB
 HOST-KEYWORD,giffgaff,🇬🇧 GB
-HOST-SUFFIX,openai.com,🇺🇳 Global
-# HOST-SUFFIX,qlogo.cn,DIRECT
-# HOST-SUFFIX,qpic.cn,DIRECT
 HOST-SUFFIX,amap.com,DIRECT
-HOST-SUFFIX,onedrive.live.com,Bing
+HOST-SUFFIX,onedrive.live.com,🇺🇳 Global
 HOST-SUFFIX,flyert.com,DIRECT
 HOST-SUFFIX,speedtest.net,DIRECT
 HOST-SUFFIX,udemycdn.com,🇺🇳 Global
