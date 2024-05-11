@@ -1,3 +1,4 @@
+payload:
 # NAME: OpenAI
 # AUTHOR: blackmatrix7
 # REPO: https://github.com/blackmatrix7/ios_rule_script
@@ -8,7 +9,6 @@
 # IP-ASN: 1
 # IP-CIDR: 2
 # TOTAL: 27
-payload:
   - DOMAIN,browser-intake-datadoghq.com
   - DOMAIN,static.cloudflareinsights.com
   - DOMAIN-SUFFIX,ai.com
@@ -46,7 +46,6 @@ payload:
 # IP-ASN: 2
 # IP-CIDR: 2
 # TOTAL: 51
-payload:
   - DOMAIN,api.msn.com
   - DOMAIN,api.statsig.com
   - DOMAIN,assets.msn.com
@@ -105,7 +104,6 @@ payload:
 # DOMAIN-KEYWORD: 3
 # DOMAIN-SUFFIX: 7
 # TOTAL: 13
-payload:
   - DOMAIN,ai.google.dev
   - DOMAIN,alkalimakersuite-pa.clients6.google.com
   - DOMAIN,makersuite.google.com
