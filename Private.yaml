@@ -1,4 +1,3 @@
-- DOMAIN-SUFFIX,points.com,🇺🇳 Global
 - DOMAIN-SUFFIX,onedrive.live.com,🇺🇳 Global
 - DOMAIN-SUFFIX,smtp,DIRECT
 - DOMAIN-KEYWORD,aria2,DIRECT
@@ -8,9 +7,11 @@
 - DOMAIN-SUFFIX,oyunfor.com,DIRECT
 - DOMAIN-SUFFIX,oracle.com,DIRECT
 - DOMAIN-SUFFIX,oraclecloud.com,DIRECT
+- DOMAIN-SUFFIX,hilton.io,DIRECT
 - DOMAIN-SUFFIX,hilton.com,DIRECT
 - DOMAIN-SUFFIX,hilton.com.cn,DIRECT
 - DOMAIN-SUFFIX,hiltonhonors.com,DIRECT
+- DOMAIN-SUFFIX,points.com,DIRECT
 - DOMAIN-SUFFIX,marriott.com,DIRECT
 - DOMAIN-SUFFIX,ihg.com,DIRECT
 - DOMAIN-SUFFIX,openai.com,🇺🇳 Global
