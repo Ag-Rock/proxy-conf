@@ -1,14 +1,15 @@
 # > 私人名单
-HOST-SUFFIX,points.com,🇺🇳 Global
 HOST-SUFFIX,keepersecurity.com,DIRECT
 HOST-SUFFIX,tenorshare.com,🇺🇳 Global
 HOST-SUFFIX,dmm.co.jp,🇯🇵 JP
 HOST-SUFFIX,oyunfor.com,DIRECT
 HOST-SUFFIX,oracle.com,DIRECT
 HOST-SUFFIX,oraclecloud.com,DIRECT
+HOST-SUFFIX,hilton.io,DIRECT
 HOST-SUFFIX,hilton.com,DIRECT
 HOST-SUFFIX,hilton.com.cn,DIRECT
 HOST-SUFFIX,hiltonhonors.com,DIRECT
+HOST-SUFFIX,points.com,DIRECT
 HOST-SUFFIX,marriott.com,DIRECT
 HOST-SUFFIX,giffgaff.com,🇬🇧 GB
 HOST-KEYWORD,giffgaff,🇬🇧 GB
