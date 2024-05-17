@@ -1,37 +1,51 @@
-# > 私人名单
-HOST-SUFFIX,keepersecurity.com,DIRECT
-HOST-SUFFIX,tenorshare.com,🇺🇳 Global
-HOST-SUFFIX,dmm.co.jp,🇯🇵 JP
-HOST-SUFFIX,oyunfor.com,DIRECT
-HOST-SUFFIX,oracle.com,DIRECT
-HOST-SUFFIX,oraclecloud.com,DIRECT
-HOST-SUFFIX,hilton.io,DIRECT
-HOST-SUFFIX,hilton.com,DIRECT
-HOST-SUFFIX,hilton.com.cn,DIRECT
-HOST-SUFFIX,hiltonhonors.com,DIRECT
-HOST-SUFFIX,points.com,DIRECT
-HOST-SUFFIX,marriott.com,DIRECT
-HOST-SUFFIX,giffgaff.com,🇬🇧 GB
-HOST-KEYWORD,giffgaff,🇬🇧 GB
-HOST-SUFFIX,amap.com,DIRECT
 HOST-SUFFIX,onedrive.live.com,🇺🇳 Global
-HOST-SUFFIX,flyert.com,DIRECT
-HOST-SUFFIX,speedtest.net,DIRECT
+HOST-SUFFIX,tenorshare.com,🇺🇳 Global
 HOST-SUFFIX,udemycdn.com,🇺🇳 Global
-HOST-SUFFIX,udemy.com,DIRECT
-HOST-SUFFIX,tradingview.com,🇺🇳 Global
-# 盈透证券
-HOST-SUFFIX,interactivebrokers.com,DIRECT
-HOST-SUFFIX,ibkr.com,DIRECT
-# 嘉信理财
-# HOST-SUFFIX,schwab.com,DIRECT
-HOST-SUFFIX,ifastgb.com,DIRECT
-HOST-SUFFIX,skrill.com,DIRECT
-HOST-SUFFIX,sticpay.com,DIRECT
+
+HOST-SUFFIX,dmm.co.jp,🇯🇵 JP
+
 HOST-SUFFIX,tapngo.com.hk,🇭🇰 HK
 HOST-SUFFIX,alipayhk.com,🇭🇰 HK
 HOST-SUFFIX,alipay.hk,🇭🇰 HK
 HOST-SUFFIX,mifinity.com,🇭🇰 HK
+
+HOST-SUFFIX,giffgaff.com,🇬🇧 GB
+
+HOST-SUFFIX,paysera.com,Banking
+HOST-SUFFIX,monese.com,Banking
+HOST-SUFFIX,fra-01.braze.eu,Banking
+HOST-SUFFIX,yuh-api.swissquote.ch,Banking
+HOST-SUFFIX,yuh.swissquote.ch,Banking
+HOST-SUFFIX,swissquote.ch,Banking
+HOST-SUFFIX,swissquote.info,Banking
+HOST-SUFFIX,uphold.com,Banking
+HOST-SUFFIX,flowbank.com,Banking
+# wise两步验证
+HOST-SUFFIX,wise.com,Banking
+HOST-SUFFIX,authy.com,Banking
+# vivid安全与欺诈调查
+HOST-SUFFIX,vivid.money,Banking
+HOST-SUFFIX,castle.io,Banking
+HOST-SUFFIX,group-ib.com,Banking
+HOST-SUFFIX,onetrust.com,Banking
+
+############################################
+HOST-SUFFIX,keepersecurity.com,DIRECT
+HOST-SUFFIX,oyunfor.com,DIRECT
+HOST-SUFFIX,oracle.com,DIRECT
+HOST-SUFFIX,oraclecloud.com,DIRECT
+HOST-SUFFIX,hilton.com,DIRECT
+HOST-SUFFIX,hiltonhonors.com,DIRECT
+HOST-SUFFIX,marriott.com,DIRECT
+HOST-SUFFIX,ihg.com,DIRECT
+HOST-SUFFIX,hp.com,DIRECT
+HOST-SUFFIX,speedtest.net,DIRECT
+HOST-SUFFIX,udemy.com,DIRECT
+HOST-SUFFIX,interactivebrokers.com,DIRECT
+HOST-SUFFIX,ibkr.com,DIRECT
+HOST-SUFFIX,ifastgb.com,DIRECT
+HOST-SUFFIX,skrill.com,DIRECT
+HOST-SUFFIX,sticpay.com,DIRECT
 HOST-SUFFIX,tech26.de,DIRECT
 HOST-SUFFIX,number26.de,DIRECT
 HOST-SUFFIX,n26.com,DIRECT
