@@ -1,0 +1,20 @@
+payload:
+- DOMAIN-SUFFIX,keepersecurity.com,DIRECT
+- DOMAIN-SUFFIX,oyunfor.com,DIRECT
+- DOMAIN-SUFFIX,oracle.com,DIRECT
+- DOMAIN-SUFFIX,oraclecloud.com,DIRECT
+- DOMAIN-SUFFIX,hilton.com,DIRECT
+- DOMAIN-SUFFIX,hiltonhonors.com,DIRECT
+- DOMAIN-SUFFIX,marriott.com,DIRECT
+- DOMAIN-SUFFIX,ihg.com,DIRECT
+- DOMAIN-SUFFIX,hp.com,DIRECT
+- DOMAIN-SUFFIX,speedtest.net,DIRECT
+- DOMAIN-SUFFIX,udemy.com,DIRECT
+- DOMAIN-SUFFIX,interactivebrokers.com,DIRECT
+- DOMAIN-SUFFIX,ibkr.com,DIRECT
+- DOMAIN-SUFFIX,ifastgb.com,DIRECT
+- DOMAIN-SUFFIX,skrill.com,DIRECT
+- DOMAIN-SUFFIX,sticpay.com,DIRECT
+- DOMAIN-SUFFIX,tech26.de,DIRECT
+- DOMAIN-SUFFIX,number26.de,DIRECT
+- DOMAIN-SUFFIX,n26.com,DIRECT
