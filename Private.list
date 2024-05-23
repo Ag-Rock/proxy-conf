@@ -12,8 +12,6 @@ HOST-SUFFIX,alipayhk.com,🇭🇰 HK
 HOST-SUFFIX,alipay.hk,🇭🇰 HK
 HOST-SUFFIX,mifinity.com,🇭🇰 HK
 
-HOST-SUFFIX,giffgaff.com,🇬🇧 GB
-
 HOST-SUFFIX,paysera.com,Banking
 HOST-SUFFIX,monese.com,Banking
 HOST-SUFFIX,fra-01.braze.eu,Banking
@@ -72,7 +70,6 @@ HOST-SUFFIX,n26.com,DIRECT
 # # XGLOBAL MT5 52.236.176.200
 # IP-CIDR,52.236.176.0/24,DIRECT
 
-# HOST-SUFFIX,uk,🇬🇧 GB
 # HOST-SUFFIX,hk,🇭🇰 HK
 # HOST-SUFFIX,jp,🇯🇵 JP
 # HOST-SUFFIX,sg,🇸🇬 SG
