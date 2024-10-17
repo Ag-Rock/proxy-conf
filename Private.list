@@ -6,7 +6,9 @@ HOST-SUFFIX,v2rayssr.com,🇺🇳 Global
 HOST-SUFFIX,twing.com,GlobalMedia
 
 HOST-SUFFIX,dmm.co.jp,🇯🇵 JP
-
+HOST-SUFFIX,line-scdn.net:443,🇭🇰 HK
+HOST-SUFFIX,linecorp.com:443,🇭🇰 HK
+HOST-SUFFIX,line-apps.com:443,🇭🇰 HK
 HOST-SUFFIX,tapngo.com.hk,🇭🇰 HK
 HOST-SUFFIX,alipayhk.com,🇭🇰 HK
 HOST-SUFFIX,alipay.hk,🇭🇰 HK
