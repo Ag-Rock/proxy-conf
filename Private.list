@@ -34,6 +34,7 @@ HOST-SUFFIX,group-ib.com,Banking
 HOST-SUFFIX,onetrust.com,Banking
 
 ############################################
+HOST-SUFFIX,bochk.com,DIRECT
 HOST-SUFFIX,keepersecurity.com,DIRECT
 HOST-SUFFIX,oyunfor.com,DIRECT
 HOST-SUFFIX,oracle.com,DIRECT
