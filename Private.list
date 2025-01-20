@@ -17,6 +17,11 @@ HOST-SUFFIX,alipayhk.com,🇭🇰 HK
 HOST-SUFFIX,alipay.hk,🇭🇰 HK
 HOST-SUFFIX,mifinity.com,🇭🇰 HK
 
+HOST-SUFFIX,hsbc.com.hk,DIRECT
+HOST-SUFFIX,etnet.com.hk,DIRECT
+HOST-SUFFIX,antbank.hk,DIRECT
+HOST-SUFFIX,aliyuncs.com,DIRECT
+
 HOST-SUFFIX,binance.com,Banking
 HOST-SUFFIX,paysera.com,Banking
 HOST-SUFFIX,monese.com,Banking
