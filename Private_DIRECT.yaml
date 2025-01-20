@@ -19,3 +19,7 @@ payload:
 - DOMAIN-SUFFIX,number26.de,DIRECT
 - DOMAIN-SUFFIX,n26.com,DIRECT
 - DOMAIN-SUFFIX,bochk.com,DIRECT
+- DOMAIN-SUFFIX,hsbc.com.hk,DIRECT
+- DOMAIN-SUFFIX,etnet.com.hk,DIRECT
+- DOMAIN-SUFFIX,antbank.hk,DIRECT
+- DOMAIN-SUFFIX,aliyuncs.com,DIRECT
