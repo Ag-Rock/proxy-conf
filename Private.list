@@ -21,6 +21,7 @@ HOST-SUFFIX,hsbc.com.hk,DIRECT
 HOST-SUFFIX,etnet.com.hk,DIRECT
 HOST-SUFFIX,antbank.hk,DIRECT
 HOST-SUFFIX,aliyuncs.com,DIRECT
+HOST-SUFFIX,cncbinternational.com,DIRECT
 
 HOST-SUFFIX,binance.com,Banking
 HOST-SUFFIX,paysera.com,Banking
