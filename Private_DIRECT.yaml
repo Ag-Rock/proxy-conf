@@ -24,3 +24,5 @@ payload:
 - DOMAIN-SUFFIX,antbank.hk,DIRECT
 - DOMAIN-SUFFIX,aliyuncs.com,DIRECT
 - DOMAIN-SUFFIX,cncbinternational.com,DIRECT
+- DOMAIN-SUFFIX,bankappgw.za.group,DIRECT
+- DOMAIN-SUFFIX,imdap-sea.alipay.com,DIRECT
