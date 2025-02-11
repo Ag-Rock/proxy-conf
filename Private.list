@@ -67,6 +67,29 @@ HOST-SUFFIX,sticpay.com,DIRECT
 HOST-SUFFIX,tech26.de,DIRECT
 HOST-SUFFIX,number26.de,DIRECT
 HOST-SUFFIX,n26.com,DIRECT
+#交通银行
+HOST-SUFFIX,95559.com.cn,DIRECT
+HOST-SUFFIX,95559.sh.cn,DIRECT
+HOST-SUFFIX,bankcomm.com,DIRECT
+#建设银行
+HOST-SUFFIX,ccb-life.com.cn,DIRECT
+HOST-SUFFIX,ccb.cn,DIRECT
+HOST-SUFFIX,ccb.com,DIRECT
+HOST-SUFFIX,ccb.com.cn,DIRECT
+HOST-SUFFIX,ccbcos.com,DIRECT
+HOST-SUFFIX,ccbfund.cn,DIRECT
+HOST-SUFFIX,ccbfund.com,DIRECT
+HOST-SUFFIX,ccbfund.com.cn,DIRECT
+HOST-SUFFIX,ccbfutures.cn,DIRECT
+HOST-SUFFIX,ccbfutures.com,DIRECT
+HOST-SUFFIX,ccbhome.cn,DIRECT
+HOST-SUFFIX,ccbhome.net,DIRECT
+HOST-SUFFIX,ccbintl.com.hk,DIRECT
+HOST-SUFFIX,ccbleasing.com,DIRECT
+HOST-SUFFIX,ccblife-test.com.cn,DIRECT
+HOST-SUFFIX,ccbseoul.com,DIRECT
+HOST-SUFFIX,ccbtrust.com.cn,DIRECT
+HOST-SUFFIX,ccbxt.com,DIRECT
 
 # # Swissquote MT4 香港103.6.130.223
 # IP-CIDR,103.6.130.0/24,DIRECT
@@ -87,8 +110,3 @@ HOST-SUFFIX,n26.com,DIRECT
 # # XGLOBAL MT5 52.236.176.200
 # IP-CIDR,52.236.176.0/24,DIRECT
 
-# HOST-SUFFIX,hk,🇭🇰 HK
-# HOST-SUFFIX,jp,🇯🇵 JP
-# HOST-SUFFIX,sg,🇸🇬 SG
-# HOST-SUFFIX,tw,🇼🇸 TW
-# HOST-SUFFIX,us,🇺🇸 US
