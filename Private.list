@@ -27,7 +27,6 @@ HOST-SUFFIX,bankappgw.za.group,DIRECT
 HOST-SUFFIX,imdap-sea.alipay.com,DIRECT
 HOST-SUFFIX,firebaselogging-pa.googleapis.com,DIRECT
 
-HOST-SUFFIX,binance.com,Banking
 HOST-SUFFIX,paysera.com,Banking
 HOST-SUFFIX,monese.com,Banking
 HOST-SUFFIX,fra-01.braze.eu,Banking
@@ -67,29 +66,6 @@ HOST-SUFFIX,sticpay.com,DIRECT
 HOST-SUFFIX,tech26.de,DIRECT
 HOST-SUFFIX,number26.de,DIRECT
 HOST-SUFFIX,n26.com,DIRECT
-#交通银行
-HOST-SUFFIX,95559.com.cn,DIRECT
-HOST-SUFFIX,95559.sh.cn,DIRECT
-HOST-SUFFIX,bankcomm.com,DIRECT
-#建设银行
-HOST-SUFFIX,ccb-life.com.cn,DIRECT
-HOST-SUFFIX,ccb.cn,DIRECT
-HOST-SUFFIX,ccb.com,DIRECT
-HOST-SUFFIX,ccb.com.cn,DIRECT
-HOST-SUFFIX,ccbcos.com,DIRECT
-HOST-SUFFIX,ccbfund.cn,DIRECT
-HOST-SUFFIX,ccbfund.com,DIRECT
-HOST-SUFFIX,ccbfund.com.cn,DIRECT
-HOST-SUFFIX,ccbfutures.cn,DIRECT
-HOST-SUFFIX,ccbfutures.com,DIRECT
-HOST-SUFFIX,ccbhome.cn,DIRECT
-HOST-SUFFIX,ccbhome.net,DIRECT
-HOST-SUFFIX,ccbintl.com.hk,DIRECT
-HOST-SUFFIX,ccbleasing.com,DIRECT
-HOST-SUFFIX,ccblife-test.com.cn,DIRECT
-HOST-SUFFIX,ccbseoul.com,DIRECT
-HOST-SUFFIX,ccbtrust.com.cn,DIRECT
-HOST-SUFFIX,ccbxt.com,DIRECT
 
 # # Swissquote MT4 香港103.6.130.223
 # IP-CIDR,103.6.130.0/24,DIRECT
