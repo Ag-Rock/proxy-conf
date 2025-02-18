@@ -1,13 +1,13 @@
 
-HOST-SUFFIX,apple-relay.cloudflare.com,Proxy
-HOST-SUFFIX,apple-relay.apple.com,Proxy
-HOST-SUFFIX,onedrive.live.com,Proxy
-HOST-SUFFIX,tenorshare.com,Proxy
-HOST-SUFFIX,udemycdn.com,Proxy
-HOST-SUFFIX,tradingview.com,Proxy
-HOST-SUFFIX,v2rayssr.com,Proxy
-HOST-SUFFIX,twing.com,Proxy
-HOST-SUFFIX,deepseek.com,Proxy
+HOST-SUFFIX,apple-relay.cloudflare.com,GMedia
+HOST-SUFFIX,apple-relay.apple.com,GMedia
+HOST-SUFFIX,onedrive.live.com,GMedia
+HOST-SUFFIX,tenorshare.com,GMedia
+HOST-SUFFIX,udemycdn.com,GMedia
+HOST-SUFFIX,tradingview.com,GMedia
+HOST-SUFFIX,v2rayssr.com,GMedia
+HOST-SUFFIX,twing.com,GMedia
+HOST-SUFFIX,deepseek.com,GMedia
 
 HOST-SUFFIX,dmm.co.jp,🇯🇵 JP
 HOST-SUFFIX,line-scdn.net:443,🇭🇰 HK
