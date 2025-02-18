@@ -1,1 +1,18 @@
-
+- DOMAIN-SUFFIX,binance.com,Banking
+- DOMAIN-SUFFIX,paysera.com,Banking
+- DOMAIN-SUFFIX,monese.com,Banking
+- DOMAIN-SUFFIX,fra-01.braze.eu,Banking
+- DOMAIN-SUFFIX,yuh-api.swissquote.ch,Banking
+- DOMAIN-SUFFIX,yuh.swissquote.ch,Banking
+- DOMAIN-SUFFIX,swissquote.ch,Banking
+- DOMAIN-SUFFIX,swissquote.info,Banking
+- DOMAIN-SUFFIX,uphold.com,Banking
+- DOMAIN-SUFFIX,flowbank.com,Banking
+# wise两步验证
+- DOMAIN-SUFFIX,wise.com,Banking
+- DOMAIN-SUFFIX,authy.com,Banking
+# vivid安全与欺诈调查
+- DOMAIN-SUFFIX,vivid.money,Banking
+- DOMAIN-SUFFIX,castle.io,Banking
+- DOMAIN-SUFFIX,group-ib.com,Banking
+- DOMAIN-SUFFIX,onetrust.com,Banking
