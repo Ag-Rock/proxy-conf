@@ -26,3 +26,15 @@ payload:
 - DOMAIN-SUFFIX,cncbinternational.com,DIRECT
 - DOMAIN-SUFFIX,bankappgw.za.group,DIRECT
 - DOMAIN-SUFFIX,imdap-sea.alipay.com,DIRECT
+###
+- DOMAIN-SUFFIX,alipayhk.com,DIRECT
+- DOMAIN-SUFFIX,alipay.hk,DIRECT
+- DOMAIN-SUFFIX,bochk.com,DIRECT
+- DOMAIN-SUFFIX,hsbc.com.hk,DIRECT
+- DOMAIN-SUFFIX,etnet.com.hk,DIRECT
+- DOMAIN-SUFFIX,antbank.hk,DIRECT
+- DOMAIN-SUFFIX,aliyuncs.com,DIRECT
+- DOMAIN-SUFFIX,cncbinternational.com,DIRECT
+- DOMAIN-SUFFIX,bankappgw.za.group,DIRECT
+- DOMAIN-SUFFIX,imdap-sea.alipay.com,DIRECT
+- DOMAIN-SUFFIX,firebaselogging-pa.googleapis.com,DIRECT
