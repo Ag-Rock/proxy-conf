@@ -1,3 +1,21 @@
+HOST-SUFFIX,dns.google,GMedia
+HOST-SUFFIX,1dot1dot1dot1.cloudflare-dns.com,GMedia
+HOST-SUFFIX,dot.sb,GMedia
+HOST-SUFFIX,dns.umbrella.com,GMedia
+HOST-SUFFIX,dns.quad9.net,GMedia
+HOST-SUFFIX,dns.google,GMedia
+HOST-SUFFIX,cloudflare-dns.com,GMedia
+HOST-SUFFIX,doh.dns.sb,GMedia
+HOST-SUFFIX,doh.opendns.com,GMedia
+HOST-SUFFIX,dns.quad9.net,GMedia
+HOST-SUFFIX,hk-hkg.doh.sb,GMedia
+IP-CIDR,8.8.8.8/32,GMedia,no-resolve
+IP-CIDR,8.8.4.4/32,GMedia,no-resolve
+IP-CIDR,1.1.1.1/32,GMedia,no-resolve
+IP-CIDR,1.0.0.1/32,GMedia,no-resolve
+IP-CIDR,185.222.222.222/32,GMedia,no-resolve
+IP-CIDR,208.67.222.222/32,GMedia,no-resolve
+IP-CIDR,208.67.220.220/32,GMedia,no-resolve
 
 HOST-SUFFIX,apple-relay.cloudflare.com,GMedia
 HOST-SUFFIX,apple-relay.apple.com,GMedia
@@ -67,22 +85,4 @@ HOST-SUFFIX,tech26.de,DIRECT
 HOST-SUFFIX,number26.de,DIRECT
 HOST-SUFFIX,n26.com,DIRECT
 
-# # Swissquote MT4 香港103.6.130.223
-# IP-CIDR,103.6.130.0/24,DIRECT
-# # Swissquote MT4 荷兰176.56.182.243
-# IP-CIDR,176.56.182.0/24,DIRECT
-# # Swissquote MT4 俄罗斯195.189.123.201
-# IP-CIDR,195.189.123.0/24,DIRECT
-# # Swissquote MT4 美国98.158.104.90
-# IP-CIDR,98.158.104.0/24,DIRECT
-# # Swissquote MT4 广东120.77.44.225
-# IP-CIDR,120.77.44.0/24,DIRECT
-# # Dukascopy MT4 40.83.74.162
-# IP-CIDR,40.83.74.0/24,DIRECT
-# # 福汇 MT4
-# HOST-SUFFIX,mt4r09.fxcorporate.com,DIRECT
-# # Swissquote MT5 185.212.168.30
-# IP-CIDR,185.212.168.0/24,DIRECT
-# # XGLOBAL MT5 52.236.176.200
-# IP-CIDR,52.236.176.0/24,DIRECT
 
