@@ -9,7 +9,7 @@ DOMAIN-SUFFIX,ihg.com
 DOMAIN-SUFFIX,hp.com
 DOMAIN-SUFFIX,speedtest.net
 DOMAIN-SUFFIX,udemy.com
-DOMAIN-SUFFIX,interactivebrokers.com
+# DOMAIN-SUFFIX,interactivebrokers.com
 DOMAIN-SUFFIX,ibkr.com
 DOMAIN-SUFFIX,ifastgb.com
 DOMAIN-SUFFIX,skrill.com
