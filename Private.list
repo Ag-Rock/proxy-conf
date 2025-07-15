@@ -78,8 +78,8 @@ HOST-SUFFIX,ihg.com,DIRECT
 HOST-SUFFIX,hp.com,DIRECT
 HOST-SUFFIX,speedtest.net,DIRECT
 HOST-SUFFIX,udemy.com,DIRECT
-HOST-SUFFIX,interactivebrokers.com,DIRECT
-HOST-SUFFIX,ibkr.com,DIRECT
+# HOST-SUFFIX,interactivebrokers.com,DIRECT
+# HOST-SUFFIX,ibkr.com,DIRECT
 HOST-SUFFIX,ifastgb.com,DIRECT
 HOST-SUFFIX,skrill.com,DIRECT
 HOST-SUFFIX,sticpay.com,DIRECT
