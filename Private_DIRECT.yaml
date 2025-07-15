@@ -10,8 +10,8 @@ payload:
 - DOMAIN-SUFFIX,hp.com,DIRECT
 - DOMAIN-SUFFIX,speedtest.net,DIRECT
 - DOMAIN-SUFFIX,udemy.com,DIRECT
-- DOMAIN-SUFFIX,interactivebrokers.com,DIRECT
-- DOMAIN-SUFFIX,ibkr.com,DIRECT
+# - DOMAIN-SUFFIX,interactivebrokers.com,DIRECT
+#- DOMAIN-SUFFIX,ibkr.com,DIRECT
 - DOMAIN-SUFFIX,ifastgb.com,DIRECT
 - DOMAIN-SUFFIX,skrill.com,DIRECT
 - DOMAIN-SUFFIX,sticpay.com,DIRECT
