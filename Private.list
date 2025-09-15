@@ -18,6 +18,12 @@ IP-CIDR,185.222.222.222/32,GMedia,no-resolve
 IP-CIDR,208.67.222.222/32,GMedia,no-resolve
 IP-CIDR,208.67.220.220/32,GMedia,no-resolve
 
+#AI
+HOST-SUFFIX,grok.com,AI
+HOST-SUFFIX,x.ai,AI
+HOST-SUFFIX,anthropic.com,AI
+HOST-SUFFIX,claude.ai,AI
+
 #私人定制
 HOST-SUFFIX,apple-relay.cloudflare.com,GMedia
 HOST-SUFFIX,apple-relay.apple.com,GMedia
