@@ -23,6 +23,7 @@ HOST-SUFFIX,grok.com,AI
 HOST-SUFFIX,x.ai,AI
 HOST-SUFFIX,anthropic.com,AI
 HOST-SUFFIX,claude.ai,AI
+HOST-SUFFIX,deepseek.com,AI
 
 #私人定制
 HOST-SUFFIX,apple-relay.cloudflare.com,GMedia
@@ -33,7 +34,6 @@ HOST-SUFFIX,udemycdn.com,GMedia
 HOST-SUFFIX,tradingview.com,GMedia
 HOST-SUFFIX,v2rayssr.com,GMedia
 HOST-SUFFIX,twing.com,GMedia
-HOST-SUFFIX,deepseek.com,AI
 
 HOST-SUFFIX,dmm.co.jp,🇯🇵 JP
 HOST-SUFFIX,line-scdn.net:443,🇭🇰 HK
