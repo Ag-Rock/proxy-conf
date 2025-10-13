@@ -24,6 +24,14 @@ HOST-SUFFIX,x.ai,AI
 HOST-SUFFIX,anthropic.com,AI
 HOST-SUFFIX,claude.ai,AI
 HOST-SUFFIX,deepseek.com,AI
+HOST-SUFFIX,apple-relay.apple.com,AI
+HOST-SUFFIX,apple-relay.fastly-edge.com,AI
+HOST-SUFFIX,apple-relay.cloudflare.com,AI
+HOST-SUFFIX,gateway.icloud.com,AI
+HOST-SUFFIX,guzzoni.apple.com,AI
+HOST-SUFFIX,cp4.cloudflare.com,AI
+HOST-SUFFIX,gspe1-ssl.ls.apple.com,AI
+HOST-SUFFIX,apps.mzstatic.com,AI
 
 #私人定制
 HOST-SUFFIX,apple-relay.cloudflare.com,GMedia
