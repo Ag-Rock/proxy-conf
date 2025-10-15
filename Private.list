@@ -22,6 +22,8 @@ IP-CIDR,208.67.220.220/32,GMedia,no-resolve
 HOST-SUFFIX,grok.com,AI
 HOST-SUFFIX,x.ai,AI
 HOST-SUFFIX,anthropic.com,AI
+HOST-SUFFIX,claudeusercontent.com,AI
+HOST-KEYWORD,claudeusercontent,AI
 HOST-SUFFIX,claude.ai,AI
 HOST-SUFFIX,deepseek.com,AI
 HOST-SUFFIX,apple-relay.apple.com,AI
