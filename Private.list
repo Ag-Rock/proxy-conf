@@ -43,6 +43,8 @@ HOST,gspe1-ssl.ls.apple.com,AI
 HOST-SUFFIX,apps.mzstatic.com,AI
 
 # 私人定制
+HOST-SUFFIX,iosapps.itunes.apple.com,DIRECT
+
 HOST-SUFFIX,onedrive.live.com,GMedia
 HOST-SUFFIX,tenorshare.com,GMedia
 HOST-SUFFIX,udemycdn.com,GMedia
