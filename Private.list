@@ -44,6 +44,26 @@ HOST-SUFFIX,apps.mzstatic.com,AI
 
 # 私人定制
 HOST,iosapps.itunes.apple.com,DIRECT
+HOST-SUFFIX,apps.itunes.apple.com,DIRECT
+HOST-SUFFIX,itunes.apple.com,DIRECT
+HOST-SUFFIX,icloud.com,DIRECT
+HOST-SUFFIX,mzstatic.com,DIRECT
+
+HOST,mask-api.fe.apple-dns.net,Apple
+HOST,mask-api.icloud.com,Apple
+HOST,mask-t.apple-dns.net,Apple
+HOST,mask.apple-dns.net,Apple
+HOST-SUFFIX,mask-h2.icloud.com,Apple
+HOST-SUFFIX,mask.icloud.com,Apple
+
+# wifi-calling自定义规则
+HOST,208.54.159.227,🇺🇸 US,no-resolve
+HOST,208.54.2.163,🇺🇸 US,no-resolve
+HOST-SUFFIX,epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🇺🇸 US
+HOST-SUFFIX,ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🇺🇸 US
+IP-CIDR,87.194.0.0/19,🎯 手选节点,no-resolve
+IP-CIDR,87.194.88.0/23,🎯 手选节点,no-resolve
+HOST-SUFFIX,epdg.epc.mnc010.mcc234.pub.3gppnetwork.org,🎯 手选节点
 
 HOST-SUFFIX,onedrive.live.com,GMedia
 HOST-SUFFIX,tenorshare.com,GMedia
