@@ -32,6 +32,7 @@ HOST-SUFFIX,guzzoni.apple.com,AI
 HOST-SUFFIX,smoot.apple.com,AI
 HOST-SUFFIX,apple-relay.cloudflare.com,AI
 HOST-SUFFIX,apple-relay.fastly-edge.com,AI
+HOST-SUFFIX,apple-relay.mask.apple-dns.net,AI
 HOST-SUFFIX,cp4.cloudflare.com,AI
 HOST-SUFFIX,apple-relay.apple.com,AI
 HOST-SUFFIX,gspe1-ssl.ls.apple.com,AI
