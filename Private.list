@@ -27,6 +27,11 @@ HOST-KEYWORD,claudeusercontent,AI
 HOST-SUFFIX,claude.ai,AI
 HOST-SUFFIX,deepseek.com,AI
 
+# iCloud 专用代理（MASQUE 协议隧道）
+HOST-SUFFIX,apple-dns.net,Global
+HOST-SUFFIX,mask.icloud.com,Global
+HOST-SUFFIX,mask-api.icloud.com,Global
+HOST-SUFFIX,mask-h2.icloud.com,Global
 # Apple Intelligence
 HOST-SUFFIX,guzzoni.apple.com,AI
 HOST-SUFFIX,smoot.apple.com,AI
