@@ -19,10 +19,13 @@ IP-CIDR,208.67.222.222/32,GMedia,no-resolve
 IP-CIDR,208.67.220.220/32,GMedia,no-resolve
 
 # iCloud 专用代理（MASQUE 协议隧道）
-HOST-SUFFIX,apple-dns.net,Global
-HOST-SUFFIX,mask.icloud.com,Global
-HOST-SUFFIX,mask-api.icloud.com,Global
-HOST-SUFFIX,mask-h2.icloud.com,Global
+# HOST-SUFFIX,apple-dns.net,Global
+# HOST-SUFFIX,mask.icloud.com,Global
+# HOST-SUFFIX,mask-api.icloud.com,Global
+# HOST-SUFFIX,mask-h2.icloud.com,Global
+# HOST,mask-api.fe.apple-dns.net,Global
+# HOST,mask-api.fe2.apple-dns.net,Global
+# HOST,mask-t.apple-dns.net,Global
 
 # 私人定制
 HOST,iosapps.itunes.apple.com,DIRECT
