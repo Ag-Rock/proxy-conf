@@ -26,20 +26,39 @@ IP-CIDR,208.67.220.220/32,GMedia,no-resolve
 # HOST,mask-api.fe.apple-dns.net,Global
 # HOST,mask-api.fe2.apple-dns.net,Global
 # HOST,mask-t.apple-dns.net,Global
+host, mask.icloud.com, Global
+host, mask-api.icloud.com, Global
+host, mask-h2.icloud.com, Global
+host, tv.apple.com, Global
+host, books.apple.com, Global
+
+# 2) 基础服务直连
+host-suffix, push.apple.com, Apple
+host, gdmf.apple.com, Apple
+host, appldnld.apple.com, Apple
+host, configuration.apple.com, Apple
+host, certs.apple.com, Apple
+host, crl.apple.com, Apple
+host, setup.icloud.com, Apple
+host, probe.icloud.com, Apple
+host, pong.icloud.com, Apple
+
+# 3) iCloud 同步类直连
+host-suffix, icloud.com, Apple
+host-suffix, icloud.apple.com, Apple
+host-suffix, icloud-content.com, Apple
+
+# 4) App Store 尽量直连
+host-suffix, apps.apple.com, Apple
+host-suffix, itunes.apple.com, Apple
+host-suffix, mzstatic.com, Apple
 
 # 私人定制
-HOST,iosapps.itunes.apple.com,DIRECT
-HOST-SUFFIX,apps.itunes.apple.com,DIRECT
-HOST-SUFFIX,itunes.apple.com,DIRECT
-HOST-SUFFIX,icloud.com,DIRECT
-HOST-SUFFIX,mzstatic.com,DIRECT
-
-HOST,mask-api.fe.apple-dns.net,Apple
-HOST,mask-api.icloud.com,Apple
-HOST,mask-t.apple-dns.net,Apple
-HOST,mask.apple-dns.net,Apple
-HOST-SUFFIX,mask-h2.icloud.com,Apple
-HOST-SUFFIX,mask.icloud.com,Apple
+# HOST,iosapps.itunes.apple.com,DIRECT
+# HOST-SUFFIX,apps.itunes.apple.com,DIRECT
+# HOST-SUFFIX,itunes.apple.com,DIRECT
+# HOST-SUFFIX,icloud.com,DIRECT
+# HOST-SUFFIX,mzstatic.com,DIRECT
 
 # wifi-calling自定义规则
 HOST,208.54.159.227,🇺🇸 US,no-resolve
