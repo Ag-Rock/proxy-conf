@@ -46,10 +46,10 @@ HOST-SUFFIX,icloud.apple.com,Apple
 HOST-SUFFIX,icloud-content.com,Apple
 
 # 4) App Store 尽量直连
-HOST-SUFFIX, music.apple.com, Apple
-HOST-SUFFIX,apps.apple.com, Apple
-HOST-SUFFIX,itunes.apple.com, Apple
-HOST-SUFFIX,mzstatic.com, Apple
+HOST-SUFFIX, music.apple.com,Apple
+HOST-SUFFIX,apps.apple.com,Apple
+HOST-SUFFIX,itunes.apple.com,Apple
+HOST-SUFFIX,mzstatic.com,Apple
 
 # wifi-calling自定义规则
 HOST,208.54.159.227,🇺🇸 US,no-resolve
