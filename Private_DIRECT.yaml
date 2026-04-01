@@ -1,4 +1,9 @@
 payload:
+- DOMAIN-SUFFIX,apps.apple.com
+- DOMAIN-SUFFIX,itunes.apple.com
+- DOMAIN-SUFFIX,appsto.re
+- DOMAIN-SUFFIX,sandbox.itunes.apple.com
+
 - DOMAIN-SUFFIX,keepersecurity.com,DIRECT
 - DOMAIN-SUFFIX,oyunfor.com,DIRECT
 - DOMAIN-SUFFIX,oracle.com,DIRECT
