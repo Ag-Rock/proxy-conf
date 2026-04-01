@@ -12,7 +12,6 @@ HOST,apple-relay.apple.com,AI
 HOST,apple-relay.cloudflare.com,AI
 HOST,apple-relay.fastly-edge.com,AI
 HOST,gspe1-ssl.ls.apple.com,AI
-HOST-SUFFIX,apps.mzstatic.com,AI
 
 HOST-SUFFIX,deepseek.com,AI
 HOST,openaiapi-site.azureedge.net,AI
