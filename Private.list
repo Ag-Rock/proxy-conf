@@ -31,6 +31,7 @@ HOST,books.apple.com,Global
 
 # 2) 基础服务直连
 HOST-SUFFIX,push.apple.com,Apple
+HOST-SUFFIX,updates.cdn-apple.com,Apple
 HOST,gdmf.apple.com,Apple
 HOST,appldnld.apple.com,Apple
 HOST,configuration.apple.com,Apple
