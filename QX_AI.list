@@ -1,0 +1,344 @@
+# =================================================================
+# QX_AI.list - Quantumult X 全球人工智能与核心服务分流规则集
+# 包含: Apple Intelligence, OpenAI, Anthropic, Google AI, xAI,
+#       代码编程助手, 图像视频生成, 音乐音频, 搜索学术, 推理平台等
+# =================================================================
+
+# ---------------- Apple Intelligence ----------------
+HOST-SUFFIX,guzzoni.apple.com,AI
+HOST-SUFFIX,smoot.apple.com,AI
+HOST-SUFFIX,apple-relay.apple.com,AI
+HOST-SUFFIX,apple-relay.cloudflare.com,AI
+HOST-SUFFIX,apple-relay.fastly-edge.com,AI
+HOST-SUFFIX,apple-relay.mask.apple-dns.net,AI
+HOST-SUFFIX,cp4.cloudflare.com,AI
+HOST-SUFFIX,gspe1-ssl.ls.apple.com,AI
+HOST-SUFFIX,mesu.apple.com,AI
+HOST-SUFFIX,appldnld.apple.com,AI
+HOST,apple-relay.apple.com,AI
+HOST,apple-relay.cloudflare.com,AI
+HOST,apple-relay.fastly-edge.com,AI
+HOST,gspe1-ssl.ls.apple.com,AI
+HOST-SUFFIX,apps.mzstatic.com,AI
+
+# ---------------- 人机验证、风控与基础通道 (防登录受阻/验证循环) ----------------
+# Cloudflare Turnstile & Challenges
+HOST-SUFFIX,challenges.cloudflare.com,AI
+HOST-SUFFIX,cloudflarechallenges.com,AI
+HOST-SUFFIX,turnstile.cloudflare.com,AI
+HOST-SUFFIX,static.cloudflareinsights.com,AI
+# Arkose Labs 行为验证 (ChatGPT / OpenAI / Microsoft)
+HOST-SUFFIX,arkoselabs.com,AI
+HOST-SUFFIX,client-api.arkoselabs.com,AI
+HOST-SUFFIX,openai-api.arkoselabs.com,AI
+HOST,client-api.arkoselabs.com,AI
+HOST,openai-api.arkoselabs.com,AI
+# Statsig 灰度与风控埋点
+HOST-SUFFIX,statsig.com,AI
+HOST-SUFFIX,api.statsig.com,AI
+HOST-SUFFIX,events.statsigapi.net,AI
+HOST-SUFFIX,featuregates.org,AI
+HOST-SUFFIX,oaistatsig.com,AI
+# Auth0 身份验证与遥测
+HOST-SUFFIX,auth0.com,AI
+HOST-SUFFIX,identrust.com,AI
+HOST,o33249.ingest.sentry.io,AI
+HOST,browser-intake-datadoghq.com,AI
+
+# ---------------- OpenAI / ChatGPT / Sora / SearchGPT ----------------
+HOST-SUFFIX,chat.com,AI
+HOST-SUFFIX,chatgpt.com,AI
+HOST-SUFFIX,openai.com,AI
+HOST-SUFFIX,oaistatic.com,AI
+HOST-SUFFIX,oaiusercontent.com,AI
+HOST-SUFFIX,sora.com,AI
+HOST-SUFFIX,searchgpt.com,AI
+# LiveKit 语音通信通道
+HOST-SUFFIX,chatgpt.livekit.cloud,AI
+HOST-SUFFIX,host.livekit.cloud,AI
+HOST-SUFFIX,turn.livekit.cloud,AI
+# CDN & 静态存储
+HOST-SUFFIX,openai.com.cdn.cloudflare.net,AI
+HOST,openaiapi-site.azureedge.net,AI
+HOST,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net,AI
+HOST,openaicom.imgix.net,AI
+HOST,openaicomproductionae4b.blob.core.windows.net,AI
+HOST,production-openaicom-storage.azureedge.net,AI
+HOST-KEYWORD,openai,AI
+HOST-KEYWORD,chatgpt,AI
+
+# ---------------- Google AI / Gemini / NotebookLM / DeepMind ----------------
+# NotebookLM 核心服务
+HOST-SUFFIX,notebooklm.google,AI
+HOST-SUFFIX,notebooklm.google.com,AI
+HOST-SUFFIX,notebooklm-pa.googleapis.com,AI
+HOST-SUFFIX,notebooklm.googleapis.com,AI
+HOST,notebooklm-pa.googleapis.com,AI
+HOST,notebooklm.googleapis.com,AI
+HOST-KEYWORD,notebooklm,AI
+# Gemini & Bard
+HOST-SUFFIX,gemini.google,AI
+HOST-SUFFIX,gemini.google.com,AI
+HOST-SUFFIX,gemini.gstatic.com,AI
+HOST-SUFFIX,bard.google.com,AI
+HOST-KEYWORD,gemini,AI
+# Google AI Studio / MakerSuite
+HOST-SUFFIX,ai.google.dev,AI
+HOST,ai.google.dev,AI
+HOST-SUFFIX,aistudio.google.com,AI
+HOST-SUFFIX,makersuite.google.com,AI
+HOST-SUFFIX,alkalicore-pa.clients6.google.com,AI
+HOST,alkalicore-pa.clients6.google.com,AI
+HOST-SUFFIX,alkalimakersuite-pa.clients6.google.com,AI
+HOST,alkalimakersuite-pa.clients6.google.com,AI
+HOST-SUFFIX,webchannel-alkalimakersuite-pa.clients6.google.com,AI
+HOST,webchannel-alkalimakersuite-pa.clients6.google.com,AI
+# Generative Language & APIs
+HOST-SUFFIX,generativeai.google,AI
+HOST-SUFFIX,generativelanguage.googleapis.com,AI
+HOST-KEYWORD,generativelanguage,AI
+HOST-SUFFIX,proactivebackend-pa.googleapis.com,AI
+HOST-SUFFIX,aisandbox-pa.googleapis.com,AI
+HOST-SUFFIX,aida.googleapis.com,AI
+HOST-SUFFIX,aicode.googleapis.com,AI
+HOST-SUFFIX,geller-pa.googleapis.com,AI
+HOST-SUFFIX,robinfrontend-pa.googleapis.com,AI
+# Cloud AI Companion & Developer Tools
+HOST-SUFFIX,cloudaicompanion.googleapis.com,AI
+HOST,cloudaicompanion.googleapis.com,AI
+HOST-SUFFIX,cloudcode-pa.googleapis.com,AI
+HOST,cloudcode-pa.googleapis.com,AI
+HOST-SUFFIX,daily-cloudcode-pa.googleapis.com,AI
+HOST,daily-cloudcode-pa.googleapis.com,AI
+HOST-SUFFIX,antigravity-unleash.goog,AI
+HOST-SUFFIX,antigravity.google,AI
+HOST-SUFFIX,antigravity-pa.googleapis.com,AI
+HOST,antigravity-pa.googleapis.com,AI
+HOST-SUFFIX,antigravity.googleapis.com,AI
+HOST,antigravity.googleapis.com,AI
+HOST-SUFFIX,jules.google,AI
+HOST-SUFFIX,jules.google.com,AI
+HOST-SUFFIX,opal.google,AI
+HOST-SUFFIX,opal.google.com,AI
+HOST-SUFFIX,labs.google,AI
+HOST-SUFFIX,labs.google.com,AI
+HOST-SUFFIX,ai.studio,AI
+HOST-SUFFIX,stitch.withgoogle.com,AI
+# DeepMind
+HOST-SUFFIX,deepmind.com,AI
+HOST-SUFFIX,deepmind.google,AI
+
+# ---------------- Anthropic / Claude ----------------
+HOST-SUFFIX,anthropic.com,AI
+HOST-SUFFIX,claude.ai,AI
+HOST-SUFFIX,claude.com,AI
+HOST-SUFFIX,clau.de,AI
+HOST-SUFFIX,claudeusercontent.com,AI
+HOST-SUFFIX,anthropicusercontent.com,AI
+HOST-SUFFIX,claudemcpclient.com,AI
+HOST-SUFFIX,claudemcpcontent.com,AI
+HOST,servd-anthropic-website.b-cdn.net,AI
+HOST-KEYWORD,claude,AI
+HOST-KEYWORD,anthropic,AI
+
+# ---------------- xAI / Grok ----------------
+HOST-SUFFIX,x.ai,AI
+HOST-SUFFIX,grok.com,AI
+HOST-SUFFIX,grok.x.com,AI
+
+# ---------------- AI 编程与研发助手 ----------------
+# Cursor
+HOST-SUFFIX,cursor.com,AI
+HOST-SUFFIX,cursor.sh,AI
+HOST-SUFFIX,cursorapi.com,AI
+HOST-SUFFIX,cursor-cdn.com,AI
+# Windsurf / Codeium
+HOST-SUFFIX,windsurf.com,AI
+HOST-SUFFIX,windsurf.build,AI
+HOST-SUFFIX,codeium.com,AI
+HOST-SUFFIX,codeiumdata.com,AI
+# GitHub Copilot & Microsoft Copilot
+HOST-SUFFIX,githubcopilot.com,AI
+HOST-SUFFIX,copilot.microsoft.com,AI
+HOST,copilot-proxy.githubusercontent.com,AI
+HOST,copilot-workspace.githubnext.com,AI
+HOST,copilotprodattachments.blob.core.windows.net,AI
+HOST,copilot-telemetry-service.githubusercontent.com,AI
+HOST,copilot-telemetry.githubusercontent.com,AI
+# Trae / ByteDance AI
+HOST-SUFFIX,trae.ai,AI
+HOST-SUFFIX,marscode.com,AI
+HOST-SUFFIX,coze.com,AI
+HOST-SUFFIX,cici.com,AI
+HOST-SUFFIX,ciciai.com,AI
+HOST-SUFFIX,ciciaicdn.com,AI
+HOST-SUFFIX,dola.com,AI
+# Augment / Bolt.new / v0 / Devin
+HOST-SUFFIX,augmentcode.com,AI
+HOST-SUFFIX,bolt.new,AI
+HOST-SUFFIX,stackblitz.com,AI
+HOST-SUFFIX,v0.dev,AI
+HOST-SUFFIX,v0.build,AI
+HOST-SUFFIX,devin.ai,AI
+HOST-SUFFIX,cognition.ai,AI
+HOST-SUFFIX,cognition-labs.com,AI
+# Supermaven / Aider / Replit / CodeRabbit
+HOST-SUFFIX,supermaven.com,AI
+HOST-SUFFIX,aider.chat,AI
+HOST-SUFFIX,replit.com,AI
+HOST-SUFFIX,replit.dev,AI
+HOST-SUFFIX,coderabbit.ai,AI
+HOST-SUFFIX,coderabbit.gallery.vsassets.io,AI
+HOST-SUFFIX,qoder.com,AI
+
+# ---------------- AI 搜索与学术研究 ----------------
+# Perplexity
+HOST-SUFFIX,perplexity.ai,AI
+HOST-SUFFIX,perplexity.com,AI
+HOST-SUFFIX,pplx.ai,AI
+HOST,ppl-ai-file-upload.s3.amazonaws.com,AI
+HOST,pplx-res.cloudinary.com,AI
+# You.com / Genspark / Felo / Phind
+HOST-SUFFIX,you.com,AI
+HOST-SUFFIX,genspark.ai,AI
+HOST-SUFFIX,felo.ai,AI
+HOST-SUFFIX,phind.com,AI
+HOST-SUFFIX,thinkany.ai,AI
+HOST-SUFFIX,youmind.ai,AI
+HOST-SUFFIX,youmind.com,AI
+HOST-SUFFIX,youmind.site,AI
+# 学术研究 (Consensus / Elicit)
+HOST-SUFFIX,consensus.app,AI
+HOST-SUFFIX,elicit.com,AI
+HOST-SUFFIX,elicit.org,AI
+
+# ---------------- AI 图像、视频与多模态 ----------------
+# Midjourney
+HOST-SUFFIX,midjourney.com,AI
+# Runway
+HOST-SUFFIX,runwayml.com,AI
+HOST-SUFFIX,runway.com,AI
+# Luma AI
+HOST-SUFFIX,lumalabs.ai,AI
+HOST-SUFFIX,luma.ai,AI
+# Pika / Ideogram / Recraft / Leonardo
+HOST-SUFFIX,pika.art,AI
+HOST-SUFFIX,ideogram.ai,AI
+HOST-SUFFIX,recraft.ai,AI
+HOST-SUFFIX,leonardo.ai,AI
+HOST-SUFFIX,krea.ai,AI
+HOST-SUFFIX,clipdrop.co,AI
+HOST-SUFFIX,magnific.ai,AI
+# Flux (Black Forest Labs)
+HOST-SUFFIX,blackforestlabs.ai,AI
+HOST-SUFFIX,bfl.ml,AI
+# Civitai & ComfyUI 生态
+HOST-SUFFIX,civitai.com,AI
+HOST-SUFFIX,comfy.org,AI
+HOST-SUFFIX,comfyci.org,AI
+HOST-SUFFIX,comfyregistry.org,AI
+# Kling AI (快手海外版)
+HOST-SUFFIX,klingai.com,AI
+HOST-SUFFIX,klingai.org,AI
+
+# ---------------- AI 音频与音乐创作 ----------------
+# Suno
+HOST-SUFFIX,suno.com,AI
+HOST-SUFFIX,suno.ai,AI
+# Udio
+HOST-SUFFIX,udio.com,AI
+# ElevenLabs
+HOST-SUFFIX,elevenlabs.com,AI
+HOST-SUFFIX,elevenlabs.io,AI
+# Fish Audio
+HOST-SUFFIX,fish.audio,AI
+
+# ---------------- 模型平台、推理 API 与开源社区 ----------------
+# OpenRouter / Groq / Together AI
+HOST-SUFFIX,openrouter.ai,AI
+HOST-SUFFIX,groq.com,AI
+HOST-SUFFIX,together.ai,AI
+HOST-SUFFIX,together.xyz,AI
+# Fireworks / Replicate / DeepInfra / Cerebras
+HOST-SUFFIX,fireworks.ai,AI
+HOST-SUFFIX,replicate.com,AI
+HOST-SUFFIX,replicate.delivery,AI
+HOST-SUFFIX,deepinfra.com,AI
+HOST-SUFFIX,cerebras.ai,AI
+HOST-SUFFIX,chutes.ai,AI
+# Mistral AI / Cohere
+HOST-SUFFIX,mistral.ai,AI
+HOST-SUFFIX,mistral.com,AI
+HOST-SUFFIX,cohere.com,AI
+HOST-SUFFIX,cohere.ai,AI
+# Hugging Face
+HOST-SUFFIX,huggingface.co,AI
+HOST-SUFFIX,hf.co,AI
+HOST-SUFFIX,hf.space,AI
+# Ollama / LM Studio / Poe / Cloudflare AI
+HOST-SUFFIX,ollama.com,AI
+HOST-SUFFIX,ollama.ai,AI
+HOST-SUFFIX,lmstudio.ai,AI
+HOST-SUFFIX,poe.com,AI
+HOST-SUFFIX,poecdn.net,AI
+HOST-SUFFIX,gateway.ai.cloudflare.com,AI
+
+# ---------------- 智能 Agent 与新兴应用 ----------------
+# Manus AI
+HOST-SUFFIX,manus.im,AI
+HOST-SUFFIX,manuscdn.com,AI
+# Dify / LangChain / CrewAI / AnythingLLM
+HOST-SUFFIX,dify.ai,AI
+HOST-SUFFIX,langchain.com,AI
+HOST-SUFFIX,langsmith.com,AI
+HOST-SUFFIX,crewai.com,AI
+HOST-SUFFIX,anythingllm.com,AI
+HOST-SUFFIX,arena.ai,AI
+HOST-SUFFIX,lmarena.ai,AI
+# 其它生产力与辅助工具
+HOST-SUFFIX,sider.ai,AI
+HOST-SUFFIX,jasper.ai,AI
+HOST-SUFFIX,meta.ai,AI
+HOST-SUFFIX,duck.ai,AI
+HOST-SUFFIX,clawhub.ai,AI
+HOST-SUFFIX,openclaw.ai,AI
+HOST-SUFFIX,openart.ai,AI
+HOST-SUFFIX,diabrowser.com,AI
+HOST-SUFFIX,diabrowser.engineering,AI
+HOST-SUFFIX,agentclientprotocol.com,AI
+HOST-SUFFIX,kiro.dev,AI
+HOST-SUFFIX,h2o.ai,AI
+HOST-SUFFIX,lovart.ai,AI
+HOST-SUFFIX,spicywriter.com,AI
+HOST-SUFFIX,crixet.com,AI
+HOST-SUFFIX,tapnow.ai,AI
+HOST-SUFFIX,plannotator.ai,AI
+HOST-SUFFIX,oystermercury.top,AI
+HOST-SUFFIX,liveperson.net,AI
+HOST-SUFFIX,lpsnmedia.net,AI
+HOST-SUFFIX,mozilla.ai,AI
+HOST-SUFFIX,openspec.dev,AI
+HOST-SUFFIX,envato.com,AI
+HOST-SUFFIX,envatousercontent.com,AI
+HOST-SUFFIX,envato-static.com,AI
+HOST-SUFFIX,themeforest.net,AI
+
+# ---------------- 国内优质大模型服务 (海外及全局分流) ----------------
+# DeepSeek
+HOST-SUFFIX,deepseek.com,AI
+# MiniMax / 海螺 AI
+HOST-SUFFIX,minimax.io,AI
+HOST-SUFFIX,minimaxi.com,AI
+HOST-SUFFIX,hailuoai.com,AI
+HOST-SUFFIX,hailuoai.video,AI
+# Moonshot / Kimi
+HOST-SUFFIX,kimi.ai,AI
+HOST-SUFFIX,moonshot.cn,AI
+# 智谱清言 / GLM
+HOST-SUFFIX,chatglm.cn,AI
+HOST-SUFFIX,bigmodel.cn,AI
+HOST-SUFFIX,zhipuai.cn,AI
+# 零一万物 / 万知 (01.AI)
+HOST-SUFFIX,01.ai,AI
+HOST-SUFFIX,lingyiwanwu.com,AI
+HOST-SUFFIX,wanzhi.com,AI
