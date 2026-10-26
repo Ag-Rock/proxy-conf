@@ -12,10 +12,6 @@ payload:
   - DOMAIN-SUFFIX,guzzoni.apple.com
   - DOMAIN-SUFFIX,smoot.apple.com
   - DOMAIN-SUFFIX,gspe1-ssl.ls.apple.com
-  - DOMAIN,apple-relay.apple.com
-  - DOMAIN,apple-relay.cloudflare.com
-  - DOMAIN,apple-relay.fastly-edge.com
-  - DOMAIN,gspe1-ssl.ls.apple.com
 
   # ---------------- 人机验证、风控与基础通道 (防登录受阻/验证循环) ----------------
   # Cloudflare Turnstile & Challenges
@@ -27,8 +23,6 @@ payload:
   - DOMAIN-SUFFIX,arkoselabs.com
   - DOMAIN-SUFFIX,client-api.arkoselabs.com
   - DOMAIN-SUFFIX,openai-api.arkoselabs.com
-  - DOMAIN,client-api.arkoselabs.com
-  - DOMAIN,openai-api.arkoselabs.com
   # Statsig 灰度与风控埋点
   - DOMAIN-SUFFIX,statsig.com
   - DOMAIN-SUFFIX,api.statsig.com
@@ -69,8 +63,6 @@ payload:
   - DOMAIN-SUFFIX,notebooklm.google.com
   - DOMAIN-SUFFIX,notebooklm-pa.googleapis.com
   - DOMAIN-SUFFIX,notebooklm.googleapis.com
-  - DOMAIN,notebooklm-pa.googleapis.com
-  - DOMAIN,notebooklm.googleapis.com
   - DOMAIN-KEYWORD,notebooklm
   # Gemini & Bard (移除 HOST-KEYWORD,gemini 避免误伤 Gemini 加密货币交易所)
   - DOMAIN-SUFFIX,gemini.google
@@ -79,15 +71,11 @@ payload:
   - DOMAIN-SUFFIX,bard.google.com
   # Google AI Studio / MakerSuite
   - DOMAIN-SUFFIX,ai.google.dev
-  - DOMAIN,ai.google.dev
   - DOMAIN-SUFFIX,aistudio.google.com
   - DOMAIN-SUFFIX,makersuite.google.com
   - DOMAIN-SUFFIX,alkalicore-pa.clients6.google.com
-  - DOMAIN,alkalicore-pa.clients6.google.com
   - DOMAIN-SUFFIX,alkalimakersuite-pa.clients6.google.com
-  - DOMAIN,alkalimakersuite-pa.clients6.google.com
   - DOMAIN-SUFFIX,webchannel-alkalimakersuite-pa.clients6.google.com
-  - DOMAIN,webchannel-alkalimakersuite-pa.clients6.google.com
   # Generative Language & APIs
   - DOMAIN-SUFFIX,generativeai.google
   - DOMAIN-SUFFIX,generativelanguage.googleapis.com
@@ -100,17 +88,12 @@ payload:
   - DOMAIN-SUFFIX,robinfrontend-pa.googleapis.com
   # Cloud AI Companion & Developer Tools
   - DOMAIN-SUFFIX,cloudaicompanion.googleapis.com
-  - DOMAIN,cloudaicompanion.googleapis.com
   - DOMAIN-SUFFIX,cloudcode-pa.googleapis.com
-  - DOMAIN,cloudcode-pa.googleapis.com
   - DOMAIN-SUFFIX,daily-cloudcode-pa.googleapis.com
-  - DOMAIN,daily-cloudcode-pa.googleapis.com
   - DOMAIN-SUFFIX,antigravity-unleash.goog
   - DOMAIN-SUFFIX,antigravity.google
   - DOMAIN-SUFFIX,antigravity-pa.googleapis.com
-  - DOMAIN,antigravity-pa.googleapis.com
   - DOMAIN-SUFFIX,antigravity.googleapis.com
-  - DOMAIN,antigravity.googleapis.com
   - DOMAIN-SUFFIX,jules.google
   - DOMAIN-SUFFIX,jules.google.com
   - DOMAIN-SUFFIX,opal.google

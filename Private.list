@@ -33,9 +33,7 @@ IP-CIDR,208.54.159.227/32,🇺🇸 US,no-resolve
 IP-CIDR,208.54.2.163/32,🇺🇸 US,no-resolve
 
 # ---------------- 2. 定位服务与防欺诈风控保护 (锁定美国定位) ----------------
-# 浏览器与操作系统网络定位 API (保证网页/应用调用地理位置时稳定返回美国)
-HOST,location.googleapis.com,Google
-HOST,www.googleapis.com,Google
+# 浏览器与操作系统网络定位 API (location.googleapis.com 已由下方 googleapis.com 覆盖)
 HOST,location.microsoft.com,Google
 # 国际主流电商/社媒/PayPal 防欺诈设备指纹 SDK (防止落入其他组导致 IP 与主站不匹配)
 HOST-SUFFIX,online-metrix.net,Google
@@ -221,37 +219,8 @@ HOST-SUFFIX,line-apps.com,🇭🇰 HK
 HOST-SUFFIX,tapngo.com.hk,🇭🇰 HK
 HOST-SUFFIX,mifinity.com,🇭🇰 HK
 
-# ---------------- 6. 国际数字银行与欧洲电子钱包 (统一归属 Banking 瑞士/欧洲组) ----------------
-HOST-SUFFIX,dukascopy.com,Banking
-HOST-SUFFIX,dukascopy.bank,Banking
-HOST-SUFFIX,yuh-api.swissquote.ch,Banking
-HOST-SUFFIX,yuh.swissquote.ch,Banking
-HOST-SUFFIX,swissquote.ch,Banking
-HOST-SUFFIX,swissquote.info,Banking
-HOST-SUFFIX,flowbank.com,Banking
-HOST-SUFFIX,n26.com,Banking
-HOST-SUFFIX,tech26.de,Banking
-HOST-SUFFIX,number26.de,Banking
-HOST-SUFFIX,ifastgb.com,Banking
-HOST-SUFFIX,wise.com,Banking
-HOST-SUFFIX,transferwise.com,Banking
-HOST-SUFFIX,authy.com,Banking
-HOST-SUFFIX,paysera.com,Banking
-HOST-SUFFIX,monese.com,Banking
-HOST-SUFFIX,fra-01.braze.eu,Banking
-HOST-SUFFIX,vivid.money,Banking
-HOST-SUFFIX,curve.com,Banking
-HOST-SUFFIX,revolut.com,Banking
-HOST-SUFFIX,skrill.com,Banking
-HOST-SUFFIX,sticpay.com,Banking
-HOST-SUFFIX,neteller.com,Banking
-HOST-SUFFIX,paysafe.com,Banking
-HOST-SUFFIX,uphold.com,Banking
-HOST-SUFFIX,castle.io,Banking
-HOST-SUFFIX,group-ib.com,Banking
-HOST-SUFFIX,onetrust.com,Banking
-
-# ---------------- 7. 香港金融机构与常用直连白名单 (保持当前 DIRECT) ----------------
+# ---------------- 6. 香港金融机构与常用直连白名单 (保持当前 DIRECT，与 Private_DIRECT.yaml 同步) ----------------
+# 注: 欧洲数字银行与国际金融已统一收敛至 Finance.list，避免跨文件重复维护
 HOST-SUFFIX,alipayhk.com,DIRECT
 HOST-SUFFIX,alipay.hk,DIRECT
 HOST-SUFFIX,imdap-sea.alipay.com,DIRECT
