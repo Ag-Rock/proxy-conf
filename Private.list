@@ -16,6 +16,66 @@ IP-CIDR,185.222.222.222/32,GMedia,no-resolve
 IP-CIDR,208.67.222.222/32,GMedia,no-resolve
 IP-CIDR,208.67.220.220/32,GMedia,no-resolve
 
+# ===== 常用全球服务分流（媒体/视频/大流量走 GMedia，主站/定位/API 走 Google） =====
+# GitHub (大文件/Raw 走 GMedia，主站走 Google)
+HOST-SUFFIX,githubusercontent.com,GMedia
+HOST-SUFFIX,github.com,Google
+HOST-SUFFIX,github.io,Google
+HOST-SUFFIX,githubassets.com,Google
+
+# YouTube (视频流走 GMedia，主站/API 定位走 Google)
+HOST-SUFFIX,googlevideo.com,GMedia
+HOST-SUFFIX,youtube.com,Google
+HOST-SUFFIX,youtu.be,Google
+HOST-SUFFIX,ytimg.com,Google
+
+# Google (主站与定位走 Google)
+HOST-SUFFIX,google.com,Google
+HOST-SUFFIX,google.com.hk,Google
+HOST-SUFFIX,googleapis.com,Google
+HOST-SUFFIX,gstatic.com,Google
+
+# Netflix (视频数据流走 GMedia，主站/定位走 Google)
+HOST-SUFFIX,nflxvideo.net,GMedia
+HOST-SUFFIX,nflxso.net,GMedia
+HOST-SUFFIX,nflxext.com,GMedia
+HOST-SUFFIX,netflix.com,Google
+HOST-SUFFIX,netflix.net,Google
+
+# Telegram (短链与主站走 Google，底层连接走 GMedia)
+HOST-SUFFIX,t.me,Google
+HOST-SUFFIX,telegram.me,Google
+
+# X (Twitter) (图片与视频走 GMedia，主站与 API 走 Google)
+HOST-SUFFIX,twimg.com,GMedia
+HOST-SUFFIX,twitter.com,Google
+HOST-SUFFIX,x.com,Google
+
+# Instagram (Reels 视频与图片走 GMedia，主站与定位走 Google)
+HOST-SUFFIX,cdninstagram.com,GMedia
+HOST-SUFFIX,instagram.com,Google
+
+# Facebook (视频与媒体走 GMedia，主站与定位走 Google)
+HOST-SUFFIX,fbcdn.net,GMedia
+HOST-SUFFIX,facebook.com,Google
+
+# Spotify (音频流与封面走 GMedia，账号与定位走 Google)
+HOST-SUFFIX,spotifycdn.com,GMedia
+HOST-SUFFIX,spotifycdn.net,GMedia
+HOST-SUFFIX,scdn.co,GMedia
+HOST-SUFFIX,spotify.com,Google
+
+# Amazon (商品大图与媒体走 GMedia，主站定位走 Google)
+HOST-SUFFIX,media-amazon.com,GMedia
+HOST-SUFFIX,images-amazon.com,GMedia
+HOST-SUFFIX,ssl-images-amazon.com,GMedia
+HOST-SUFFIX,amazon.com,Google
+
+# Adobe (安装包与大文件下载走 GMedia，账号验证走 Google)
+HOST-SUFFIX,adobe.io,GMedia
+HOST-SUFFIX,ccm-download.adobe.com,GMedia
+HOST-SUFFIX,adobe.com,Google
+
 # 私人定制
 HOST-SUFFIX,onedrive.live.com,GMedia
 HOST-SUFFIX,tenorshare.com,GMedia
