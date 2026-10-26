@@ -1,19 +1,85 @@
+# =================================================================
+# Finance.yaml - Clash / Mihomo 国际数字银行、欧洲电子钱包、外汇券商与加密货币分流规则
+# 与 Finance.list 保持 1:1 完全同步 | 归属策略组: Banking (瑞士/欧洲节点)
+# =================================================================
 payload:
-  - DOMAIN-SUFFIX,binance.com
-  - DOMAIN-SUFFIX,paysera.com
-  - DOMAIN-SUFFIX,monese.com
-  - DOMAIN-SUFFIX,fra-01.braze.eu
+  # ---------------- 1. 瑞士及欧洲数字银行 / 金融账户 ----------------
+  # Dukascopy (瑞士杜高斯贝银行)
+  - DOMAIN-SUFFIX,dukascopy.com
+  - DOMAIN-SUFFIX,dukascopy.bank
+  # Swissquote & Yuh (瑞士瑞讯银行 & Yuh)
   - DOMAIN-SUFFIX,yuh-api.swissquote.ch
   - DOMAIN-SUFFIX,yuh.swissquote.ch
   - DOMAIN-SUFFIX,swissquote.ch
   - DOMAIN-SUFFIX,swissquote.info
-  - DOMAIN-SUFFIX,uphold.com
+  # FlowBank
   - DOMAIN-SUFFIX,flowbank.com
-  # wise两步验证
+  # N26 (德国数字银行 - 强风控：严禁中国大陆 IP 直连，必须使用固定瑞士/欧洲节点)
+  - DOMAIN-SUFFIX,n26.com
+  - DOMAIN-SUFFIX,tech26.de
+  - DOMAIN-SUFFIX,number26.de
+  # iFast Global Bank (英国奕丰环球银行 - 固定欧洲/瑞士节点维持漫游定位)
+  - DOMAIN-SUFFIX,ifastgb.com
+  # Wise (原 TransferWise) & 两步验证
   - DOMAIN-SUFFIX,wise.com
+  - DOMAIN-SUFFIX,transferwise.com
   - DOMAIN-SUFFIX,authy.com
-  # vivid安全与欺诈调查
+  # Paysera / Monese / Vivid / Curve / Revolut
+  - DOMAIN-SUFFIX,paysera.com
+  - DOMAIN-SUFFIX,monese.com
+  - DOMAIN-SUFFIX,fra-01.braze.eu
   - DOMAIN-SUFFIX,vivid.money
+  - DOMAIN-SUFFIX,curve.com
+  - DOMAIN-SUFFIX,revolut.com
+  # Skrill / Sticpay / Neteller (Paysafe 集团欧洲电子钱包 - 固定欧洲纯净 IP)
+  - DOMAIN-SUFFIX,skrill.com
+  - DOMAIN-SUFFIX,sticpay.com
+  - DOMAIN-SUFFIX,neteller.com
+  - DOMAIN-SUFFIX,paysafe.com
+  # IG Group & 国际经纪商
+  - DOMAIN-SUFFIX,ig.com
+
+  # ---------------- 2. 银行级安全防欺诈、KYC 合规与客服组件 (保持与银行同 IP) ----------------
   - DOMAIN-SUFFIX,castle.io
   - DOMAIN-SUFFIX,group-ib.com
   - DOMAIN-SUFFIX,onetrust.com
+  - DOMAIN-SUFFIX,intercom.com
+  - DOMAIN-SUFFIX,intercom.io
+  - DOMAIN-SUFFIX,intercomcdn.com
+  - DOMAIN-SUFFIX,sumsub.com
+  - DOMAIN-SUFFIX,jumio.com
+  - DOMAIN-SUFFIX,onfido.com
+
+  # ---------------- 3. 加密货币交易所与 Web3 行情 ----------------
+  - DOMAIN-SUFFIX,binance.com
+  - DOMAIN-SUFFIX,binance.cc
+  - DOMAIN-SUFFIX,binance.cloud
+  - DOMAIN-SUFFIX,binance.us
+  - DOMAIN-SUFFIX,bnbstatic.com
+  - DOMAIN-SUFFIX,bybit.com
+  - DOMAIN-SUFFIX,okx.com
+  - DOMAIN-SUFFIX,okex.com
+  - DOMAIN-SUFFIX,bitget.com
+  - DOMAIN-SUFFIX,kraken.com
+  - DOMAIN-SUFFIX,kucoin.com
+  - DOMAIN-SUFFIX,gate.io
+  - DOMAIN-SUFFIX,bitfinex.com
+  - DOMAIN-SUFFIX,bitstamp.net
+  - DOMAIN-SUFFIX,bitmex.com
+  - DOMAIN-SUFFIX,coinbase.com
+  - DOMAIN-SUFFIX,gemini.com
+  - DOMAIN-SUFFIX,uphold.com
+  - DOMAIN-SUFFIX,cex.io
+  - DOMAIN-SUFFIX,choise.com
+  - DOMAIN-SUFFIX,huobi.com
+  - DOMAIN-SUFFIX,htx.com
+  - DOMAIN-SUFFIX,mexc.com
+  - DOMAIN-SUFFIX,poloniex.com
+  - DOMAIN-SUFFIX,bithumb.com
+  - DOMAIN-SUFFIX,coinone.co.kr
+  - DOMAIN-SUFFIX,korbit.co.kr
+  - DOMAIN-SUFFIX,coincheck.com
+  - DOMAIN-SUFFIX,coingecko.com
+  - DOMAIN-SUFFIX,coinmarketcap.com
+  - DOMAIN-SUFFIX,uniswap.org
+  - DOMAIN-SUFFIX,bitcointalk.org

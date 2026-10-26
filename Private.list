@@ -1,129 +1,269 @@
-# 国外DNS
-HOST-SUFFIX,dns.google,GMedia
-HOST-SUFFIX,1dot1dot1dot1.cloudflare-dns.com,GMedia
-HOST-SUFFIX,dot.sb,GMedia
-HOST-SUFFIX,dns.umbrella.com,GMedia
-HOST-SUFFIX,dns.quad9.net,GMedia
-HOST-SUFFIX,cloudflare-dns.com,GMedia
-HOST-SUFFIX,doh.dns.sb,GMedia
-HOST-SUFFIX,doh.opendns.com,GMedia
-HOST-SUFFIX,hk-hkg.doh.sb,GMedia
-IP-CIDR,8.8.8.8/32,GMedia,no-resolve
-IP-CIDR,8.8.4.4/32,GMedia,no-resolve
-IP-CIDR,1.1.1.1/32,GMedia,no-resolve
-IP-CIDR,1.0.0.1/32,GMedia,no-resolve
-IP-CIDR,185.222.222.222/32,GMedia,no-resolve
-IP-CIDR,208.67.222.222/32,GMedia,no-resolve
-IP-CIDR,208.67.220.220/32,GMedia,no-resolve
+# =================================================================
+# Private.list - Quantumult X 个人核心定制总表 (高优先级 inserted-resource)
+# 核心架构:
+#   1. 控制面 (主站/登录/API/风控定位/防欺诈) -> Google (美国策略组)
+#   2. 数据面 (视频流/音频流/大图/安装包 CDN) -> GMedia (大流量媒体组)
+#   3. 苹果生态 (美区 Apple ID) -> 仅非大陆提供服务走 Google，系统更新/App下载/iCloud 基础走 DIRECT
+#   4. 金融账户 -> 欧洲数字银行(N26/iFast/Skrill等)走 Banking，香港金融保持 DIRECT
+# =================================================================
 
-# ===== 常用全球服务分流（媒体/视频/大流量走 GMedia，主站/定位/API 走 Google） =====
-# GitHub (大文件/Raw 走 GMedia，主站走 Google)
+# ---------------- 1. 国外加密 DNS 与 Wi-Fi Calling ----------------
+# 海外 DoH 走 Google (美国节点)，确保海外域名解析出的 CDN 调度归属地稳定在美国
+HOST-SUFFIX,dns.google,Google
+HOST-SUFFIX,1dot1dot1dot1.cloudflare-dns.com,Google
+HOST-SUFFIX,cloudflare-dns.com,Google
+HOST-SUFFIX,dot.sb,Google
+HOST-SUFFIX,doh.dns.sb,Google
+HOST-SUFFIX,dns.quad9.net,Google
+HOST-SUFFIX,dns.umbrella.com,Google
+HOST-SUFFIX,doh.opendns.com,Google
+HOST-SUFFIX,hk-hkg.doh.sb,🇭🇰 HK
+IP-CIDR,8.8.8.8/32,Google,no-resolve
+IP-CIDR,8.8.4.4/32,Google,no-resolve
+IP-CIDR,1.1.1.1/32,Google,no-resolve
+IP-CIDR,1.0.0.1/32,Google,no-resolve
+IP-CIDR,185.222.222.222/32,Google,no-resolve
+IP-CIDR,208.67.222.222/32,Google,no-resolve
+IP-CIDR,208.67.220.220/32,Google,no-resolve
+
+# 美国 T-Mobile / Ultra Mobile Wi-Fi Calling
+HOST-SUFFIX,epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🇺🇸 US
+HOST-SUFFIX,ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🇺🇸 US
+IP-CIDR,208.54.159.227/32,🇺🇸 US,no-resolve
+IP-CIDR,208.54.2.163/32,🇺🇸 US,no-resolve
+
+# ---------------- 2. 定位服务与防欺诈风控保护 (锁定美国定位) ----------------
+# 浏览器与操作系统网络定位 API (保证网页/应用调用地理位置时稳定返回美国)
+HOST,location.googleapis.com,Google
+HOST,www.googleapis.com,Google
+HOST,location.microsoft.com,Google
+# 国际主流电商/社媒/PayPal 防欺诈设备指纹 SDK (防止落入其他组导致 IP 与主站不匹配)
+HOST-SUFFIX,online-metrix.net,Google
+HOST-SUFFIX,sift.com,Google
+HOST-SUFFIX,siftscience.com,Google
+HOST-SUFFIX,forter.com,Google
+HOST-SUFFIX,riskified.com,Google
+HOST-SUFFIX,maxmind.com,Google
+HOST-SUFFIX,fpjs.io,Google
+HOST-SUFFIX,fingerprint.com,Google
+# PayPal 核心风控与 Braintree 支付网关
+HOST-SUFFIX,paypal.com,PayPal
+HOST-SUFFIX,paypalobjects.com,PayPal
+HOST-SUFFIX,braintreegateway.com,PayPal
+HOST-SUFFIX,braintree-api.com,PayPal
+
+# ---------------- 3. 苹果生态深度分流 (美区 Apple ID 定制优化) ----------------
+# [A] 大流量、Apple Music 与基础服务强制 DIRECT (避免被 AppleProxy 或 AI 规则误伤导致卡顿)
+# 系统更新、App Store 下载、iCloud 与推送
+HOST-SUFFIX,appldnld.apple.com,DIRECT
+HOST-SUFFIX,mesu.apple.com,DIRECT
+HOST-SUFFIX,swscan.apple.com,DIRECT
+HOST-SUFFIX,swcdn.apple.com,DIRECT
+HOST-SUFFIX,swdist.apple.com,DIRECT
+HOST-SUFFIX,updates.cdn-apple.com,DIRECT
+HOST-SUFFIX,updates-http.cdn-apple.com,DIRECT
+HOST-SUFFIX,oscdn.apple.com,DIRECT
+HOST-SUFFIX,osrecovery.apple.com,DIRECT
+HOST-SUFFIX,apps.mzstatic.com,DIRECT
+HOST-SUFFIX,mzstatic.com,DIRECT
+HOST-SUFFIX,push.apple.com,DIRECT
+HOST-SUFFIX,icloud.com,DIRECT
+HOST-SUFFIX,icloud-content.com,DIRECT
+HOST-SUFFIX,cdn-apple.com,DIRECT
+HOST-SUFFIX,aaplimg.com,DIRECT
+# Apple Music 全链路强制 DIRECT (无损/空间音频流、曲库 API、歌词封面直连国内 CDN，杜绝听歌卡顿)
+HOST-SUFFIX,music.apple.com,DIRECT
+HOST-SUFFIX,blobstore.apple.com,DIRECT
+HOST,aod.itunes.apple.com,DIRECT
+HOST,aod-ssl.itunes.apple.com,DIRECT
+HOST,audio.itunes.apple.com,DIRECT
+HOST,audio-ssl.itunes.apple.com,DIRECT
+HOST,streamingaudio.itunes.apple.com,DIRECT
+HOST,mvod.itunes.apple.com,DIRECT
+HOST,musicstatus.itunes.apple.com,DIRECT
+HOST,play.itunes.apple.com,DIRECT
+HOST,client-api.itunes.apple.com,DIRECT
+# [B] 仅不在中国大陆提供/美区专属服务走 Google (美国节点)
+# Apple News / Stocks / Books / Podcasts / Fitness+ / TV+ 及美区商店搜索接口
+HOST-SUFFIX,apple.news,Google
+HOST,news-edge.apple.com,Google
+HOST,news-events.apple.com,Google
+HOST,news-client.apple.com,Google
+HOST,news-client-search.apple.com,Google
+HOST,stocks-edge.apple.com,Google
+HOST,stocks-data-service.apple.com,Google
+HOST,stocks-sparkline.apple.com,Google
+HOST-SUFFIX,tv.apple.com,Google
+HOST,play-edge.itunes.apple.com,Google
+HOST,uts-api.itunes.apple.com,Google
+HOST,amp-api.podcasts.apple.com,Google
+HOST,amp-api-edge.apps.apple.com,Google
+HOST,search.itunes.apple.com,Google
+HOST,bag.itunes.apple.com,Google
+HOST,bookkeeper.itunes.apple.com,Google
+HOST,hls-svod.itunes.apple.com,GMedia
+
+# ---------------- 4. 全球主流服务分流 (数据面 GMedia + 控制面 Google) ----------------
+# GitHub (大文件/Raw/Release 下载走 GMedia，主站与操作走 Google)
 HOST-SUFFIX,githubusercontent.com,GMedia
 HOST-SUFFIX,github.com,Google
 HOST-SUFFIX,github.io,Google
 HOST-SUFFIX,githubassets.com,Google
 
-# YouTube (视频流走 GMedia，主站/API 定位走 Google)
+# YouTube (纯视频流走 GMedia，主站/API/评论定位走 Google)
 HOST-SUFFIX,googlevideo.com,GMedia
 HOST-SUFFIX,youtube.com,Google
 HOST-SUFFIX,youtu.be,Google
 HOST-SUFFIX,ytimg.com,Google
 
-# Google (主站与定位走 Google)
+# Google (核心主站与定位走 Google)
 HOST-SUFFIX,google.com,Google
 HOST-SUFFIX,google.com.hk,Google
 HOST-SUFFIX,googleapis.com,Google
 HOST-SUFFIX,gstatic.com,Google
 
-# Netflix (视频数据流走 GMedia，主站/定位走 Google)
+# Netflix (视频数据流走 GMedia，主站与地区解锁判定走 Google)
 HOST-SUFFIX,nflxvideo.net,GMedia
 HOST-SUFFIX,nflxso.net,GMedia
 HOST-SUFFIX,nflxext.com,GMedia
 HOST-SUFFIX,netflix.com,Google
 HOST-SUFFIX,netflix.net,Google
 
-# Telegram (短链与主站走 Google，底层连接走 GMedia)
+# Telegram (网页短链与主站走 Google，媒体 CDN 与底层客户端连接走 GMedia)
 HOST-SUFFIX,t.me,Google
 HOST-SUFFIX,telegram.me,Google
+HOST-SUFFIX,telegram.org,Google
+HOST-SUFFIX,telesco.pe,GMedia
+HOST-SUFFIX,cdn-telegram.org,GMedia
+HOST-SUFFIX,telegram-cdn.org,GMedia
 
-# X (Twitter) (图片与视频走 GMedia，主站与 API 走 Google)
+# X / Twitter (图片、视频流与直播走 GMedia，主站、API 与趋势定位走 Google)
 HOST-SUFFIX,twimg.com,GMedia
+HOST-SUFFIX,pscp.tv,GMedia
+HOST-SUFFIX,periscope.tv,GMedia
 HOST-SUFFIX,twitter.com,Google
 HOST-SUFFIX,x.com,Google
+HOST-SUFFIX,t.co,Google
 
-# Instagram (Reels 视频与图片走 GMedia，主站与定位走 Google)
+# Instagram & Threads (Reels 视频与图片 CDN 走 GMedia，主站与定位走 Google)
 HOST-SUFFIX,cdninstagram.com,GMedia
 HOST-SUFFIX,instagram.com,Google
+HOST-SUFFIX,threads.net,Google
 
-# Facebook (视频与媒体走 GMedia，主站与定位走 Google)
+# Facebook & Meta (视频与静态媒体走 GMedia，主站与定位走 Google)
 HOST-SUFFIX,fbcdn.net,GMedia
 HOST-SUFFIX,facebook.com,Google
+HOST-SUFFIX,fb.com,Google
+HOST-SUFFIX,messenger.com,Google
 
-# Spotify (音频流与封面走 GMedia，账号与定位走 Google)
+# Reddit / Discord / TikTok (媒体 CDN 走 GMedia，主站与账户定位走 Google)
+HOST-SUFFIX,redd.it,GMedia
+HOST-SUFFIX,redditmedia.com,GMedia
+HOST-SUFFIX,redditstatic.com,GMedia
+HOST-SUFFIX,reddit.com,Google
+HOST-SUFFIX,discordapp.net,GMedia
+HOST-SUFFIX,cdn.discordapp.com,GMedia
+HOST-SUFFIX,discord.com,Google
+HOST-SUFFIX,discord.gg,Google
+HOST-SUFFIX,ibytedtos.com,GMedia
+HOST-SUFFIX,ipstatp.com,GMedia
+HOST-SUFFIX,muscdn.com,GMedia
+HOST-SUFFIX,tiktokcdn.com,GMedia
+HOST-SUFFIX,tiktokv.com,Google
+HOST-SUFFIX,tiktok.com,Google
+
+# Spotify (高码率音频流与封面 CDN 走 GMedia，账号与美区定位走 Google)
 HOST-SUFFIX,spotifycdn.com,GMedia
 HOST-SUFFIX,spotifycdn.net,GMedia
 HOST-SUFFIX,scdn.co,GMedia
+HOST-SUFFIX,audio-ak-spotify-com.akamaized.net,GMedia
+HOST-SUFFIX,audio4-ak-spotify-com.akamaized.net,GMedia
+HOST-SUFFIX,heads4-ak-spotify-com.akamaized.net,GMedia
 HOST-SUFFIX,spotify.com,Google
 
-# Amazon (商品大图与媒体走 GMedia，主站定位走 Google)
+# Amazon (商品大图与视频媒体走 GMedia，主站购物与定位走 Google)
 HOST-SUFFIX,media-amazon.com,GMedia
 HOST-SUFFIX,images-amazon.com,GMedia
 HOST-SUFFIX,ssl-images-amazon.com,GMedia
 HOST-SUFFIX,amazon.com,Google
 
-# Adobe (安装包与大文件下载走 GMedia，账号验证走 Google)
+# Adobe (安装包与云端大文件走 GMedia，账号授权验证走 Google)
 HOST-SUFFIX,adobe.io,GMedia
 HOST-SUFFIX,ccm-download.adobe.com,GMedia
 HOST-SUFFIX,adobe.com,Google
 
-# 私人定制
-HOST-SUFFIX,onedrive.live.com,GMedia
+# Bilibili (指定走 GMedia)
+HOST-KEYWORD,bilibili,GMedia
+HOST-SUFFIX,bilivideo.com,GMedia
+HOST-SUFFIX,bilivideo.cn,GMedia
+HOST-SUFFIX,bilivideo.net,GMedia
+HOST-SUFFIX,biliapi.net,GMedia
+HOST-SUFFIX,biliapi.com,GMedia
+HOST-SUFFIX,hdslb.com,GMedia
+HOST-SUFFIX,hdslb.net,GMedia
+HOST-SUFFIX,acgvideo.com,GMedia
+
+# ---------------- 5. 其它个人定制代理规则 ----------------
+# OneDrive 归入专属 OneDrive 策略组
+HOST-SUFFIX,onedrive.live.com,OneDrive
 HOST-SUFFIX,tenorshare.com,GMedia
 HOST-SUFFIX,udemycdn.com,GMedia
-HOST-SUFFIX,tradingview.com,GMedia
+HOST-SUFFIX,tradingview.com,Google
 HOST-SUFFIX,v2rayssr.com,GMedia
-HOST-SUFFIX,twing.com,GMedia
 HOST-SUFFIX,axure.cachefly.net,GMedia
-
 HOST-SUFFIX,yahoo.com,Google
-HOST-SUFFIX,dmm.co.jp,🇯🇵 JP
-HOST-SUFFIX,line-scdn.net:443,🇭🇰 HK
-HOST-SUFFIX,linecorp.com:443,🇭🇰 HK
-HOST-SUFFIX,line-apps.com:443,🇭🇰 HK
-HOST-SUFFIX,tapngo.com.hk,🇭🇰 HK
-HOST-SUFFIX,alipayhk.com,DIRECT
-HOST-SUFFIX,alipay.hk,DIRECT
-HOST-SUFFIX,mifinity.com,🇭🇰 HK
-HOST-SUFFIX,bochk.com,DIRECT
-HOST-SUFFIX,hsbc.com.hk,DIRECT
-HOST-SUFFIX,etnet.com.hk,DIRECT
-HOST-SUFFIX,antbank.hk,DIRECT
-HOST-SUFFIX,aliyuncs.com,DIRECT
-HOST-SUFFIX,cncbinternational.com,DIRECT
-HOST-SUFFIX,bankappgw.za.group,DIRECT
-HOST-SUFFIX,imdap-sea.alipay.com,DIRECT
-HOST-SUFFIX,airstarbank.com,DIRECT
-HOST-SUFFIX,firebaselogging-pa.googleapis.com,DIRECT
 
-HOST-SUFFIX,paysera.com,Banking
-HOST-SUFFIX,monese.com,Banking
-HOST-SUFFIX,fra-01.braze.eu,Banking
+# 地区专属服务 (日本 / 香港)
+HOST-SUFFIX,dmm.co.jp,🇯🇵 JP
+HOST-SUFFIX,line-scdn.net,🇭🇰 HK
+HOST-SUFFIX,linecorp.com,🇭🇰 HK
+HOST-SUFFIX,line-apps.com,🇭🇰 HK
+HOST-SUFFIX,tapngo.com.hk,🇭🇰 HK
+HOST-SUFFIX,mifinity.com,🇭🇰 HK
+
+# ---------------- 6. 国际数字银行与欧洲电子钱包 (统一归属 Banking 瑞士/欧洲组) ----------------
+HOST-SUFFIX,dukascopy.com,Banking
+HOST-SUFFIX,dukascopy.bank,Banking
 HOST-SUFFIX,yuh-api.swissquote.ch,Banking
 HOST-SUFFIX,yuh.swissquote.ch,Banking
 HOST-SUFFIX,swissquote.ch,Banking
 HOST-SUFFIX,swissquote.info,Banking
-HOST-SUFFIX,uphold.com,Banking
 HOST-SUFFIX,flowbank.com,Banking
-# wise两步验证
+HOST-SUFFIX,n26.com,Banking
+HOST-SUFFIX,tech26.de,Banking
+HOST-SUFFIX,number26.de,Banking
+HOST-SUFFIX,ifastgb.com,Banking
 HOST-SUFFIX,wise.com,Banking
+HOST-SUFFIX,transferwise.com,Banking
 HOST-SUFFIX,authy.com,Banking
-# vivid安全与欺诈调查
+HOST-SUFFIX,paysera.com,Banking
+HOST-SUFFIX,monese.com,Banking
+HOST-SUFFIX,fra-01.braze.eu,Banking
 HOST-SUFFIX,vivid.money,Banking
+HOST-SUFFIX,curve.com,Banking
+HOST-SUFFIX,revolut.com,Banking
+HOST-SUFFIX,skrill.com,Banking
+HOST-SUFFIX,sticpay.com,Banking
+HOST-SUFFIX,neteller.com,Banking
+HOST-SUFFIX,paysafe.com,Banking
+HOST-SUFFIX,uphold.com,Banking
 HOST-SUFFIX,castle.io,Banking
 HOST-SUFFIX,group-ib.com,Banking
 HOST-SUFFIX,onetrust.com,Banking
 
-############################################
+# ---------------- 7. 香港金融机构与常用直连白名单 (保持当前 DIRECT) ----------------
+HOST-SUFFIX,alipayhk.com,DIRECT
+HOST-SUFFIX,alipay.hk,DIRECT
+HOST-SUFFIX,imdap-sea.alipay.com,DIRECT
+HOST-SUFFIX,bochk.com,DIRECT
+HOST-SUFFIX,hsbc.com.hk,DIRECT
+HOST-SUFFIX,etnet.com.hk,DIRECT
+HOST-SUFFIX,antbank.hk,DIRECT
+HOST-SUFFIX,cncbinternational.com,DIRECT
+HOST-SUFFIX,bankappgw.za.group,DIRECT
+HOST-SUFFIX,airstarbank.com,DIRECT
+HOST-SUFFIX,aliyuncs.com,DIRECT
+HOST-SUFFIX,firebaselogging-pa.googleapis.com,DIRECT
 HOST-SUFFIX,keepersecurity.com,DIRECT
 HOST-SUFFIX,oyunfor.com,DIRECT
 HOST-SUFFIX,oracle.com,DIRECT
@@ -135,13 +275,6 @@ HOST-SUFFIX,ihg.com,DIRECT
 HOST-SUFFIX,hp.com,DIRECT
 HOST-SUFFIX,speedtest.net,DIRECT
 HOST-SUFFIX,udemy.com,DIRECT
+HOST-SUFFIX,openvsx.eclipsecontent.org,DIRECT
 # HOST-SUFFIX,interactivebrokers.com,DIRECT
 # HOST-SUFFIX,ibkr.com,DIRECT
-HOST-SUFFIX,ifastgb.com,DIRECT
-HOST-SUFFIX,skrill.com,DIRECT
-HOST-SUFFIX,sticpay.com,DIRECT
-HOST-SUFFIX,tech26.de,DIRECT
-HOST-SUFFIX,number26.de,DIRECT
-HOST-SUFFIX,n26.com,DIRECT
-
-

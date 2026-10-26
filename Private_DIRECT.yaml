@@ -1,41 +1,30 @@
+# =================================================================
+# Private_DIRECT.yaml - 个人定制直连白名单 (Clash Classical YAML 格式)
+# =================================================================
 payload:
-- DOMAIN-SUFFIX,keepersecurity.com,DIRECT
-- DOMAIN-SUFFIX,oyunfor.com,DIRECT
-- DOMAIN-SUFFIX,oracle.com,DIRECT
-- DOMAIN-SUFFIX,oraclecloud.com,DIRECT
-- DOMAIN-SUFFIX,hilton.com,DIRECT
-- DOMAIN-SUFFIX,hiltonhonors.com,DIRECT
-- DOMAIN-SUFFIX,marriott.com,DIRECT
-- DOMAIN-SUFFIX,ihg.com,DIRECT
-- DOMAIN-SUFFIX,hp.com,DIRECT
-- DOMAIN-SUFFIX,speedtest.net,DIRECT
-- DOMAIN-SUFFIX,udemy.com,DIRECT
-# - DOMAIN-SUFFIX,interactivebrokers.com,DIRECT
-#- DOMAIN-SUFFIX,ibkr.com,DIRECT
-- DOMAIN-SUFFIX,ifastgb.com,DIRECT
-- DOMAIN-SUFFIX,skrill.com,DIRECT
-- DOMAIN-SUFFIX,sticpay.com,DIRECT
-- DOMAIN-SUFFIX,tech26.de,DIRECT
-- DOMAIN-SUFFIX,number26.de,DIRECT
-- DOMAIN-SUFFIX,n26.com,DIRECT
-- DOMAIN-SUFFIX,bochk.com,DIRECT
-- DOMAIN-SUFFIX,hsbc.com.hk,DIRECT
-- DOMAIN-SUFFIX,etnet.com.hk,DIRECT
-- DOMAIN-SUFFIX,antbank.hk,DIRECT
-- DOMAIN-SUFFIX,aliyuncs.com,DIRECT
-- DOMAIN-SUFFIX,cncbinternational.com,DIRECT
-- DOMAIN-SUFFIX,bankappgw.za.group,DIRECT
-- DOMAIN-SUFFIX,imdap-sea.alipay.com,DIRECT
-- DOMAIN-SUFFIX,airstarbank.com,DIRECT
-###
-- DOMAIN-SUFFIX,alipayhk.com,DIRECT
-- DOMAIN-SUFFIX,alipay.hk,DIRECT
-- DOMAIN-SUFFIX,bochk.com,DIRECT
-- DOMAIN-SUFFIX,hsbc.com.hk,DIRECT
-- DOMAIN-SUFFIX,etnet.com.hk,DIRECT
-- DOMAIN-SUFFIX,antbank.hk,DIRECT
-- DOMAIN-SUFFIX,aliyuncs.com,DIRECT
-- DOMAIN-SUFFIX,cncbinternational.com,DIRECT
-- DOMAIN-SUFFIX,bankappgw.za.group,DIRECT
-- DOMAIN-SUFFIX,imdap-sea.alipay.com,DIRECT
-- DOMAIN-SUFFIX,firebaselogging-pa.googleapis.com,DIRECT
+  # 香港金融机构与支付服务 (保持当前直连策略)
+  - DOMAIN-SUFFIX,bochk.com
+  - DOMAIN-SUFFIX,hsbc.com.hk
+  - DOMAIN-SUFFIX,etnet.com.hk
+  - DOMAIN-SUFFIX,antbank.hk
+  - DOMAIN-SUFFIX,cncbinternational.com
+  - DOMAIN-SUFFIX,bankappgw.za.group
+  - DOMAIN-SUFFIX,airstarbank.com
+  - DOMAIN-SUFFIX,alipayhk.com
+  - DOMAIN-SUFFIX,alipay.hk
+  - DOMAIN-SUFFIX,imdap-sea.alipay.com
+  # 常用工具、酒店集团与云服务直连
+  - DOMAIN-SUFFIX,aliyuncs.com
+  - DOMAIN-SUFFIX,keepersecurity.com
+  - DOMAIN-SUFFIX,oyunfor.com
+  - DOMAIN-SUFFIX,oracle.com
+  - DOMAIN-SUFFIX,oraclecloud.com
+  - DOMAIN-SUFFIX,hilton.com
+  - DOMAIN-SUFFIX,hiltonhonors.com
+  - DOMAIN-SUFFIX,marriott.com
+  - DOMAIN-SUFFIX,ihg.com
+  - DOMAIN-SUFFIX,hp.com
+  - DOMAIN-SUFFIX,speedtest.net
+  - DOMAIN-SUFFIX,udemy.com
+  - DOMAIN-SUFFIX,openvsx.eclipsecontent.org
+  - DOMAIN-SUFFIX,firebaselogging-pa.googleapis.com

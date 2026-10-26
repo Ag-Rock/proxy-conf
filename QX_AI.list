@@ -4,22 +4,19 @@
 #       代码编程助手, 图像视频生成, 音乐音频, 搜索学术, 推理平台等
 # =================================================================
 
-# ---------------- Apple Intelligence ----------------
-HOST-SUFFIX,guzzoni.apple.com,AI
-HOST-SUFFIX,smoot.apple.com,AI
+# ---------------- Apple Intelligence & Siri AI ----------------
 HOST-SUFFIX,apple-relay.apple.com,AI
 HOST-SUFFIX,apple-relay.cloudflare.com,AI
 HOST-SUFFIX,apple-relay.fastly-edge.com,AI
 HOST-SUFFIX,apple-relay.mask.apple-dns.net,AI
 HOST-SUFFIX,cp4.cloudflare.com,AI
+HOST-SUFFIX,guzzoni.apple.com,AI
+HOST-SUFFIX,smoot.apple.com,AI
 HOST-SUFFIX,gspe1-ssl.ls.apple.com,AI
-HOST-SUFFIX,mesu.apple.com,AI
-HOST-SUFFIX,appldnld.apple.com,AI
 HOST,apple-relay.apple.com,AI
 HOST,apple-relay.cloudflare.com,AI
 HOST,apple-relay.fastly-edge.com,AI
 HOST,gspe1-ssl.ls.apple.com,AI
-HOST-SUFFIX,apps.mzstatic.com,AI
 
 # ---------------- 人机验证、风控与基础通道 (防登录受阻/验证循环) ----------------
 # Cloudflare Turnstile & Challenges
@@ -76,12 +73,11 @@ HOST-SUFFIX,notebooklm.googleapis.com,AI
 HOST,notebooklm-pa.googleapis.com,AI
 HOST,notebooklm.googleapis.com,AI
 HOST-KEYWORD,notebooklm,AI
-# Gemini & Bard
+# Gemini & Bard (移除 HOST-KEYWORD,gemini 避免误伤 Gemini 加密货币交易所)
 HOST-SUFFIX,gemini.google,AI
 HOST-SUFFIX,gemini.google.com,AI
 HOST-SUFFIX,gemini.gstatic.com,AI
 HOST-SUFFIX,bard.google.com,AI
-HOST-KEYWORD,gemini,AI
 # Google AI Studio / MakerSuite
 HOST-SUFFIX,ai.google.dev,AI
 HOST,ai.google.dev,AI
