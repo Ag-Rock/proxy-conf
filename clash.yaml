@@ -1,3 +1,18 @@
+# ===== GitHub 公开配置顶部脱敏占位（用于通过 Clash Verge 订阅校验，真实连接由本地 Merge 覆盖） =====
+proxy-providers:
+  KKK:
+    { type: http, url: "https://example.com", interval: 86400 }
+  CF.live:
+    { type: http, url: "https://example.com", interval: 86400 }
+  CF.art:
+    { type: http, url: "https://example.com", interval: 86400 }
+proxies:
+  - { name: 🇺🇸 美国-1, server: 127.0.0.1, port: 443, type: vmess, uuid: 00000000-0000-0000-0000-000000000000, alterId: 0, cipher: auto }
+  - { name: 🇺🇸 美国-2, server: 127.0.0.1, port: 443, type: vmess, uuid: 00000000-0000-0000-0000-000000000000, alterId: 0, cipher: auto }
+  - { name: 🇺🇸 美国-3, server: 127.0.0.1, port: 443, type: vmess, uuid: 00000000-0000-0000-0000-000000000000, alterId: 0, cipher: auto }
+  - { name: 🇨🇭 瑞士-1, server: 127.0.0.1, port: 443, type: vmess, uuid: 00000000-0000-0000-0000-000000000000, alterId: 0, cipher: auto }
+  - { name: 🇨🇭 瑞士-2, server: 127.0.0.1, port: 443, type: vmess, uuid: 00000000-0000-0000-0000-000000000000, alterId: 0, cipher: auto }
+  - { name: 🇨🇭 瑞士-3, server: 127.0.0.1, port: 443, type: vmess, uuid: 00000000-0000-0000-0000-000000000000, alterId: 0, cipher: auto }
 # ===== 全局配置 =====
 port: 7890
 socks-port: 7891
