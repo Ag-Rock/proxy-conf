@@ -1,0 +1,397 @@
+# 规则匹配
+# 此规则部分没有做防泄露处理，因为弊严重大于利！
+rules:
+  # 1. 优先处理本地和私有网络及个人直连白名单
+  - GEOSITE,private,DIRECT
+  - RULE-SET,AgPrivate,DIRECT
+  # 2. 拦截 QUIC 流量（强制降级为 TCP，防止广告通过 UDP 443 穿透及改善代理稳定性）
+  - AND,((DST-PORT,443),(NETWORK,UDP)),REJECT
+
+  # 3. 苹果生态深度分流 (美区 Apple ID 定制优化)
+  # [3A] 系统更新、App Store 下载、iCloud、推送与 Apple Music 全链路强制 DIRECT (防止被 AppleProxy 误伤导致听歌卡顿)
+  - DOMAIN-SUFFIX,appldnld.apple.com,DIRECT
+  - DOMAIN-SUFFIX,mesu.apple.com,DIRECT
+  - DOMAIN-SUFFIX,swscan.apple.com,DIRECT
+  - DOMAIN-SUFFIX,swcdn.apple.com,DIRECT
+  - DOMAIN-SUFFIX,swdist.apple.com,DIRECT
+  - DOMAIN-SUFFIX,updates.cdn-apple.com,DIRECT
+  - DOMAIN-SUFFIX,updates-http.cdn-apple.com,DIRECT
+  - DOMAIN-SUFFIX,oscdn.apple.com,DIRECT
+  - DOMAIN-SUFFIX,osrecovery.apple.com,DIRECT
+  - DOMAIN-SUFFIX,apps.mzstatic.com,DIRECT
+  - DOMAIN-SUFFIX,mzstatic.com,DIRECT
+  - DOMAIN-SUFFIX,push.apple.com,DIRECT
+  - DOMAIN-SUFFIX,icloud.com,DIRECT
+  - DOMAIN-SUFFIX,icloud-content.com,DIRECT
+  - DOMAIN-SUFFIX,cdn-apple.com,DIRECT
+  - DOMAIN-SUFFIX,aaplimg.com,DIRECT
+  # Apple Music 音频流、曲库 API、歌词与MV强制直连
+  - DOMAIN-SUFFIX,music.apple.com,DIRECT
+  - DOMAIN-SUFFIX,blobstore.apple.com,DIRECT
+  - DOMAIN,aod.itunes.apple.com,DIRECT
+  - DOMAIN,aod-ssl.itunes.apple.com,DIRECT
+  - DOMAIN,audio.itunes.apple.com,DIRECT
+  - DOMAIN,audio-ssl.itunes.apple.com,DIRECT
+  - DOMAIN,streamingaudio.itunes.apple.com,DIRECT
+  - DOMAIN,mvod.itunes.apple.com,DIRECT
+  - DOMAIN,musicstatus.itunes.apple.com,DIRECT
+  - DOMAIN,play.itunes.apple.com,DIRECT
+  - DOMAIN,client-api.itunes.apple.com,DIRECT
+  # [3B] 美区专属/不在中国大陆提供的服务 (News/Stocks/TV+/Podcasts/美区商店搜索) -> 控制面走 Google，TV+ 视频流走 GMedia
+  # (注: Apple Intelligence 核心域名已统一收敛在下方 AgAI 规则集中)
+  - DOMAIN-SUFFIX,apple.news,Apple
+  - DOMAIN,news-edge.apple.com,Apple
+  - DOMAIN,news-events.apple.com,Apple
+  - DOMAIN,news-client.apple.com,Apple
+  - DOMAIN,news-client-search.apple.com,Apple
+  - DOMAIN,stocks-edge.apple.com,Apple
+  - DOMAIN,stocks-data-service.apple.com,Apple
+  - DOMAIN,stocks-sparkline.apple.com,Apple
+  - DOMAIN-SUFFIX,tv.apple.com,Apple
+  - DOMAIN,play-edge.itunes.apple.com,Apple
+  - DOMAIN,uts-api.itunes.apple.com,Apple
+  - DOMAIN,amp-api.podcasts.apple.com,Apple
+  - DOMAIN,amp-api-edge.apps.apple.com,Apple
+  - DOMAIN,search.itunes.apple.com,Apple
+  - DOMAIN,bag.itunes.apple.com,Apple
+  - DOMAIN,bookkeeper.itunes.apple.com,Apple
+  - DOMAIN,hls-svod.itunes.apple.com,GMedia
+
+  # 4. AI 核心验证、Apple Intelligence、遥测保护与全球 AI 分流 (优先于广告拦截与 Google 通用规则)
+  - RULE-SET,AgAI,AI
+  - GEOSITE,category-ai-!cn,AI
+
+  # 5. 国际金融、定位服务与防欺诈风控保护 (优先于广告拦截，防止银行风控/客服组件被误杀或定位割裂)
+  - RULE-SET,Finance,Banking
+  - DOMAIN,location.microsoft.com,🚀 手选主流
+  - DOMAIN-SUFFIX,online-metrix.net,🚀 手选主流
+  - DOMAIN-SUFFIX,sift.com,🚀 手选主流
+  - DOMAIN-SUFFIX,siftscience.com,🚀 手选主流
+  - DOMAIN-SUFFIX,forter.com,🚀 手选主流
+  - DOMAIN-SUFFIX,riskified.com,🚀 手选主流
+  - DOMAIN-SUFFIX,maxmind.com,🚀 手选主流
+  - DOMAIN-SUFFIX,fpjs.io,🚀 手选主流
+  - DOMAIN-SUFFIX,fingerprint.com,🚀 手选主流
+  - DOMAIN-SUFFIX,paypalobjects.com,PayPal
+  - DOMAIN-SUFFIX,braintreegateway.com,PayPal
+  - DOMAIN-SUFFIX,braintree-api.com,PayPal
+
+  # 6. 广告拦截（置于核心白名单、AI 与银行风控保护之后，优先于普通代理规则）
+  - GEOSITE,category-ads-all,REJECT
+  - RULE-SET,AdvertisingLite,REJECT
+
+  # 7. 极速匹配常用全球服务 (数据面 GMedia + 控制面 🚀 手选主流)
+  # GitHub (大文件/Raw走 GMedia，主站走 🚀 手选主流)
+  - DOMAIN-SUFFIX,githubusercontent.com,GMedia
+  - GEOSITE,github,🚀 手选主流
+
+  # YouTube (视频流走 GMedia，主站/API 定位走 Google)
+  - DOMAIN-SUFFIX,googlevideo.com,GMedia
+  - GEOSITE,youtube,Google
+
+  - GEOSITE,google,Google
+
+  # Netflix (视频流走 GMedia，主站/定位走 Google)
+  - DOMAIN-SUFFIX,nflxvideo.net,GMedia
+  - DOMAIN-SUFFIX,nflxso.net,GMedia
+  - DOMAIN-SUFFIX,nflxext.com,GMedia
+  - GEOSITE,netflix,🚀 手选主流
+
+  # Telegram (短链与主站走 🚀 手选主流，媒体与底层连接走 GMedia)
+  - DOMAIN-SUFFIX,t.me,🚀 手选主流
+  - DOMAIN-SUFFIX,telegram.me,🚀 手选主流
+  - DOMAIN-SUFFIX,telegram.org,🚀 手选主流
+  - GEOSITE,telegram,GMedia
+
+  # 8. 海外加密 DNS 服务器 (走 🚀 手选主流 美国组，确保海外 CDN 解析归属地锁定美国)
+  - DOMAIN-SUFFIX,dns.google,🚀 手选主流
+  - DOMAIN-SUFFIX,1dot1dot1dot1.cloudflare-dns.com,🚀 手选主流
+  - DOMAIN-SUFFIX,dot.sb,🚀 手选主流
+  - DOMAIN-SUFFIX,dns.umbrella.com,🚀 手选主流
+  - DOMAIN-SUFFIX,dns.quad9.net,🚀 手选主流
+  - DOMAIN-SUFFIX,cloudflare-dns.com,🚀 手选主流
+  - DOMAIN-SUFFIX,doh.dns.sb,🚀 手选主流
+  - DOMAIN-SUFFIX,doh.opendns.com,🚀 手选主流
+  - DOMAIN-SUFFIX,hk-hkg.doh.sb,🇭🇰 HK
+  - IP-CIDR,8.8.8.8/32,🚀 手选主流,no-resolve
+  - IP-CIDR,8.8.4.4/32,🚀 手选主流,no-resolve
+  - IP-CIDR,1.1.1.1/32,🚀 手选主流,no-resolve
+  - IP-CIDR,1.0.0.1/32,🚀 手选主流,no-resolve
+  - IP-CIDR,185.222.222.222/32,🚀 手选主流,no-resolve
+  - IP-CIDR,208.67.222.222/32,🚀 手选主流,no-resolve
+  - IP-CIDR,208.67.220.220/32,🚀 手选主流,no-resolve
+
+  # 9. Wi-Fi Calling 自定义规则
+  - DOMAIN-SUFFIX,epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🇺🇸 US
+  - DOMAIN-SUFFIX,ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🇺🇸 US
+  - IP-CIDR,208.54.159.227/32,🇺🇸 US,no-resolve
+  - IP-CIDR,208.54.2.163/32,🇺🇸 US,no-resolve
+  - IP-CIDR,87.194.0.0/19,🎯 手选节点
+  - IP-CIDR,87.194.88.0/23,🎯 手选节点
+  - DOMAIN-SUFFIX,epdg.epc.mnc010.mcc234.pub.3gppnetwork.org,🎯 手选节点
+
+  # 10. Bilibili 与个人常用站点定制
+  - DOMAIN-KEYWORD,bilibili,GMedia
+  - DOMAIN-SUFFIX,bilivideo.com,GMedia
+  - DOMAIN-SUFFIX,bilivideo.cn,GMedia
+  - DOMAIN-SUFFIX,bilivideo.net,GMedia
+  - DOMAIN-SUFFIX,biliapi.net,GMedia
+  - DOMAIN-SUFFIX,biliapi.com,GMedia
+  - DOMAIN-SUFFIX,hdslb.com,GMedia
+  - DOMAIN-SUFFIX,hdslb.net,GMedia
+  - DOMAIN-SUFFIX,acgvideo.com,GMedia
+  - GEOSITE,bilibili,GMedia
+  - DOMAIN-SUFFIX,onedrive.live.com,OneDrive
+  - DOMAIN-SUFFIX,1drv.com,OneDrive
+  - DOMAIN-SUFFIX,1drv.ms,OneDrive
+  - DOMAIN-SUFFIX,livefilestore.com,OneDrive
+  - DOMAIN-SUFFIX,tenorshare.com,GMedia
+  - DOMAIN-SUFFIX,udemycdn.com,GMedia
+  - DOMAIN-SUFFIX,tradingview.com,🚀 手选主流
+  - DOMAIN-SUFFIX,v2rayssr.com,GMedia
+  - DOMAIN-SUFFIX,axure.cachefly.net,GMedia
+  - DOMAIN-SUFFIX,yahoo.com,🚀 手选主流
+
+  # 11. 地区特定服务 (日本 / 香港)
+  - DOMAIN-SUFFIX,dmm.co.jp,🇯🇵 JP
+  - DOMAIN-SUFFIX,line-scdn.net,🇭🇰 HK
+  - DOMAIN-SUFFIX,linecorp.com,🇭🇰 HK
+  - DOMAIN-SUFFIX,line-apps.com,🇭🇰 HK
+  - DOMAIN-SUFFIX,tapngo.com.hk,🇭🇰 HK
+  - DOMAIN-SUFFIX,mifinity.com,🇭🇰 HK
+
+  # 12. 加密货币扩展规则库 (Banking 策略组)
+  - RULE-SET,Crypto_domain,Banking
+
+  # 13. 社交媒体、流媒体与电商精细分流 (数据面 GMedia + 控制面 🚀 手选主流)
+  # Adobe (安装包/更新走 GMedia，账号验证走 🚀 手选主流)
+  - DOMAIN-SUFFIX,adobe.io,GMedia
+  - DOMAIN-SUFFIX,ccm-download.adobe.com,GMedia
+  - RULE-SET,Adobe_domain,🚀 手选主流
+
+  # X / Twitter (图片、视频与直播走 GMedia，主站与趋势定位走 🚀 手选主流)
+  - DOMAIN-SUFFIX,twimg.com,GMedia
+  - DOMAIN-SUFFIX,pscp.tv,GMedia
+  - DOMAIN-SUFFIX,periscope.tv,GMedia
+  - RULE-SET,X_domain,🚀 手选主流
+
+  # Reddit / Discord / TikTok (媒体 CDN 走 GMedia，主站与定位走 🚀 手选主流)
+  - DOMAIN-SUFFIX,redd.it,GMedia
+  - DOMAIN-SUFFIX,redditmedia.com,GMedia
+  - DOMAIN-SUFFIX,redditstatic.com,GMedia
+  - DOMAIN-SUFFIX,reddit.com,🚀 手选主流
+  - DOMAIN-SUFFIX,discordapp.net,GMedia
+  - DOMAIN-SUFFIX,cdn.discordapp.com,GMedia
+  - DOMAIN-SUFFIX,discord.com,🚀 手选主流
+  - DOMAIN-SUFFIX,discord.gg,🚀 手选主流
+  - DOMAIN-SUFFIX,ibytedtos.com,GMedia
+  - DOMAIN-SUFFIX,ipstatp.com,GMedia
+  - DOMAIN-SUFFIX,muscdn.com,GMedia
+  - DOMAIN-SUFFIX,tiktokcdn.com,GMedia
+  - DOMAIN-SUFFIX,tiktokv.com,🚀 手选主流
+  - DOMAIN-SUFFIX,tiktok.com,🚀 手选主流
+
+  # Amazon (商品图/媒体走 GMedia，主站定位走 🚀 手选主流)
+  - DOMAIN-SUFFIX,media-amazon.com,GMedia
+  - DOMAIN-SUFFIX,images-amazon.com,GMedia
+  - DOMAIN-SUFFIX,ssl-images-amazon.com,GMedia
+  - RULE-SET,amazon_domain,🚀 手选主流
+
+  # Instagram & Threads (Reels视频、图片走 GMedia，主站定位走 🚀 手选主流)
+  - DOMAIN-SUFFIX,cdninstagram.com,GMedia
+  - DOMAIN-SUFFIX,threads.net,🚀 手选主流
+  - RULE-SET,ins_domain,🚀 手选主流
+
+  # Facebook & Meta (视频、图片媒体走 GMedia，主站定位走 🚀 手选主流)
+  - DOMAIN-SUFFIX,fbcdn.net,GMedia
+  - RULE-SET,facebook_domain,🚀 手选主流
+
+  # PayPal
+  - RULE-SET,Paypal_domain,PayPal
+
+  # Spotify (音频流走 GMedia，账号与定位走 🚀 手选主流)
+  - DOMAIN-SUFFIX,spotifycdn.com,GMedia
+  - DOMAIN-SUFFIX,spotifycdn.net,GMedia
+  - DOMAIN-SUFFIX,scdn.co,GMedia
+  - DOMAIN-SUFFIX,audio-ak-spotify-com.akamaized.net,GMedia
+  - DOMAIN-SUFFIX,audio4-ak-spotify-com.akamaized.net,GMedia
+  - DOMAIN-SUFFIX,heads4-ak-spotify-com.akamaized.net,GMedia
+  - RULE-SET,Spotify,🚀 手选主流
+
+  # 14. 苹果、微软与通用代理规则集
+  # AppleProxy (仅拦截顶部未放行的苹果非大陆服务 -> 走 Apple 美区节点)
+  - RULE-SET,AppleProxy,Apple
+  # Apple 其余基础服务 -> 走 Apple 策略组 (默认首项为 DIRECT)
+  - RULE-SET,Apple_domain,Apple
+  - RULE-SET,OneDrive_domain,OneDrive
+  - RULE-SET,Nintendo_domain,Game
+  - RULE-SET,Xbox_domain,Game
+  - RULE-SET,Microsoft_domain,Microsoft
+  - RULE-SET,SpeedTest_domain,Global
+  - RULE-SET,GFW_domain,Global
+  - RULE-SET,geolocation-!cn,Global
+
+  # 15. IP 规则与国内直连兜底
+  - RULE-SET,google_ip,Google,no-resolve
+  - RULE-SET,netflix_ip,GMedia,no-resolve
+  - RULE-SET,telegram_ip,GMedia,no-resolve
+  - GEOSITE,cn,DIRECT
+  - GEOIP,cn,DIRECT,no-resolve
+  - MATCH,Global
+# ===== Clash for Windows 绕过 =====
+# cfw-bypass:
+#   - localhost
+#   - 127.*
+#   - 10.*
+#   - 172.16.*
+#   - 172.17.*
+#   - 172.18.*
+#   - 172.19.*
+#   - 172.20.*
+#   - 172.21.*
+#   - 172.22.*
+#   - 172.23.*
+#   - 172.24.*
+#   - 172.25.*
+#   - 172.26.*
+#   - 172.27.*
+#   - 172.28.*
+#   - 172.29.*
+#   - 172.30.*
+#   - 172.31.*
+#   - 192.168.*
+#   - <local>
+#   - "*.cn"
+#   - "*.qq.com"
+#   - "*.163.com"
+#   - "*.126.net"
+#   - "*.music.163.com"
+# 规则集
+rule-anchor:
+  ip: &ip { type: http, interval: 86400, behavior: ipcidr, format: mrs, proxy: 🚀 手选主流 }
+  domain: &domain { type: http, interval: 86400, behavior: domain, format: mrs, proxy: 🚀 手选主流 }
+  class:
+    &class { type: http, interval: 86400, behavior: classical, format: text, proxy: 🚀 手选主流 }
+  class-yaml:
+    &class-yaml { type: http, interval: 86400, behavior: classical, format: yaml, proxy: 🚀 手选主流 }
+rule-providers:
+  AdvertisingLite:
+    {
+      <<: *class,
+      url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AdvertisingLite/AdvertisingLite.list",
+    }
+  AgPrivate:
+    {
+      <<: *class-yaml,
+      url: "https://raw.githubusercontent.com/Ag-Rock/proxy-conf/main/Private_DIRECT.yaml",
+    }
+  AgAI:
+    {
+      <<: *class-yaml,
+      url: "https://raw.githubusercontent.com/Ag-Rock/proxy-conf/main/AI.yaml",
+    }
+  Crypto_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-cryptocurrency.mrs",
+    }
+  Finance:
+    {
+      <<: *class-yaml,
+      url: "https://raw.githubusercontent.com/Ag-Rock/proxy-conf/refs/heads/main/Finance.yaml",
+    }
+  Adobe_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/adobe.mrs",
+    }
+  Paypal_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs",
+    }
+  OneDrive_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs",
+    }
+  Nintendo_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/nintendo.mrs",
+    }
+  Xbox_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/xbox.mrs",
+    }
+  Microsoft_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs",
+    }
+  AppleProxy:
+    {
+      <<: *class,
+      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/AppleProxy/AppleProxy.list",
+    }
+  Apple_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs",
+    }
+  Spotify:
+    {
+      <<: *class,
+      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Spotify/Spotify.list",
+    }
+  SpeedTest_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs",
+    }
+  X_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/x.mrs",
+    }
+  amazon_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/amazon.mrs",
+    }
+  ins_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs",
+    }
+  facebook_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs",
+    }
+  GFW_domain:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs",
+    }
+  geolocation-!cn:
+    {
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs",
+    }
+  google_ip:
+    {
+      <<: *ip,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs",
+    }
+  telegram_ip:
+    {
+      <<: *ip,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs",
+    }
+  netflix_ip:
+    {
+      <<: *ip,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs",
+    }
