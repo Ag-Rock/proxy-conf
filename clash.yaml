@@ -131,9 +131,6 @@ pr:
     proxies:
       [
         🚀 手选主流,
-        🏎️ 速度优选,
-        🚑 故障转移,
-        🎯 手选节点,
         🇺🇸 US+,
         🇨🇭 CH+,
         🏴‍☠️ CF,
@@ -143,6 +140,9 @@ pr:
         🇼🇸 TW,
         🇸🇬 SG,
         🇰🇷 KR,
+        🏎️ 速度优选,
+        🚑 故障转移,
+        🎯 手选节点,
         DIRECT,
       ],
   }
@@ -188,7 +188,7 @@ proxy-groups:
     name: AI,
     type: select,
     proxies:
-      [🇺🇸 美国-3, 🚀 手选主流, 🏎️ 速度优选, 🚑 故障转移, 🎯 手选节点, 🇺🇸 US+, 🇨🇭 CH+, 🏴‍☠️ CF, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR],
+      [🇺🇸 美国-3, 🚀 手选主流, 🇺🇸 US+, 🇨🇭 CH+, 🏴‍☠️ CF, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR, 🏎️ 速度优选, 🚑 故障转移, 🎯 手选节点],
     icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/AI.png",
     }
   - {
@@ -198,46 +198,12 @@ proxy-groups:
     }
   - {
       name: Banking,
-      type: select,
-      proxies:
-        [
-          🇨🇭 CH+,
-          🚀 手选主流,
-          🏎️ 速度优选,
-          🚑 故障转移,
-          🎯 手选节点,
-          🇺🇸 US+,
-          🏴‍☠️ CF,
-          🇺🇸 US,
-          🇭🇰 HK,
-          🇯🇵 JP,
-          🇼🇸 TW,
-          🇸🇬 SG,
-          🇰🇷 KR,
-          DIRECT,
-        ],
+      <<: *pr,
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Crypto.png",
     }
   - {
       name: Apple,
-      type: select,
-      proxies:
-        [
-          DIRECT,
-          🚀 手选主流,
-          🏎️ 速度优选,
-          🚑 故障转移,
-          🎯 手选节点,
-          🇺🇸 US+,
-          🇨🇭 CH+,
-          🏴‍☠️ CF,
-          🇺🇸 US,
-          🇭🇰 HK,
-          🇯🇵 JP,
-          🇼🇸 TW,
-          🇸🇬 SG,
-          🇰🇷 KR,
-        ],
+      <<: *pr,
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Apple.png",
     }
   - {
@@ -252,24 +218,7 @@ proxy-groups:
     }
   - {
       name: Game,
-      type: select,
-      proxies:
-        [
-          🇯🇵 JP,
-          🇺🇸 US,
-          🇺🇸 US+,
-          🚀 手选主流,
-          🇭🇰 HK,
-          🏎️ 速度优选,
-          🚑 故障转移,
-          🎯 手选节点,
-          🇨🇭 CH+,
-          🏴‍☠️ CF,
-          🇼🇸 TW,
-          🇸🇬 SG,
-          🇰🇷 KR,
-          DIRECT,
-        ],
+      <<: *pr,
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Game.png",
     }
   - {
