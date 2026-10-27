@@ -136,9 +136,14 @@ HOST-SUFFIX,windsurf.com,AI
 HOST-SUFFIX,windsurf.build,AI
 HOST-SUFFIX,codeium.com,AI
 HOST-SUFFIX,codeiumdata.com,AI
-# GitHub Copilot & Microsoft Copilot
+# GitHub Copilot & Microsoft Copilot / Bing AI
 HOST-SUFFIX,githubcopilot.com,AI
 HOST-SUFFIX,copilot.microsoft.com,AI
+HOST-SUFFIX,copilot.cloud.microsoft,AI
+HOST,sydney.bing.com,AI
+HOST,edgeservices.bing.com,AI
+HOST-SUFFIX,bingapis.com,AI
+HOST-SUFFIX,bing.com,AI
 HOST,copilot-proxy.githubusercontent.com,AI
 HOST,copilot-workspace.githubnext.com,AI
 HOST,copilotprodattachments.blob.core.windows.net,AI

@@ -204,6 +204,9 @@ HOST-SUFFIX,acgvideo.com,GMedia
 # ---------------- 5. 其它个人定制代理规则 ----------------
 # OneDrive 归入专属 OneDrive 策略组
 HOST-SUFFIX,onedrive.live.com,OneDrive
+HOST-SUFFIX,1drv.com,OneDrive
+HOST-SUFFIX,1drv.ms,OneDrive
+HOST-SUFFIX,livefilestore.com,OneDrive
 HOST-SUFFIX,tenorshare.com,GMedia
 HOST-SUFFIX,udemycdn.com,GMedia
 HOST-SUFFIX,tradingview.com,🚀 手选主流
@@ -245,5 +248,25 @@ HOST-SUFFIX,hp.com,DIRECT
 HOST-SUFFIX,speedtest.net,DIRECT
 HOST-SUFFIX,udemy.com,DIRECT
 HOST-SUFFIX,openvsx.eclipsecontent.org,DIRECT
+# 微软 (Windows/Office)、Xbox 与任天堂 (Switch) 游戏下载及系统更新 CDN 强制 DIRECT (跑满国内宽带，省代理流量)
+HOST-SUFFIX,cdn.nintendo.net,DIRECT
+HOST-SUFFIX,hac.lp1.d4c.nintendo.net,DIRECT
+HOST,assets1.xboxlive.com,DIRECT
+HOST,assets2.xboxlive.com,DIRECT
+HOST,dlassets.xboxlive.com,DIRECT
+HOST,dlassets2.xboxlive.com,DIRECT
+HOST,xvcf1.xboxlive.com,DIRECT
+HOST,xvcf2.xboxlive.com,DIRECT
+HOST-SUFFIX,xboxlive.cn,DIRECT
+HOST-SUFFIX,windowsupdate.com,DIRECT
+HOST-SUFFIX,delivery.mp.microsoft.com,DIRECT
+HOST-SUFFIX,update.microsoft.com,DIRECT
+HOST,download.microsoft.com,DIRECT
+HOST-SUFFIX,officecdn.microsoft.com,DIRECT
+HOST-SUFFIX,officecdn.microsoft.com.edgesuite.net,DIRECT
+HOST-SUFFIX,sfx.ms,DIRECT
+HOST-SUFFIX,microsoft.cn,DIRECT
+HOST-SUFFIX,azure.cn,DIRECT
+HOST-SUFFIX,21vianet.com,DIRECT
 # HOST-SUFFIX,interactivebrokers.com,DIRECT
 # HOST-SUFFIX,ibkr.com,DIRECT

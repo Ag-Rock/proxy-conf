@@ -28,3 +28,23 @@ payload:
   - DOMAIN-SUFFIX,udemy.com
   - DOMAIN-SUFFIX,openvsx.eclipsecontent.org
   - DOMAIN-SUFFIX,firebaselogging-pa.googleapis.com
+  # 微软 (Windows/Office)、Xbox 与任天堂 (Switch) 游戏下载及系统更新 CDN 强制直连
+  - DOMAIN-SUFFIX,cdn.nintendo.net
+  - DOMAIN-SUFFIX,hac.lp1.d4c.nintendo.net
+  - DOMAIN,assets1.xboxlive.com
+  - DOMAIN,assets2.xboxlive.com
+  - DOMAIN,dlassets.xboxlive.com
+  - DOMAIN,dlassets2.xboxlive.com
+  - DOMAIN,xvcf1.xboxlive.com
+  - DOMAIN,xvcf2.xboxlive.com
+  - DOMAIN-SUFFIX,xboxlive.cn
+  - DOMAIN-SUFFIX,windowsupdate.com
+  - DOMAIN-SUFFIX,delivery.mp.microsoft.com
+  - DOMAIN-SUFFIX,update.microsoft.com
+  - DOMAIN,download.microsoft.com
+  - DOMAIN-SUFFIX,officecdn.microsoft.com
+  - DOMAIN-SUFFIX,officecdn.microsoft.com.edgesuite.net
+  - DOMAIN-SUFFIX,sfx.ms
+  - DOMAIN-SUFFIX,microsoft.cn
+  - DOMAIN-SUFFIX,azure.cn
+  - DOMAIN-SUFFIX,21vianet.com
