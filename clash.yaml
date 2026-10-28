@@ -152,6 +152,9 @@ dns:
     - https://doh.pub/dns-query
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
+  direct-nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
   nameserver-policy:
     "geosite:cn":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
@@ -162,7 +165,7 @@ dns:
     "+.cdn.nintendo.net,+.hac.lp1.d4c.nintendo.net,assets1.xboxlive.com,assets2.xboxlive.com,dlassets.xboxlive.com,dlassets2.xboxlive.com,xvcf1.xboxlive.com,xvcf2.xboxlive.com,+.xboxlive.cn,+.windowsupdate.com,+.delivery.mp.microsoft.com,+.update.microsoft.com,download.microsoft.com,+.officecdn.microsoft.com,+.sfx.ms":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "geosite:geolocation-!cn":
-      ["https://dns.cloudflare.com/dns-query", "https://dns.google/dns-query"]
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
 #   # 电信
 #   - 219.148.204.66
 #   - 219.149.6.99
@@ -415,7 +418,8 @@ rules:
   - RULE-SET,AgPrivate,DIRECT
   # 2. 拦截 QUIC 流量（强制降级为 TCP，防止广告通过 UDP 443 穿透及改善代理稳定性）
   - AND,((DST-PORT,443),(NETWORK,UDP)),REJECT
-
+  # 4. AI 核心验证、Apple Intelligence、遥测保护与全球 AI 分流 (优先于广告拦截与 Google 通用规则)
+  - RULE-SET,AgAI,AI
   # 3. 苹果生态深度分流 (美区 Apple ID + 全家桶高速保障双策略组架构，与 Private.list 1:1 对齐)
   # [3A] 美区专属服务与 App Store 店面控制面 -> AppleProxy (默认美国节点，置于 itunes/apps 泛域名之前精准剥离控制面)
   - DOMAIN-SUFFIX,apple.news,AppleProxy
@@ -494,7 +498,7 @@ rules:
   - DOMAIN-SUFFIX,gs-loc.apple.com,Apple
 
   # 4. AI 核心验证、Apple Intelligence、遥测保护与全球 AI 分流 (优先于广告拦截与 Google 通用规则)
-  - RULE-SET,AgAI,AI
+  # - RULE-SET,AgAI,AI  guzzoni-apple-com.v.aaplimg.com 在自建 AI 集中，但主规则先用 DOMAIN-SUFFIX,aaplimg.com,Apple 命中，因此它不会进入后面的 AgAI。如果这个域名应走 AI，把精确域名规则移到 aaplimg.com 规则之前即可
   - GEOSITE,category-ai-!cn,AI
 
   # 5. 国际金融、定位服务与防欺诈风控保护 (优先于广告拦截，防止银行风控/客服组件被误杀或定位割裂)
