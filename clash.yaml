@@ -650,12 +650,12 @@ rules:
   - RULE-SET,Paypal_domain,PayPal
 
   # Spotify (音频流走 GMedia，账号与定位走 🚀 手选主流)
-  - DOMAIN-SUFFIX,spotifycdn.com,GMedia
-  - DOMAIN-SUFFIX,spotifycdn.net,GMedia
-  - DOMAIN-SUFFIX,scdn.co,GMedia
-  - DOMAIN-SUFFIX,audio-ak-spotify-com.akamaized.net,GMedia
-  - DOMAIN-SUFFIX,audio4-ak-spotify-com.akamaized.net,GMedia
-  - DOMAIN-SUFFIX,heads4-ak-spotify-com.akamaized.net,GMedia
+  - DOMAIN-SUFFIX,spotifycdn.com,DIRECT
+  - DOMAIN-SUFFIX,spotifycdn.net,DIRECT
+  - DOMAIN-SUFFIX,scdn.co,DIRECT
+  - DOMAIN-SUFFIX,audio-ak-spotify-com.akamaized.net,DIRECT
+  - DOMAIN-SUFFIX,audio4-ak-spotify-com.akamaized.net,DIRECT
+  - DOMAIN-SUFFIX,heads4-ak-spotify-com.akamaized.net,DIRECT
   - RULE-SET,Spotify,🚀 手选主流
 
   # 14. 苹果、微软与通用代理规则集
