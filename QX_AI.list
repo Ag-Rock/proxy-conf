@@ -8,11 +8,13 @@
 HOST-SUFFIX,apple-relay.apple.com,AI
 HOST-SUFFIX,apple-relay.cloudflare.com,AI
 HOST-SUFFIX,apple-relay.fastly-edge.com,AI
+HOST-SUFFIX,apple-relay.akamaized.net,AI
 HOST-SUFFIX,apple-relay.mask.apple-dns.net,AI
 HOST-SUFFIX,cp4.cloudflare.com,AI
 HOST-SUFFIX,guzzoni.apple.com,AI
+HOST,guzzoni-apple-com.v.aaplimg.com,AI
 HOST-SUFFIX,smoot.apple.com,AI
-HOST-SUFFIX,gspe1-ssl.ls.apple.com,AI
+HOST,gspe1-ssl.ls.apple.com,AI
 
 # ---------------- 人机验证、风控与基础通道 (防登录受阻/验证循环) ----------------
 # Cloudflare Turnstile & Challenges

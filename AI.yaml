@@ -7,11 +7,13 @@ payload:
   - DOMAIN-SUFFIX,apple-relay.apple.com
   - DOMAIN-SUFFIX,apple-relay.cloudflare.com
   - DOMAIN-SUFFIX,apple-relay.fastly-edge.com
+  - DOMAIN-SUFFIX,apple-relay.akamaized.net
   - DOMAIN-SUFFIX,apple-relay.mask.apple-dns.net
   - DOMAIN-SUFFIX,cp4.cloudflare.com
   - DOMAIN-SUFFIX,guzzoni.apple.com
+  - DOMAIN,guzzoni-apple-com.v.aaplimg.com
   - DOMAIN-SUFFIX,smoot.apple.com
-  - DOMAIN-SUFFIX,gspe1-ssl.ls.apple.com
+  - DOMAIN,gspe1-ssl.ls.apple.com
 
   # ---------------- 人机验证、风控与基础通道 (防登录受阻/验证循环) ----------------
   # Cloudflare Turnstile & Challenges

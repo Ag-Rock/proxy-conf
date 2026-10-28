@@ -1,18 +1,63 @@
 # ===== GitHub 公开配置顶部脱敏占位（用于通过 Clash Verge 订阅校验，真实连接由本地 Merge 覆盖） =====
 proxy-providers:
-  KKK:
-    { type: http, url: "https://example.com", interval: 86400 }
-  CF.live:
-    { type: http, url: "https://example.com", interval: 86400 }
-  CF.art:
-    { type: http, url: "https://example.com", interval: 86400 }
+  KKK: { type: http, url: "https://example.com", interval: 86400 }
+  CF.live: { type: http, url: "https://example.com", interval: 86400 }
+  CF.art: { type: http, url: "https://example.com", interval: 86400 }
 proxies:
-  - { name: 🇺🇸 美国-1, server: 127.0.0.1, port: 443, type: vmess, uuid: 00000000-0000-0000-0000-000000000000, alterId: 0, cipher: auto }
-  - { name: 🇺🇸 美国-2, server: 127.0.0.1, port: 443, type: vmess, uuid: 00000000-0000-0000-0000-000000000000, alterId: 0, cipher: auto }
-  - { name: 🇺🇸 美国-3, server: 127.0.0.1, port: 443, type: vmess, uuid: 00000000-0000-0000-0000-000000000000, alterId: 0, cipher: auto }
-  - { name: 🇨🇭 瑞士-1, server: 127.0.0.1, port: 443, type: vmess, uuid: 00000000-0000-0000-0000-000000000000, alterId: 0, cipher: auto }
-  - { name: 🇨🇭 瑞士-2, server: 127.0.0.1, port: 443, type: vmess, uuid: 00000000-0000-0000-0000-000000000000, alterId: 0, cipher: auto }
-  - { name: 🇨🇭 瑞士-3, server: 127.0.0.1, port: 443, type: vmess, uuid: 00000000-0000-0000-0000-000000000000, alterId: 0, cipher: auto }
+  - {
+      name: 🇺🇸 美国-1,
+      server: 127.0.0.1,
+      port: 443,
+      type: vmess,
+      uuid: 00000000-0000-0000-0000-000000000000,
+      alterId: 0,
+      cipher: auto,
+    }
+  - {
+      name: 🇺🇸 美国-2,
+      server: 127.0.0.1,
+      port: 443,
+      type: vmess,
+      uuid: 00000000-0000-0000-0000-000000000000,
+      alterId: 0,
+      cipher: auto,
+    }
+  - {
+      name: 🇺🇸 美国-3,
+      server: 127.0.0.1,
+      port: 443,
+      type: vmess,
+      uuid: 00000000-0000-0000-0000-000000000000,
+      alterId: 0,
+      cipher: auto,
+    }
+  - {
+      name: 🇨🇭 瑞士-1,
+      server: 127.0.0.1,
+      port: 443,
+      type: vmess,
+      uuid: 00000000-0000-0000-0000-000000000000,
+      alterId: 0,
+      cipher: auto,
+    }
+  - {
+      name: 🇨🇭 瑞士-2,
+      server: 127.0.0.1,
+      port: 443,
+      type: vmess,
+      uuid: 00000000-0000-0000-0000-000000000000,
+      alterId: 0,
+      cipher: auto,
+    }
+  - {
+      name: 🇨🇭 瑞士-3,
+      server: 127.0.0.1,
+      port: 443,
+      type: vmess,
+      uuid: 00000000-0000-0000-0000-000000000000,
+      alterId: 0,
+      cipher: auto,
+    }
 # ===== 全局配置 =====
 port: 7890
 socks-port: 7891
@@ -87,6 +132,13 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
+    - "time.apple.com"
+    - "time-ios.apple.com"
+    - "+.push.apple.com"
+    - "+.ls.apple.com"
+    - "mesu.apple.com"
+    - "gdmf.apple.com"
+    - "+.appldnld.apple.com"
     - "conntest.nintendowifi.net"
     - "ctest.cdn.nintendo.net"
     - "+.srv.nintendo.net"
@@ -101,9 +153,11 @@ dns:
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
   nameserver-policy:
-    "geosite:cn": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "geosite:apple-cn": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.music.apple.com,+.blobstore.apple.com,+.mzstatic.com,+.cdn-apple.com,+.icloud.com,+.icloud-content.com,aod.itunes.apple.com,aod-ssl.itunes.apple.com,audio.itunes.apple.com,audio-ssl.itunes.apple.com,streamingaudio.itunes.apple.com,mvod.itunes.apple.com":
+    "geosite:cn":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "geosite:apple-cn":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.appldnld.apple.com,+.mesu.apple.com,+.gdmf.apple.com,+.swscan.apple.com,+.swcdn.apple.com,+.swdist.apple.com,+.oscdn.apple.com,+.osrecovery.apple.com,+.mzstatic.com,+.cdn-apple.com,+.aaplimg.com,iosapps.itunes.apple.com,osxapps.itunes.apple.com,upp.itunes.apple.com,supportdownload.apple.com,download.developer.apple.com,+.icloud.com,+.icloud-content.com,+.icloud.com.cn,+.me.com,+.push.apple.com,+.ess.apple.com,+.identity.apple.com,+.gs-loc.apple.com,+.music.apple.com,+.blobstore.apple.com,aod.itunes.apple.com,aod-ssl.itunes.apple.com,audio.itunes.apple.com,audio-ssl.itunes.apple.com,streamingaudio.itunes.apple.com,mvod.itunes.apple.com,musicstatus.itunes.apple.com,play.itunes.apple.com,client-api.itunes.apple.com":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "+.cdn.nintendo.net,+.hac.lp1.d4c.nintendo.net,assets1.xboxlive.com,assets2.xboxlive.com,dlassets.xboxlive.com,dlassets2.xboxlive.com,xvcf1.xboxlive.com,xvcf2.xboxlive.com,+.xboxlive.cn,+.windowsupdate.com,+.delivery.mp.microsoft.com,+.update.microsoft.com,download.microsoft.com,+.officecdn.microsoft.com,+.sfx.ms":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
@@ -131,6 +185,9 @@ pr:
     proxies:
       [
         🚀 手选主流,
+        🏎️ 速度优选,
+        🚑 故障转移,
+        🎯 手选节点,
         🇺🇸 US+,
         🇨🇭 CH+,
         🏴‍☠️ CF,
@@ -140,9 +197,6 @@ pr:
         🇼🇸 TW,
         🇸🇬 SG,
         🇰🇷 KR,
-        🏎️ 速度优选,
-        🚑 故障转移,
-        🎯 手选节点,
         DIRECT,
       ],
   }
@@ -185,11 +239,25 @@ proxy-groups:
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Pornhub.png",
     }
   - {
-    name: AI,
-    type: select,
-    proxies:
-      [🇺🇸 美国-3, 🚀 手选主流, 🇺🇸 US+, 🇨🇭 CH+, 🏴‍☠️ CF, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR, 🏎️ 速度优选, 🚑 故障转移, 🎯 手选节点],
-    icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/AI.png",
+      name: AI,
+      type: select,
+      proxies:
+        [
+          🇺🇸 美国-3,
+          🚀 手选主流,
+          🇺🇸 US+,
+          🇨🇭 CH+,
+          🏴‍☠️ CF,
+          🇺🇸 US,
+          🇯🇵 JP,
+          🇼🇸 TW,
+          🇸🇬 SG,
+          🇰🇷 KR,
+          🏎️ 速度优选,
+          🚑 故障转移,
+          🎯 手选节点,
+        ],
+      icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/AI.png",
     }
   - {
       name: PayPal,
@@ -202,8 +270,30 @@ proxy-groups:
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Crypto.png",
     }
   - {
-      name: Apple,
+      name: AppleProxy,
       <<: *pr,
+      icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Apple.png",
+    }
+  - {
+      name: Apple,
+      type: select,
+      proxies:
+        [
+          DIRECT,
+          🚀 手选主流,
+          🇺🇸 US+,
+          🇨🇭 CH+,
+          🏴‍☠️ CF,
+          🇺🇸 US,
+          🇭🇰 HK,
+          🇯🇵 JP,
+          🇼🇸 TW,
+          🇸🇬 SG,
+          🇰🇷 KR,
+          🏎️ 速度优选,
+          🚑 故障转移,
+          🎯 手选节点,
+        ],
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Apple.png",
     }
   - {
@@ -218,7 +308,24 @@ proxy-groups:
     }
   - {
       name: Game,
-      <<: *pr,
+      type: select,
+      proxies:
+        [
+          🇯🇵 JP,
+          🇺🇸 US,
+          🇺🇸 US+,
+          🚀 手选主流,
+          🇭🇰 HK,
+          🏎️ 速度优选,
+          🚑 故障转移,
+          🎯 手选节点,
+          🇨🇭 CH+,
+          🏴‍☠️ CF,
+          🇼🇸 TW,
+          🇸🇬 SG,
+          🇰🇷 KR,
+          DIRECT,
+        ],
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Game.png",
     }
   - {
@@ -300,7 +407,6 @@ proxy-groups:
       interval: 300,
     }
 
-
 # 规则匹配
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
@@ -310,55 +416,82 @@ rules:
   # 2. 拦截 QUIC 流量（强制降级为 TCP，防止广告通过 UDP 443 穿透及改善代理稳定性）
   - AND,((DST-PORT,443),(NETWORK,UDP)),REJECT
 
-  # 3. 苹果生态深度分流 (美区 Apple ID 定制优化)
-  # [3A] 系统更新、App Store 下载、iCloud、推送与 Apple Music 全链路强制 DIRECT (防止被 AppleProxy 误伤导致听歌卡顿)
-  - DOMAIN-SUFFIX,appldnld.apple.com,DIRECT
-  - DOMAIN-SUFFIX,mesu.apple.com,DIRECT
-  - DOMAIN-SUFFIX,swscan.apple.com,DIRECT
-  - DOMAIN-SUFFIX,swcdn.apple.com,DIRECT
-  - DOMAIN-SUFFIX,swdist.apple.com,DIRECT
-  - DOMAIN-SUFFIX,updates.cdn-apple.com,DIRECT
-  - DOMAIN-SUFFIX,updates-http.cdn-apple.com,DIRECT
-  - DOMAIN-SUFFIX,oscdn.apple.com,DIRECT
-  - DOMAIN-SUFFIX,osrecovery.apple.com,DIRECT
-  - DOMAIN-SUFFIX,apps.mzstatic.com,DIRECT
-  - DOMAIN-SUFFIX,mzstatic.com,DIRECT
-  - DOMAIN-SUFFIX,push.apple.com,DIRECT
-  - DOMAIN-SUFFIX,icloud.com,DIRECT
-  - DOMAIN-SUFFIX,icloud-content.com,DIRECT
-  - DOMAIN-SUFFIX,cdn-apple.com,DIRECT
-  - DOMAIN-SUFFIX,aaplimg.com,DIRECT
-  # Apple Music 音频流、曲库 API、歌词与MV强制直连
-  - DOMAIN-SUFFIX,music.apple.com,DIRECT
-  - DOMAIN-SUFFIX,blobstore.apple.com,DIRECT
-  - DOMAIN,aod.itunes.apple.com,DIRECT
-  - DOMAIN,aod-ssl.itunes.apple.com,DIRECT
-  - DOMAIN,audio.itunes.apple.com,DIRECT
-  - DOMAIN,audio-ssl.itunes.apple.com,DIRECT
-  - DOMAIN,streamingaudio.itunes.apple.com,DIRECT
-  - DOMAIN,mvod.itunes.apple.com,DIRECT
-  - DOMAIN,musicstatus.itunes.apple.com,DIRECT
-  - DOMAIN,play.itunes.apple.com,DIRECT
-  - DOMAIN,client-api.itunes.apple.com,DIRECT
-  # [3B] 美区专属/不在中国大陆提供的服务 (News/Stocks/TV+/Podcasts/美区商店搜索) -> 控制面走 Google，TV+ 视频流走 GMedia
-  # (注: Apple Intelligence 核心域名已统一收敛在下方 AgAI 规则集中)
-  - DOMAIN-SUFFIX,apple.news,Apple
-  - DOMAIN,news-edge.apple.com,Apple
-  - DOMAIN,news-events.apple.com,Apple
-  - DOMAIN,news-client.apple.com,Apple
-  - DOMAIN,news-client-search.apple.com,Apple
-  - DOMAIN,stocks-edge.apple.com,Apple
-  - DOMAIN,stocks-data-service.apple.com,Apple
-  - DOMAIN,stocks-sparkline.apple.com,Apple
-  - DOMAIN-SUFFIX,tv.apple.com,Apple
-  - DOMAIN,play-edge.itunes.apple.com,Apple
-  - DOMAIN,uts-api.itunes.apple.com,Apple
-  - DOMAIN,amp-api.podcasts.apple.com,Apple
-  - DOMAIN,amp-api-edge.apps.apple.com,Apple
-  - DOMAIN,search.itunes.apple.com,Apple
-  - DOMAIN,bag.itunes.apple.com,Apple
-  - DOMAIN,bookkeeper.itunes.apple.com,Apple
+  # 3. 苹果生态深度分流 (美区 Apple ID + 全家桶高速保障双策略组架构，与 Private.list 1:1 对齐)
+  # [3A] 美区专属服务与 App Store 店面控制面 -> AppleProxy (默认美国节点，置于 itunes/apps 泛域名之前精准剥离控制面)
+  - DOMAIN-SUFFIX,apple.news,AppleProxy
+  - DOMAIN,news-edge.apple.com,AppleProxy
+  - DOMAIN,news-events.apple.com,AppleProxy
+  - DOMAIN,news-client.apple.com,AppleProxy
+  - DOMAIN,news-client-search.apple.com,AppleProxy
+  - DOMAIN,stocks-edge.apple.com,AppleProxy
+  - DOMAIN,stocks-data-service.apple.com,AppleProxy
+  - DOMAIN,stocks-sparkline.apple.com,AppleProxy
+  - DOMAIN-SUFFIX,tv.apple.com,AppleProxy
+  - DOMAIN,play-edge.itunes.apple.com,AppleProxy
+  - DOMAIN,uts-api.itunes.apple.com,AppleProxy
+  - DOMAIN,amp-api.podcasts.apple.com,AppleProxy
+  - DOMAIN,bookkeeper.itunes.apple.com,AppleProxy
+  - DOMAIN,amp-api-edge.apps.apple.com,AppleProxy
+  - DOMAIN,amp-api.apps.apple.com,AppleProxy
+  - DOMAIN,amp-api-search-edge.apps.apple.com,AppleProxy
+  - DOMAIN,search.itunes.apple.com,AppleProxy
+  - DOMAIN,bag.itunes.apple.com,AppleProxy
+  - DOMAIN,lookup-api.apple.com,AppleProxy
+  - DOMAIN,xp.apple.com,AppleProxy
+  - DOMAIN,beta.apple.com,AppleProxy
+  # Apple TV+ 纯视频流走 GMedia 大流量媒体组
   - DOMAIN,hls-svod.itunes.apple.com,GMedia
+  # [3B] 高速直连保障全链路 -> Apple (默认 DIRECT，拦截并防止被下方 AppleProxy 宽泛规则误伤)
+  # 1) iOS / iPadOS / macOS / tvOS / watchOS / AirPods 系统与固件更新
+  - DOMAIN-SUFFIX,appldnld.apple.com,Apple
+  - DOMAIN-SUFFIX,mesu.apple.com,Apple
+  - DOMAIN-SUFFIX,gdmf.apple.com,Apple
+  - DOMAIN-SUFFIX,swscan.apple.com,Apple
+  - DOMAIN-SUFFIX,swcdn.apple.com,Apple
+  - DOMAIN-SUFFIX,swdist.apple.com,Apple
+  - DOMAIN-SUFFIX,updates.cdn-apple.com,Apple
+  - DOMAIN-SUFFIX,updates-http.cdn-apple.com,Apple
+  - DOMAIN-SUFFIX,oscdn.apple.com,Apple
+  - DOMAIN-SUFFIX,osrecovery.apple.com,Apple
+  - DOMAIN,wkms-public.apple.com,Apple
+  # 2) App Store 应用安装、增量升级包下载与授权签发 (upp / p*-buy / iosapps / osxapps / mzstatic)
+  - DOMAIN-SUFFIX,apps.mzstatic.com,Apple
+  - DOMAIN-SUFFIX,mzstatic.com,Apple
+  - DOMAIN-SUFFIX,cdn-apple.com,Apple
+  - DOMAIN-SUFFIX,aaplimg.com,Apple
+  - DOMAIN,iosapps.itunes.apple.com,Apple
+  - DOMAIN,osxapps.itunes.apple.com,Apple
+  - DOMAIN,upp.itunes.apple.com,Apple
+  - DOMAIN,supportdownload.apple.com,Apple
+  - DOMAIN,download.developer.apple.com,Apple
+  # 3) Apple Music 全链路 (无损/空间音频流、曲库 API、歌词封面) 与其余 itunes/apps 下载签发接口
+  - DOMAIN-SUFFIX,music.apple.com,Apple
+  - DOMAIN-SUFFIX,blobstore.apple.com,Apple
+  - DOMAIN,aod.itunes.apple.com,Apple
+  - DOMAIN,aod-ssl.itunes.apple.com,Apple
+  - DOMAIN,audio.itunes.apple.com,Apple
+  - DOMAIN,audio-ssl.itunes.apple.com,Apple
+  - DOMAIN,streamingaudio.itunes.apple.com,Apple
+  - DOMAIN,mvod.itunes.apple.com,Apple
+  - DOMAIN,musicstatus.itunes.apple.com,Apple
+  - DOMAIN,play.itunes.apple.com,Apple
+  - DOMAIN,client-api.itunes.apple.com,Apple
+  - DOMAIN-SUFFIX,itunes.apple.com,Apple
+  - DOMAIN-SUFFIX,apps.apple.com,Apple
+  # 4) iCloud 全家桶 (相册/云盘/备忘录记事本/日历/提醒事项/通讯录/查找/HomeKit家庭中枢/APNs推送)
+  - DOMAIN-SUFFIX,icloud.com,Apple
+  - DOMAIN-SUFFIX,icloud-content.com,Apple
+  - DOMAIN-SUFFIX,icloud.com.cn,Apple
+  - DOMAIN-SUFFIX,me.com,Apple
+  - DOMAIN-SUFFIX,push.apple.com,Apple
+  - DOMAIN-SUFFIX,ess.apple.com,Apple
+  - DOMAIN-SUFFIX,identity.apple.com,Apple
+  - DOMAIN,time.apple.com,Apple
+  - DOMAIN,time-ios.apple.com,Apple
+  # 5) Apple Maps 地图导航与 Wi-Fi/基站辅助快速定位 (gspe1-ssl.ls.apple.com 优先走 AI)
+  - DOMAIN,gspe1-ssl.ls.apple.com,AI
+  - DOMAIN-SUFFIX,ls.apple.com,Apple
+  - DOMAIN-SUFFIX,gs-loc.apple.com,Apple
 
   # 4. AI 核心验证、Apple Intelligence、遥测保护与全球 AI 分流 (优先于广告拦截与 Google 通用规则)
   - RULE-SET,AgAI,AI
@@ -522,8 +655,8 @@ rules:
   - RULE-SET,Spotify,🚀 手选主流
 
   # 14. 苹果、微软与通用代理规则集
-  # AppleProxy (仅拦截顶部未放行的苹果非大陆服务 -> 走 Apple 美区节点)
-  - RULE-SET,AppleProxy,Apple
+  # AppleProxy (仅拦截顶部未放行的苹果非大陆服务 -> 走 AppleProxy 美区策略组)
+  - RULE-SET,AppleProxy,AppleProxy
   # Apple 其余基础服务 -> 走 Apple 策略组 (默认首项为 DIRECT)
   - RULE-SET,Apple_domain,Apple
   - RULE-SET,OneDrive_domain,OneDrive
@@ -571,12 +704,38 @@ rules:
 #   - "*.music.163.com"
 # 规则集
 rule-anchor:
-  ip: &ip { type: http, interval: 86400, behavior: ipcidr, format: mrs, proxy: 🚀 手选主流 }
-  domain: &domain { type: http, interval: 86400, behavior: domain, format: mrs, proxy: 🚀 手选主流 }
+  ip:
+    &ip {
+      type: http,
+      interval: 86400,
+      behavior: ipcidr,
+      format: mrs,
+      proxy: 🚀 手选主流,
+    }
+  domain:
+    &domain {
+      type: http,
+      interval: 86400,
+      behavior: domain,
+      format: mrs,
+      proxy: 🚀 手选主流,
+    }
   class:
-    &class { type: http, interval: 86400, behavior: classical, format: text, proxy: 🚀 手选主流 }
+    &class {
+      type: http,
+      interval: 86400,
+      behavior: classical,
+      format: text,
+      proxy: 🚀 手选主流,
+    }
   class-yaml:
-    &class-yaml { type: http, interval: 86400, behavior: classical, format: yaml, proxy: 🚀 手选主流 }
+    &class-yaml {
+      type: http,
+      interval: 86400,
+      behavior: classical,
+      format: yaml,
+      proxy: 🚀 手选主流,
+    }
 rule-providers:
   AdvertisingLite:
     {

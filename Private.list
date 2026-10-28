@@ -50,56 +50,86 @@ HOST-SUFFIX,paypalobjects.com,PayPal
 HOST-SUFFIX,braintreegateway.com,PayPal
 HOST-SUFFIX,braintree-api.com,PayPal
 
-# ---------------- 3. 苹果生态深度分流 (美区 Apple ID 定制优化) ----------------
-# [A] 大流量、Apple Music 与基础服务强制 DIRECT (避免被 AppleProxy 或 AI 规则误伤导致卡顿)
-# 系统更新、App Store 下载、iCloud 与推送
-HOST-SUFFIX,appldnld.apple.com,DIRECT
-HOST-SUFFIX,mesu.apple.com,DIRECT
-HOST-SUFFIX,swscan.apple.com,DIRECT
-HOST-SUFFIX,swcdn.apple.com,DIRECT
-HOST-SUFFIX,swdist.apple.com,DIRECT
-HOST-SUFFIX,updates.cdn-apple.com,DIRECT
-HOST-SUFFIX,updates-http.cdn-apple.com,DIRECT
-HOST-SUFFIX,oscdn.apple.com,DIRECT
-HOST-SUFFIX,osrecovery.apple.com,DIRECT
-HOST-SUFFIX,apps.mzstatic.com,DIRECT
-HOST-SUFFIX,mzstatic.com,DIRECT
-HOST-SUFFIX,push.apple.com,DIRECT
-HOST-SUFFIX,icloud.com,DIRECT
-HOST-SUFFIX,icloud-content.com,DIRECT
-HOST-SUFFIX,cdn-apple.com,DIRECT
-HOST-SUFFIX,aaplimg.com,DIRECT
-# Apple Music 全链路强制 DIRECT (无损/空间音频流、曲库 API、歌词封面直连国内 CDN，杜绝听歌卡顿)
-HOST-SUFFIX,music.apple.com,DIRECT
-HOST-SUFFIX,blobstore.apple.com,DIRECT
-HOST,aod.itunes.apple.com,DIRECT
-HOST,aod-ssl.itunes.apple.com,DIRECT
-HOST,audio.itunes.apple.com,DIRECT
-HOST,audio-ssl.itunes.apple.com,DIRECT
-HOST,streamingaudio.itunes.apple.com,DIRECT
-HOST,mvod.itunes.apple.com,DIRECT
-HOST,musicstatus.itunes.apple.com,DIRECT
-HOST,play.itunes.apple.com,DIRECT
-HOST,client-api.itunes.apple.com,DIRECT
-# [B] 仅不在中国大陆提供/美区专属服务走 Apple (美国节点)
-# Apple News / Stocks / Books / Podcasts / Fitness+ / TV+ 及美区商店搜索接口
-HOST-SUFFIX,apple.news,Apple
-HOST,news-edge.apple.com,Apple
-HOST,news-events.apple.com,Apple
-HOST,news-client.apple.com,Apple
-HOST,news-client-search.apple.com,Apple
-HOST,stocks-edge.apple.com,Apple
-HOST,stocks-data-service.apple.com,Apple
-HOST,stocks-sparkline.apple.com,Apple
-HOST-SUFFIX,tv.apple.com,Apple
-HOST,play-edge.itunes.apple.com,Apple
-HOST,uts-api.itunes.apple.com,Apple
-HOST,amp-api.podcasts.apple.com,Apple
-HOST,amp-api-edge.apps.apple.com,Apple
-HOST,search.itunes.apple.com,Apple
-HOST,bag.itunes.apple.com,Apple
-HOST,bookkeeper.itunes.apple.com,Apple
+# ---------------- 3. 苹果生态深度分流 (美区 Apple ID + 全家桶高速保障双策略组架构) ----------------
+# 架构说明:
+#   - Apple Intelligence & 地区准入判定 (gspe1-ssl.ls.apple.com) -> 已统一收敛于 QX_AI.list (归属 AI 策略组)
+#   - [3A] 美区专属服务与商店控制面 (News/TV+/Podcasts/Stocks/美区商店探索与搜索) -> 归属 AppleProxy 策略组 (默认美国节点)
+#   - [3B] 速度保障核心服务 (系统更新/App升级下载/iCloud全家桶/相册/记事本/日历/提醒/家庭/音乐/地图) -> 归属 Apple 策略组 (默认 DIRECT)
+# [3A] 美区专属服务与 App Store 店面控制面 -> AppleProxy (置于 itunes/apps 泛域名直连之前，精准剥离控制面)
+HOST-SUFFIX,apple.news,AppleProxy
+HOST,news-edge.apple.com,AppleProxy
+HOST,news-events.apple.com,AppleProxy
+HOST,news-client.apple.com,AppleProxy
+HOST,news-client-search.apple.com,AppleProxy
+HOST,stocks-edge.apple.com,AppleProxy
+HOST,stocks-data-service.apple.com,AppleProxy
+HOST,stocks-sparkline.apple.com,AppleProxy
+HOST-SUFFIX,tv.apple.com,AppleProxy
+HOST,play-edge.itunes.apple.com,AppleProxy
+HOST,uts-api.itunes.apple.com,AppleProxy
+HOST,amp-api.podcasts.apple.com,AppleProxy
+HOST,bookkeeper.itunes.apple.com,AppleProxy
+HOST,amp-api-edge.apps.apple.com,AppleProxy
+HOST,amp-api.apps.apple.com,AppleProxy
+HOST,amp-api-search-edge.apps.apple.com,AppleProxy
+HOST,search.itunes.apple.com,AppleProxy
+HOST,bag.itunes.apple.com,AppleProxy
+HOST,lookup-api.apple.com,AppleProxy
+HOST,xp.apple.com,AppleProxy
+HOST,beta.apple.com,AppleProxy
+# Apple TV+ 纯视频流走 GMedia 大流量媒体组
 HOST,hls-svod.itunes.apple.com,GMedia
+# [3B] 高速直连保障全链路 -> Apple (默认 DIRECT，拦截并防止被下方 AppleProxy.list 宽泛规则误伤)
+# 1) iOS / iPadOS / macOS / tvOS / watchOS / AirPods 系统与固件更新
+HOST-SUFFIX,appldnld.apple.com,Apple
+HOST-SUFFIX,mesu.apple.com,Apple
+HOST-SUFFIX,gdmf.apple.com,Apple
+HOST-SUFFIX,swscan.apple.com,Apple
+HOST-SUFFIX,swcdn.apple.com,Apple
+HOST-SUFFIX,swdist.apple.com,Apple
+HOST-SUFFIX,updates.cdn-apple.com,Apple
+HOST-SUFFIX,updates-http.cdn-apple.com,Apple
+HOST-SUFFIX,oscdn.apple.com,Apple
+HOST-SUFFIX,osrecovery.apple.com,Apple
+HOST,wkms-public.apple.com,Apple
+# 2) App Store 应用安装、增量升级包下载与授权签发 (upp / p*-buy / iosapps / osxapps / mzstatic)
+HOST-SUFFIX,apps.mzstatic.com,Apple
+HOST-SUFFIX,mzstatic.com,Apple
+HOST-SUFFIX,cdn-apple.com,Apple
+HOST-SUFFIX,aaplimg.com,Apple
+HOST,iosapps.itunes.apple.com,Apple
+HOST,osxapps.itunes.apple.com,Apple
+HOST,upp.itunes.apple.com,Apple
+HOST,supportdownload.apple.com,Apple
+HOST,download.developer.apple.com,Apple
+# 3) Apple Music 全链路 (无损/空间音频流、曲库 API、歌词封面) 与其余 itunes/apps 下载签发接口
+HOST-SUFFIX,music.apple.com,Apple
+HOST-SUFFIX,blobstore.apple.com,Apple
+HOST,aod.itunes.apple.com,Apple
+HOST,aod-ssl.itunes.apple.com,Apple
+HOST,audio.itunes.apple.com,Apple
+HOST,audio-ssl.itunes.apple.com,Apple
+HOST,streamingaudio.itunes.apple.com,Apple
+HOST,mvod.itunes.apple.com,Apple
+HOST,musicstatus.itunes.apple.com,Apple
+HOST,play.itunes.apple.com,Apple
+HOST,client-api.itunes.apple.com,Apple
+HOST-SUFFIX,itunes.apple.com,Apple
+HOST-SUFFIX,apps.apple.com,Apple
+# 4) iCloud 全家桶 (相册/云盘/备忘录记事本/日历/提醒事项/通讯录/查找/HomeKit家庭中枢/APNs推送)
+HOST-SUFFIX,icloud.com,Apple
+HOST-SUFFIX,icloud-content.com,Apple
+HOST-SUFFIX,icloud.com.cn,Apple
+HOST-SUFFIX,me.com,Apple
+HOST-SUFFIX,push.apple.com,Apple
+HOST-SUFFIX,ess.apple.com,Apple
+HOST-SUFFIX,identity.apple.com,Apple
+HOST,time.apple.com,Apple
+HOST,time-ios.apple.com,Apple
+# 5) Apple Maps 地图导航与 Wi-Fi/基站辅助快速定位 (gspe1-ssl.ls.apple.com 已在 QX_AI.list 中优先走 AI)
+HOST,gspe1-ssl.ls.apple.com,AI
+HOST-SUFFIX,ls.apple.com,Apple
+HOST-SUFFIX,gs-loc.apple.com,Apple
 
 # ---------------- 4. 全球主流服务分流 (数据面 GMedia + 控制面 🚀 手选主流) ----------------
 # GitHub (大文件/Raw/Release 下载走 GMedia，主站与操作走 🚀 手选主流)
