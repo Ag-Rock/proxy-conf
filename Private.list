@@ -201,12 +201,12 @@ HOST-SUFFIX,tiktokv.com,🚀 手选主流
 HOST-SUFFIX,tiktok.com,🚀 手选主流
 
 # Spotify (高码率音频流与封面 CDN 走 GMedia，账号与美区定位走 🚀 手选主流)
-HOST-SUFFIX,spotifycdn.com,GMedia
-HOST-SUFFIX,spotifycdn.net,GMedia
-HOST-SUFFIX,scdn.co,GMedia
-HOST-SUFFIX,audio-ak-spotify-com.akamaized.net,GMedia
-HOST-SUFFIX,audio4-ak-spotify-com.akamaized.net,GMedia
-HOST-SUFFIX,heads4-ak-spotify-com.akamaized.net,GMedia
+HOST-SUFFIX,spotifycdn.com,DIRECT
+HOST-SUFFIX,spotifycdn.net,DIRECT
+HOST-SUFFIX,scdn.co,DIRECT
+HOST-SUFFIX,audio-ak-spotify-com.akamaized.net,DIRECT
+HOST-SUFFIX,audio4-ak-spotify-com.akamaized.net,DIRECT
+HOST-SUFFIX,heads4-ak-spotify-com.akamaized.net,DIRECT
 HOST-SUFFIX,spotify.com,🚀 手选主流
 
 # Amazon (商品大图与视频媒体走 GMedia，主站购物与定位走 🚀 手选主流)
