@@ -220,17 +220,6 @@ HOST-SUFFIX,adobe.io,GMedia
 HOST-SUFFIX,ccm-download.adobe.com,GMedia
 HOST-SUFFIX,adobe.com,🚀 手选主流
 
-# Bilibili (指定走 GMedia)
-HOST-KEYWORD,bilibili,GMedia
-HOST-SUFFIX,bilivideo.com,GMedia
-HOST-SUFFIX,bilivideo.cn,GMedia
-HOST-SUFFIX,bilivideo.net,GMedia
-HOST-SUFFIX,biliapi.net,GMedia
-HOST-SUFFIX,biliapi.com,GMedia
-HOST-SUFFIX,hdslb.com,GMedia
-HOST-SUFFIX,hdslb.net,GMedia
-HOST-SUFFIX,acgvideo.com,GMedia
-
 # ---------------- 5. 其它个人定制代理规则 ----------------
 # OneDrive 归入专属 OneDrive 策略组
 HOST-SUFFIX,onedrive.live.com,OneDrive

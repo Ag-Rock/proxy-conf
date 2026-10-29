@@ -570,17 +570,7 @@ rules:
   - IP-CIDR,87.194.88.0/23,🎯 手选节点
   - DOMAIN-SUFFIX,epdg.epc.mnc010.mcc234.pub.3gppnetwork.org,🎯 手选节点
 
-  # 10. Bilibili 与个人常用站点定制
-  - DOMAIN-KEYWORD,bilibili,GMedia
-  - DOMAIN-SUFFIX,bilivideo.com,GMedia
-  - DOMAIN-SUFFIX,bilivideo.cn,GMedia
-  - DOMAIN-SUFFIX,bilivideo.net,GMedia
-  - DOMAIN-SUFFIX,biliapi.net,GMedia
-  - DOMAIN-SUFFIX,biliapi.com,GMedia
-  - DOMAIN-SUFFIX,hdslb.com,GMedia
-  - DOMAIN-SUFFIX,hdslb.net,GMedia
-  - DOMAIN-SUFFIX,acgvideo.com,GMedia
-  - GEOSITE,bilibili,GMedia
+  # 10. 个人常用站点定制
   - DOMAIN-SUFFIX,onedrive.live.com,OneDrive
   - DOMAIN-SUFFIX,1drv.com,OneDrive
   - DOMAIN-SUFFIX,1drv.ms,OneDrive
