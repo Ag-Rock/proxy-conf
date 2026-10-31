@@ -25,7 +25,6 @@
 | [`Finance.list`](./Finance.list) | `filter` | `Banking` | Quantumult X 国际数字银行、欧洲电子钱包与加密货币分流规则集（与 `Finance.yaml` 1:1 同步）。 |
 | [`AllInOne.conf`](./AllInOne.conf) | `rewrite` | - | Quantumult X 综合重写（Rewrite）、重定向与去广告规则合集。 |
 | [`resource-parser.js`](./resource-parser.js) | `script` | - | 资源解析器脚本（©Shawn），支持多格式节点订阅解析、筛选重命名及跨平台分流/重写规则转换。 |
-| [`tidal.js`](./tidal.js) | `script` | - | TIDAL 音质解锁重写脚本。 |
 
 ---
 
