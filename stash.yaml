@@ -64,16 +64,16 @@ socks-port: 7891
 redir-port: 7892
 mixed-port: 7893
 tproxy-port: 7894
-allow-lan: true
+allow-lan: false
 bind-address: "*"
 ipv6: false
 unified-delay: true
 tcp-concurrent: true
-log-level: info
+log-level: warning
 find-process-mode: strict
 # global-client-fingerprint: chrome (已按新版 Mihomo 要求迁移至节点 client-fingerprint)
 keep-alive-idle: 600
-keep-alive-interval: 15
+keep-alive-interval: 60
 
 # 连入接管了 OpenClash 的家庭 Wi-Fi 时自动挂起 Stash，将流量完全交由软路由处理
 ssid-suspend:
@@ -138,6 +138,11 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
+    - "+.local"
+    - "+.lan"
+    - "localhost.ptlogin2.qq.com"
+    - "*.stun.*.*"
+    - "*.stun.*.*.*"
     - "time.apple.com"
     - "time-ios.apple.com"
     - "+.push.apple.com"
@@ -152,6 +157,9 @@ dns:
     - "+.msftconnecttest.com"
     - "+.msftncsi.com"
     - "teredo.ipv6.microsoft.com"
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
   nameserver:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
@@ -287,14 +295,14 @@ proxy-groups:
       use: [KKK],
       lazy: true,
       tolerance: 50,
-      interval: 300,
+      interval: 600,
       filter: "(?=.*(美|US|(?i)States|American|港|HK|(?i)Hong|日本|JP|🇯🇵|(?i)Japan|台|TW|(?i)Taiwan|新|狮|獅|SG|(?i)Singapore|韩|韓|朝|KR|(?i)Korea))^((?!(免费|试用|更新|海外|失联)).)*$",
     }
   - {
       name: 🚑 故障转移,
       type: fallback,
       lazy: true,
-      interval: 300,
+      interval: 600,
       proxies: [🇺🇸 US+, 🇨🇭 CH+, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR, 🇭🇰 HK],
     }
   - {
@@ -382,7 +390,7 @@ proxy-groups:
       type: url-test,
       lazy: true,
       tolerance: 50,
-      interval: 300,
+      interval: 600,
       proxies: [🇺🇸 美国-1, 🇺🇸 美国-2, 🇺🇸 美国-3],
     }
   - {
@@ -390,7 +398,7 @@ proxy-groups:
       type: url-test,
       lazy: true,
       tolerance: 50,
-      interval: 300,
+      interval: 600,
       proxies: [🇨🇭 瑞士-1, 🇨🇭 瑞士-2, 🇨🇭 瑞士-3],
     }
   - {
@@ -399,7 +407,7 @@ proxy-groups:
       use: [KKK],
       lazy: true,
       tolerance: 50,
-      interval: 300,
+      interval: 600,
       filter: "(?=.*(美|US|(?i)States|American))^((?!(免费|试用|更新|海外|倍率3)).)*$",
     }
   - {
@@ -408,7 +416,7 @@ proxy-groups:
       use: [KKK],
       lazy: true,
       tolerance: 50,
-      interval: 300,
+      interval: 600,
       filter: "(?=.*(港|HK|(?i)Hong))^((?!(免费|试用|更新|海外|失联)).)*$",
     }
   - {
@@ -417,7 +425,7 @@ proxy-groups:
       use: [KKK],
       lazy: true,
       tolerance: 50,
-      interval: 300,
+      interval: 600,
       filter: "(?=.*(日本|JP|🇯🇵|(?i)Japan))^((?!(免费|试用|更新|海外)).)*$",
     }
   - {
@@ -426,7 +434,7 @@ proxy-groups:
       use: [KKK],
       lazy: true,
       tolerance: 50,
-      interval: 300,
+      interval: 600,
       filter: "(?=.*(台|TW|(?i)Taiwan))^((?!(免费|试用|更新|海外)).)*$",
     }
   - {
@@ -435,7 +443,7 @@ proxy-groups:
       use: [KKK],
       lazy: true,
       tolerance: 50,
-      interval: 300,
+      interval: 600,
       filter: "(?=.*(新|狮|獅|SG|(?i)Singapore))^((?!(免费|试用|更新|海外)).)*$",
     }
   - {
@@ -445,7 +453,7 @@ proxy-groups:
       # include-all: true,
       lazy: true,
       tolerance: 50,
-      interval: 300,
+      interval: 600,
       filter: "(?=.*(韩|韓|朝|KR|(?i)Korea))^((?!(免费|试用|更新|海外)).)*$",
     }
   - {
@@ -455,7 +463,7 @@ proxy-groups:
       use: [CF.live, CF.art],
       lazy: true,
       tolerance: 50,
-      interval: 300,
+      interval: 600,
     }
 
 # 规则匹配
