@@ -12,7 +12,7 @@
 | 文件名 | 类型 | 对应策略组 | 说明 |
 | :--- | :--- | :--- | :--- |
 | [`clash.yaml`](./clash.yaml) | 主配置 | 全局 | Mihomo (Clash Meta) 完整主配置文件。顶部含脱敏占位节点（用于通过客户端订阅校验），支持通过本地 `Merge` 或 OpenClash 覆写注入真实节点；内置 Fake-IP、精细化 `nameserver-policy` DoH 分流、QUIC 降级保护及 `.mrs` 高性能规则集。 |
-| [`stash.yaml`](./stash.yaml) | 主配置 | 全局 | Stash (iOS / macOS) 远程订阅专用主配置文件（与 `clash.yaml` 规则 1:1 对齐）。针对 Stash 引擎专门适配了 `follow-rule: true`、拆解展开 68 项独立 `nameserver-policy` DoH 映射、内置家庭 Wi-Fi 自动挂起（`ssid-suspend`）及全策略组 `lazy: true` 后台省电优化，支持通过本地 `.stoverride`（`#!replace`）注入真实节点。 |
+| [`stash.yaml`](./stash.yaml) | 主配置 | 全局 | Stash (iOS / macOS) 远程订阅专用主配置文件（与 `clash.yaml` 规则 1:1 对齐）。针对 Stash 引擎专门适配了 `follow-rule: true`、拆解展开 68 项独立 `nameserver-policy` DoH 映射、`default-nameserver` 引导解析及全策略组 `lazy: true` 后台省电优化，支持通过本地 `.stoverride`（`#!replace`）注入真实节点。 |
 | [`AI.yaml`](./AI.yaml) | `classical` | `AI` | 全球人工智能与核心验证分流规则集（与 `QX_AI.list` 保持 1:1 同步）。涵盖 Apple Intelligence、iCloud 专用代理、主流大模型、AI 编程 Agent 及人机验证/OAuth/特性开关域名。 |
 | [`Finance.yaml`](./Finance.yaml) | `classical` | `Banking` | 国际数字银行、欧洲电子钱包、外汇券商、加密货币交易所及银行级 KYC/反欺诈组件规则集（与 `Finance.list` 保持 1:1 同步）。 |
 | [`Private_DIRECT.yaml`](./Private_DIRECT.yaml) | `classical` | `DIRECT` | 个人定制高优先级直连白名单。包含香港金融机构（BOCHK/HSBC HK/ZA Bank/AlipayHK 等）、常用云服务，以及 Windows/Office/Xbox/Switch 满速下载更新 CDN。 |
@@ -152,7 +152,9 @@
      ```text
      https://raw.githubusercontent.com/Ag-Rock/proxy-conf/main/stash.yaml
      ```
-   - `stash.yaml` 已原生内置 `ssid-suspend`（连入家庭 `Ag` / `Ag_5G` Wi-Fi 时自动挂起 Stash 并交由软路由 OpenClash 处理）、`follow-rule: true`、展开版 `nameserver-policy` 以及全自动测速组 `lazy: true` 省电优化。
+   - **配置家庭 Wi-Fi 自动挂起（交给软路由 OpenClash）**：
+     - 进入 Stash -> `设置` -> `按需连接 (On-Demand)`，开启 `按需连接`，在下方 `排除 SSIDs (Excluded SSIDs)` 中添加家庭 Wi-Fi 名称（如 `Ag`、`Ag_5G`），并确保**关闭** `保持持续运行`。
+     - 在 iOS 系统 `设置 -> 隐私与安全性 -> 定位服务 -> Stash` 中将定位权限设为 `始终`（用于识别 Wi-Fi SSID）。
 
 2. **配置本地 `.stoverride` 覆写（注入真实节点）**：
    - 在 Stash 的 `覆写 (Override)` 中新建本地覆写（或放入 `iCloud Drive/Stash/Overrides/local_nodes.stoverride`）并启用，通过 `#!replace` 完整替换 `stash.yaml` 顶部的 `127.0.0.1` 脱敏占位节点：

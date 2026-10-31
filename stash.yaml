@@ -75,10 +75,7 @@ find-process-mode: strict
 keep-alive-idle: 600
 keep-alive-interval: 60
 
-# 连入接管了 OpenClash 的家庭 Wi-Fi 时自动挂起 Stash，将流量完全交由软路由处理
-ssid-suspend:
-  - Ag
-  - Ag_5G
+# 注：Stash 家庭 Wi-Fi (Ag / Ag_5G) 自动挂起请直接在 Stash App「设置 -> 按需连接 -> 排除 SSIDs」中配置（需关闭「保持持续运行」并授予 Stash「始终定位」权限）
 
 # GeoData 模式（更快的规则匹配）
 geodata-mode: true
