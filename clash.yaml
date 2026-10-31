@@ -195,9 +195,6 @@ pr:
     proxies:
       [
         🚀 手选主流,
-        🏎️ 速度优选,
-        🚑 故障转移,
-        🎯 手选节点,
         🇺🇸 US+,
         🇨🇭 CH+,
         🏴‍☠️ CF,
@@ -207,6 +204,9 @@ pr:
         🇼🇸 TW,
         🇸🇬 SG,
         🇰🇷 KR,
+        🏎️ 速度优选,
+        🚑 故障转移,
+        🎯 手选节点,
         DIRECT,
       ],
   }
@@ -245,24 +245,7 @@ proxy-groups:
     }
   - {
       name: GMedia,
-      type: select,
-      proxies:
-        [
-          🏎️ 速度优选,
-          🚀 手选主流,
-          🚑 故障转移,
-          🎯 手选节点,
-          🇺🇸 US+,
-          🇨🇭 CH+,
-          🏴‍☠️ CF,
-          🇺🇸 US,
-          🇭🇰 HK,
-          🇯🇵 JP,
-          🇼🇸 TW,
-          🇸🇬 SG,
-          🇰🇷 KR,
-          DIRECT,
-        ],
+      <<: *pr,
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Pornhub.png",
     }
   - {
@@ -303,24 +286,7 @@ proxy-groups:
     }
   - {
       name: Apple,
-      type: select,
-      proxies:
-        [
-          DIRECT,
-          🚀 手选主流,
-          🇺🇸 US+,
-          🇨🇭 CH+,
-          🏴‍☠️ CF,
-          🇺🇸 US,
-          🇭🇰 HK,
-          🇯🇵 JP,
-          🇼🇸 TW,
-          🇸🇬 SG,
-          🇰🇷 KR,
-          🏎️ 速度优选,
-          🚑 故障转移,
-          🎯 手选节点,
-        ],
+      <<: *pr,
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Apple.png",
     }
   - {
@@ -335,24 +301,7 @@ proxy-groups:
     }
   - {
       name: Game,
-      type: select,
-      proxies:
-        [
-          🇯🇵 JP,
-          🇺🇸 US,
-          🇺🇸 US+,
-          🚀 手选主流,
-          🇭🇰 HK,
-          🏎️ 速度优选,
-          🚑 故障转移,
-          🎯 手选节点,
-          🇨🇭 CH+,
-          🏴‍☠️ CF,
-          🇼🇸 TW,
-          🇸🇬 SG,
-          🇰🇷 KR,
-          DIRECT,
-        ],
+      <<: *pr,
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Game.png",
     }
   - {
