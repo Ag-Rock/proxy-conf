@@ -71,7 +71,7 @@ unified-delay: true
 tcp-concurrent: true
 log-level: info
 find-process-mode: strict
-global-client-fingerprint: chrome
+# global-client-fingerprint: chrome (已按新版 Mihomo 要求迁移至节点 client-fingerprint)
 keep-alive-idle: 600
 keep-alive-interval: 15
 
@@ -165,7 +165,11 @@ dns:
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "+.cdn.nintendo.net,+.hac.lp1.d4c.nintendo.net,assets1.xboxlive.com,assets2.xboxlive.com,dlassets.xboxlive.com,dlassets2.xboxlive.com,xvcf1.xboxlive.com,xvcf2.xboxlive.com,+.xboxlive.cn,+.windowsupdate.com,+.delivery.mp.microsoft.com,+.update.microsoft.com,download.microsoft.com,+.officecdn.microsoft.com,+.sfx.ms":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "rule-set:AgAI,geosite:category-ai-!cn,+.ai":
+    "rule-set:AgAI":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "geosite:category-ai-!cn":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "+.ai":
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     "geosite:geolocation-!cn":
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
