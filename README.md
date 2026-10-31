@@ -1,6 +1,6 @@
-# Proxy-Conf | Clash (Mihomo) & Quantumult X 双端同步分流配置
+# Proxy-Conf | Clash (Mihomo) / Stash & Quantumult X 多端同步分流配置
 
-本项目维护一套 **Clash (Mihomo / Clash Verge / OpenClash)** 与 **Quantumult X** 双端 **`1:1` 严格同步**的高精度代理分流配置与规则集。
+本项目维护一套 **Clash (Mihomo / Clash Verge / OpenClash)**、**Stash (iOS / macOS)** 与 **Quantumult X** 多端 **`1:1` 严格同步**的高精度代理分流配置与规则集。
 
 核心针对 **全球 AI 全链路防封锁**、**美区 Apple 生态与国内满速直连兼顾**、**国际数字银行强风控保护** 以及 **流媒体/社媒「控制面与数据面分离」** 四大场景进行了深度定制与优化。
 
@@ -8,10 +8,11 @@
 
 ## 📁 仓库文件说明
 
-### 1. Clash / Mihomo 配置文件与规则集
+### 1. Clash / Mihomo / Stash 配置文件与规则集
 | 文件名 | 类型 | 对应策略组 | 说明 |
 | :--- | :--- | :--- | :--- |
 | [`clash.yaml`](./clash.yaml) | 主配置 | 全局 | Mihomo (Clash Meta) 完整主配置文件。顶部含脱敏占位节点（用于通过客户端订阅校验），支持通过本地 `Merge` 或 OpenClash 覆写注入真实节点；内置 Fake-IP、精细化 `nameserver-policy` DoH 分流、QUIC 降级保护及 `.mrs` 高性能规则集。 |
+| [`stash.yaml`](./stash.yaml) | 主配置 | 全局 | Stash (iOS / macOS) 远程订阅专用主配置文件（与 `clash.yaml` 规则 1:1 对齐）。针对 Stash 引擎专门适配了 `follow-rule: true`、拆解展开 68 项独立 `nameserver-policy` DoH 映射、内置家庭 Wi-Fi 自动挂起（`ssid-suspend`）及全策略组 `lazy: true` 后台省电优化，支持通过本地 `.stoverride`（`#!replace`）注入真实节点。 |
 | [`AI.yaml`](./AI.yaml) | `classical` | `AI` | 全球人工智能与核心验证分流规则集（与 `QX_AI.list` 保持 1:1 同步）。涵盖 Apple Intelligence、iCloud 专用代理、主流大模型、AI 编程 Agent 及人机验证/OAuth/特性开关域名。 |
 | [`Finance.yaml`](./Finance.yaml) | `classical` | `Banking` | 国际数字银行、欧洲电子钱包、外汇券商、加密货币交易所及银行级 KYC/反欺诈组件规则集（与 `Finance.list` 保持 1:1 同步）。 |
 | [`Private_DIRECT.yaml`](./Private_DIRECT.yaml) | `classical` | `DIRECT` | 个人定制高优先级直连白名单。包含香港金融机构（BOCHK/HSBC HK/ZA Bank/AlipayHK 等）、常用云服务，以及 Windows/Office/Xbox/Switch 满速下载更新 CDN。 |
@@ -145,7 +146,69 @@
 
 ---
 
-### 三、Quantumult X 使用方法
+### 三、Stash (iOS / macOS) 使用方法
+
+1. **导入远程订阅配置**：
+   - 打开 Stash -> `设置` -> `配置文件` -> `从 URL 下载`，填入 `stash.yaml` 的 Raw 链接：
+     ```text
+     https://raw.githubusercontent.com/Ag-Rock/proxy-conf/main/stash.yaml
+     ```
+   - `stash.yaml` 已原生内置 `ssid-suspend`（连入家庭 `Ag` / `Ag_5G` Wi-Fi 时自动挂起 Stash 并交由软路由 OpenClash 处理）、`follow-rule: true`、展开版 `nameserver-policy` 以及全自动测速组 `lazy: true` 省电优化。
+
+2. **配置本地 `.stoverride` 覆写（注入真实节点）**：
+   - 在 Stash 的 `覆写 (Override)` 中新建本地覆写（或放入 `iCloud Drive/Stash/Overrides/local_nodes.stoverride`）并启用，通过 `#!replace` 完整替换 `stash.yaml` 顶部的 `127.0.0.1` 脱敏占位节点：
+     ```yaml
+     name: 私人节点注入 (Local Nodes)
+     desc: 替换 GitHub 公开 stash.yaml 中的 127.0.0.1 占位节点与机场订阅，敏感信息仅保存在本地
+     icon: https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Global.png
+     category: 本地节点
+
+     proxy-providers: #!replace
+       KKK:
+         url: "https://your-airport-subscription-url"
+         type: http
+         interval: 86400
+         health-check:
+           enable: true
+           url: https://www.gstatic.com/generate_204
+           interval: 600
+           lazy: true
+           timeout: 10000
+       CF.live:
+         url: "https://your-backup-sub-1"
+         type: http
+         interval: 86400
+         proxy: 🚀 手选主流
+         health-check:
+           enable: true
+           url: https://www.gstatic.com/generate_204
+           interval: 600
+           lazy: true
+           timeout: 10000
+       CF.art:
+         url: "https://your-backup-sub-2"
+         type: http
+         interval: 86400
+         proxy: 🚀 手选主流
+         health-check:
+           enable: true
+           url: https://www.gstatic.com/generate_204
+           interval: 600
+           lazy: true
+           timeout: 10000
+
+     proxies: #!replace
+       - { name: 🇺🇸 美国-1, server: your.us1.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, network: ws, ws-opts: { path: /us, headers: { Host: your.us1.domain } } }
+       - { name: 🇺🇸 美国-2, server: your.us2.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, network: ws, ws-opts: { path: /us, headers: { Host: your.us2.domain } } }
+       - { name: 🇺🇸 美国-3, server: your.us3.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, network: ws, ws-opts: { path: /us, headers: { Host: your.us3.domain } } }
+       - { name: 🇨🇭 瑞士-1, server: your.ch1.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, network: ws, ws-opts: { path: /ch, headers: { Host: your.ch1.domain } } }
+       - { name: 🇨🇭 瑞士-2, server: your.ch2.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, network: ws, ws-opts: { path: /ch, headers: { Host: your.ch2.domain } } }
+       - { name: 🇨🇭 瑞士-3, server: your.ch3.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, network: ws, ws-opts: { path: /ch, headers: { Host: your.ch3.domain } } }
+     ```
+
+---
+
+### 四、Quantumult X 使用方法
 
 在 Quantumult X 配置文件的 `[filter_remote]` 模块顶部按如下顺序引入本仓库的三大核心分流规则（开启 `inserted-resource=true` 确保优先级高于去广告与通用规则）：
 
@@ -170,8 +233,8 @@ https://raw.githubusercontent.com/Ag-Rock/proxy-conf/main/AllInOne.conf, tag=All
 
 ## 🔄 维护规范
 
-- **双端同步原则**：修改任何分流规则时，务必保持 Clash 端与 Quantumult X 端 **1:1 同步更新**：
+- **多端同步原则**：修改任何分流规则时，务必保持 Clash / Stash 端与 Quantumult X 端 **1:1 同步更新**：
   - `AI.yaml` $\leftrightarrow$ `QX_AI.list`
   - `Finance.yaml` $\leftrightarrow$ `Finance.list`
-  - `clash.yaml`（内联规则）+ `Private_DIRECT.yaml` $\leftrightarrow$ `Private.list`
-- **隐私安全规范**：公开仓库中严禁提交任何真实机场订阅链接、服务器域名/IP、UUID 或私钥凭证；所有敏感节点信息均通过客户端本地覆写（Merge / 本地配置）注入。
+  - `clash.yaml`（内联规则）$\leftrightarrow$ `stash.yaml`（内联规则）+ `Private_DIRECT.yaml` $\leftrightarrow$ `Private.list`
+- **隐私安全规范**：公开仓库中严禁提交任何真实机场订阅链接、服务器域名/IP、UUID 或私钥凭证；所有敏感节点信息均通过客户端本地覆写（Merge / `.stoverride` / 本地配置）注入。
