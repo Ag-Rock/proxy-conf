@@ -135,7 +135,6 @@ dns:
     - "time.apple.com"
     - "time-ios.apple.com"
     - "+.push.apple.com"
-    - "+.ls.apple.com"
     - "mesu.apple.com"
     - "gdmf.apple.com"
     - "+.appldnld.apple.com"
@@ -160,10 +159,14 @@ dns:
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "geosite:apple-cn":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.mask.icloud.com,+.mask-h2.icloud.com,+.mask-api.icloud.com,+.mask.apple-dns.net,+.mask-api.fe.apple-dns.net,+.icloud-och.com,+.apple-relay.apple.com,+.apple-relay.cloudflare.com,+.apple-relay.fastly-edge.com,+.apple-relay.akamaized.net,gspe1-ssl.ls.apple.com,configuration.ls.apple.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     "+.appldnld.apple.com,+.mesu.apple.com,+.gdmf.apple.com,+.swscan.apple.com,+.swcdn.apple.com,+.swdist.apple.com,+.oscdn.apple.com,+.osrecovery.apple.com,+.mzstatic.com,+.cdn-apple.com,+.aaplimg.com,iosapps.itunes.apple.com,osxapps.itunes.apple.com,upp.itunes.apple.com,supportdownload.apple.com,download.developer.apple.com,+.icloud.com,+.icloud-content.com,+.icloud.com.cn,+.me.com,+.push.apple.com,+.ess.apple.com,+.identity.apple.com,+.gs-loc.apple.com,+.music.apple.com,+.blobstore.apple.com,aod.itunes.apple.com,aod-ssl.itunes.apple.com,audio.itunes.apple.com,audio-ssl.itunes.apple.com,streamingaudio.itunes.apple.com,mvod.itunes.apple.com,musicstatus.itunes.apple.com,play.itunes.apple.com,client-api.itunes.apple.com":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "+.cdn.nintendo.net,+.hac.lp1.d4c.nintendo.net,assets1.xboxlive.com,assets2.xboxlive.com,dlassets.xboxlive.com,dlassets2.xboxlive.com,xvcf1.xboxlive.com,xvcf2.xboxlive.com,+.xboxlive.cn,+.windowsupdate.com,+.delivery.mp.microsoft.com,+.update.microsoft.com,download.microsoft.com,+.officecdn.microsoft.com,+.sfx.ms":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "rule-set:AgAI,geosite:category-ai-!cn,+.ai":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     "geosite:geolocation-!cn":
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
 #   # 电信
@@ -238,7 +241,24 @@ proxy-groups:
     }
   - {
       name: GMedia,
-      <<: *pr,
+      type: select,
+      proxies:
+        [
+          🏎️ 速度优选,
+          🚀 手选主流,
+          🚑 故障转移,
+          🎯 手选节点,
+          🇺🇸 US+,
+          🇨🇭 CH+,
+          🏴‍☠️ CF,
+          🇺🇸 US,
+          🇭🇰 HK,
+          🇯🇵 JP,
+          🇼🇸 TW,
+          🇸🇬 SG,
+          🇰🇷 KR,
+          DIRECT,
+        ],
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Pornhub.png",
     }
   - {
@@ -416,9 +436,28 @@ rules:
   # 1. 优先处理本地和私有网络及个人直连白名单
   - GEOSITE,private,DIRECT
   - RULE-SET,AgPrivate,DIRECT
-  # 2. 拦截 QUIC 流量（强制降级为 TCP，防止广告通过 UDP 443 穿透及改善代理稳定性）
+  # 2. iCloud Private Relay (专用代理) 置于 QUIC 拦截之前，放行 MASQUE/HTTP3 (UDP 443) 隧道与地区校验
+  - DOMAIN-SUFFIX,mask.icloud.com,AI
+  - DOMAIN-SUFFIX,mask-h2.icloud.com,AI
+  - DOMAIN-SUFFIX,mask-api.icloud.com,AI
+  - DOMAIN-SUFFIX,mask.apple-dns.net,AI
+  - DOMAIN-SUFFIX,mask-api.fe.apple-dns.net,AI
+  - DOMAIN-SUFFIX,icloud-och.com,AI
+  - DOMAIN-SUFFIX,apple-relay.apple.com,AI
+  - DOMAIN-SUFFIX,apple-relay.cloudflare.com,AI
+  - DOMAIN-SUFFIX,apple-relay.fastly-edge.com,AI
+  - DOMAIN-SUFFIX,apple-relay.akamaized.net,AI
+  - DOMAIN-SUFFIX,cp4.cloudflare.com,AI
+  # 3. 拦截其余 QUIC 流量（强制降级为 TCP，防止广告通过 UDP 443 穿透及改善代理稳定性）
   - AND,((DST-PORT,443),(NETWORK,UDP)),REJECT
-  # 4. AI 核心验证、Apple Intelligence、遥测保护与全球 AI 分流 (优先于广告拦截与 Google 通用规则)
+  # 4. Antigravity / Google 软件更新与安装包下载剥离至 GMedia 高速组（防走 AI 自建节点导致更新极慢）
+  - DOMAIN,download.antigravity.google,GMedia
+  - DOMAIN,releases.antigravity.google,GMedia
+  - DOMAIN-SUFFIX,dl.google.com,GMedia
+  - DOMAIN-SUFFIX,gvt1.com,GMedia
+  - DOMAIN-SUFFIX,gvt2.com,GMedia
+  - DOMAIN-SUFFIX,storage.googleapis.com,GMedia
+  # 5. AI 核心验证、Apple Intelligence、遥测保护与全球 AI 分流 (优先于广告拦截与 Google 通用规则)
   - RULE-SET,AgAI,AI
   # 3. 苹果生态深度分流 (美区 Apple ID + 全家桶高速保障双策略组架构，与 Private.list 1:1 对齐)
   # [3A] 美区专属服务与 App Store 店面控制面 -> AppleProxy (默认美国节点，置于 itunes/apps 泛域名之前精准剥离控制面)
@@ -492,8 +531,9 @@ rules:
   - DOMAIN-SUFFIX,identity.apple.com,Apple
   - DOMAIN,time.apple.com,Apple
   - DOMAIN,time-ios.apple.com,Apple
-  # 5) Apple Maps 地图导航与 Wi-Fi/基站辅助快速定位 (gspe1-ssl.ls.apple.com 优先走 AI)
+  # 5) Apple Maps 地图导航与 Wi-Fi/基站辅助快速定位 (gspe1-ssl / configuration 优先走 AI)
   - DOMAIN,gspe1-ssl.ls.apple.com,AI
+  - DOMAIN,configuration.ls.apple.com,AI
   - DOMAIN-SUFFIX,ls.apple.com,Apple
   - DOMAIN-SUFFIX,gs-loc.apple.com,Apple
 

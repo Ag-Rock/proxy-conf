@@ -117,6 +117,13 @@ HOST,client-api.itunes.apple.com,Apple
 HOST-SUFFIX,itunes.apple.com,Apple
 HOST-SUFFIX,apps.apple.com,Apple
 # 4) iCloud 全家桶 (相册/云盘/备忘录记事本/日历/提醒事项/通讯录/查找/HomeKit家庭中枢/APNs推送)
+# 注: iCloud Private Relay (专用代理) 核心入口与地区校验必须优先走 AI (防止被下方 icloud.com 直连误伤提示在中国不支持)
+HOST-SUFFIX,mask.icloud.com,AI
+HOST-SUFFIX,mask-h2.icloud.com,AI
+HOST-SUFFIX,mask-api.icloud.com,AI
+HOST-SUFFIX,mask.apple-dns.net,AI
+HOST-SUFFIX,mask-api.fe.apple-dns.net,AI
+HOST-SUFFIX,icloud-och.com,AI
 HOST-SUFFIX,icloud.com,Apple
 HOST-SUFFIX,icloud-content.com,Apple
 HOST-SUFFIX,icloud.com.cn,Apple
@@ -126,8 +133,9 @@ HOST-SUFFIX,ess.apple.com,Apple
 HOST-SUFFIX,identity.apple.com,Apple
 HOST,time.apple.com,Apple
 HOST,time-ios.apple.com,Apple
-# 5) Apple Maps 地图导航与 Wi-Fi/基站辅助快速定位 (gspe1-ssl.ls.apple.com 已在 QX_AI.list 中优先走 AI)
+# 5) Apple Maps 地图导航与 Wi-Fi/基站辅助快速定位 (gspe1-ssl / configuration 优先走 AI)
 HOST,gspe1-ssl.ls.apple.com,AI
+HOST,configuration.ls.apple.com,AI
 HOST-SUFFIX,ls.apple.com,Apple
 HOST-SUFFIX,gs-loc.apple.com,Apple
 
@@ -144,7 +152,11 @@ HOST-SUFFIX,youtube.com,Google
 HOST-SUFFIX,youtu.be,Google
 HOST-SUFFIX,ytimg.com,Google
 
-# Google (核心主站与定位走 Google)
+# Google (软件更新/安装包下载/云存储大文件走 GMedia，核心主站与定位走 Google)
+HOST-SUFFIX,dl.google.com,GMedia
+HOST-SUFFIX,gvt1.com,GMedia
+HOST-SUFFIX,gvt2.com,GMedia
+HOST-SUFFIX,storage.googleapis.com,GMedia
 HOST-SUFFIX,google.com,Google
 HOST-SUFFIX,google.com.hk,Google
 HOST-SUFFIX,googleapis.com,Google
