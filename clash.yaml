@@ -224,7 +224,7 @@ proxy-groups:
       lazy: true,
       tolerance: 50,
       interval: 300,
-      filter: "(?=.*(美|US|(?i)States|American|港|HK|(?i)Hong|日本|JP|🇯🇵|(?i)Japan|台|TW|(?i)Taiwan|新|狮|獅|SG|(?i)Singapore|韩|韓|朝|KR|(?i)Korea))^((?!(免费|试用|更新|海外|失联)).)*$",
+      filter: "(?=.*(美|US|(?i)States|American|港|HK|(?i)Hong|日本|JP|🇯🇵|(?i)Japan|台|TW|(?i)Taiwan|新|狮|獅|SG|(?i)Singapore|韩|韓|朝|KR|(?i)Korea))^((?!(免费|试用|更新|海外|失联|流量)).)*$",
     }
   - {
       name: 🚑 故障转移,
@@ -237,7 +237,7 @@ proxy-groups:
       type: select,
       use: [KKK],
       include-all: false,
-      filter: "^((?!(美|US|日本|JP|🇯🇵|台|TW|港|HK|韩|韓|朝|KR|新加坡|狮|獅|SG|瑞士|免费|试用|更新|海外|失联)).)*$",
+      filter: "^((?!(美|US|日本|JP|🇯🇵|台|TW|港|HK|韩|韓|朝|KR|新加坡|狮|獅|SG|瑞士|免费|试用|更新|海外|失联|流量)).)*$",
     }
   - {
       name: Global,
@@ -275,7 +275,7 @@ proxy-groups:
       type: select,
       proxies: [🇺🇸 US+, 🇺🇸 US, 🇯🇵 JP, 🇭🇰 HK],
       use: [KKK],
-      filter: "(?i)^(?!.*(?:免费|试用|更新|失联)).*(?:德国|英国|菲律宾|Germany|Frankfurt|United Kingdom|London|Philippines|🇩🇪|🇬🇧|🇵🇭|\\b(?:DE|UK|GB|PH)\\b)",
+      filter: "(?i)^(?!.*(?:免费|试用|更新|失联|流量)).*(?:德国|英国|菲律宾|Germany|Frankfurt|United Kingdom|London|Philippines|🇩🇪|🇬🇧|🇵🇭|\\b(?:DE|UK|GB|PH)\\b)",
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/PayPal.png",
     }
   - {
@@ -283,7 +283,7 @@ proxy-groups:
       type: select,
       proxies: [🇨🇭 CH+],
       use: [KKK],
-      filter: "(?i)^(?!.*(?:免费|试用|更新|失联)).*(?:瑞士|德国|英国|法国|荷兰|爱尔兰|Swiss|Switzerland|Germany|Frankfurt|United Kingdom|London|France|Netherlands|Ireland|🇨🇭|🇩🇪|🇬🇧|🇫🇷|🇳🇱|🇮🇪|\\b(?:CH|DE|UK|GB|FR|NL|IE)\\b)",
+      filter: "(?i)^(?!.*(?:免费|试用|更新|失联|流量)).*(?:瑞士|德国|英国|法国|荷兰|爱尔兰|Swiss|Switzerland|Germany|Frankfurt|United Kingdom|London|France|Netherlands|Ireland|🇨🇭|🇩🇪|🇬🇧|🇫🇷|🇳🇱|🇮🇪|\\b(?:CH|DE|UK|GB|FR|NL|IE)\\b)",
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Crypto.png",
     }
   - {
