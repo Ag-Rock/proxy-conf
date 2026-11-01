@@ -639,7 +639,7 @@ rules:
   - DOMAIN-SUFFIX,audio-ak-spotify-com.akamaized.net,DIRECT
   - DOMAIN-SUFFIX,audio4-ak-spotify-com.akamaized.net,DIRECT
   - DOMAIN-SUFFIX,heads4-ak-spotify-com.akamaized.net,DIRECT
-  - RULE-SET,Spotify,🚀 手选主流
+  - RULE-SET,Spotify_domain,🚀 手选主流
 
   # 14. 苹果、微软与通用代理规则集
   # AppleProxy (仅拦截顶部未放行的苹果非大陆服务 -> 走 AppleProxy 美区策略组)
@@ -707,14 +707,6 @@ rule-anchor:
       format: mrs,
       proxy: 🚀 手选主流,
     }
-  class:
-    &class {
-      type: http,
-      interval: 86400,
-      behavior: classical,
-      format: text,
-      proxy: 🚀 手选主流,
-    }
   class-yaml:
     &class-yaml {
       type: http,
@@ -726,7 +718,7 @@ rule-anchor:
 rule-providers:
   AdvertisingLite:
     {
-      <<: *class,
+      <<: *class-yaml,
       url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/AdvertisingLite/AdvertisingLite.yaml",
     }
   AgPrivate:
@@ -781,18 +773,18 @@ rule-providers:
     }
   AppleProxy:
     {
-      <<: *class,
-      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/AppleProxy/AppleProxy.list",
+      <<: *class-yaml,
+      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/AppleProxy/AppleProxy.yaml",
     }
   Apple_domain:
     {
       <<: *domain,
       url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs",
     }
-  Spotify:
+  Spotify_domain:
     {
-      <<: *class,
-      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Spotify/Spotify.list",
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs",
     }
   SpeedTest_domain:
     {

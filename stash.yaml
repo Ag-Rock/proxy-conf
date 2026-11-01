@@ -719,7 +719,7 @@ rules:
   - DOMAIN-SUFFIX,audio-ak-spotify-com.akamaized.net,DIRECT
   - DOMAIN-SUFFIX,audio4-ak-spotify-com.akamaized.net,DIRECT
   - DOMAIN-SUFFIX,heads4-ak-spotify-com.akamaized.net,DIRECT
-  - RULE-SET,Spotify,🚀 手选主流
+  - RULE-SET,Spotify_domain,🚀 手选主流
 
   # 14. 苹果、微软与通用代理规则集
   # AppleProxy (仅拦截顶部未放行的苹果非大陆服务 -> 走 AppleProxy 美区策略组)
@@ -776,24 +776,14 @@ rule-anchor:
       type: http,
       interval: 86400,
       behavior: ipcidr,
-      format: mrs,
-      proxy: 🚀 手选主流,
+      format: yaml,
     }
   domain:
     &domain {
       type: http,
       interval: 86400,
       behavior: domain,
-      format: mrs,
-      proxy: 🚀 手选主流,
-    }
-  class:
-    &class {
-      type: http,
-      interval: 86400,
-      behavior: classical,
-      format: text,
-      proxy: 🚀 手选主流,
+      format: yaml,
     }
   class-yaml:
     &class-yaml {
@@ -801,12 +791,11 @@ rule-anchor:
       interval: 86400,
       behavior: classical,
       format: yaml,
-      proxy: 🚀 手选主流,
     }
 rule-providers:
   AdvertisingLite:
     {
-      <<: *class,
+      <<: *class-yaml,
       url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/AdvertisingLite/AdvertisingLite.yaml",
     }
   AgPrivate:
@@ -822,7 +811,7 @@ rule-providers:
   Crypto_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-cryptocurrency.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-cryptocurrency.yaml",
     }
   Finance:
     {
@@ -832,95 +821,95 @@ rule-providers:
   Adobe_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/adobe.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/adobe.yaml",
     }
   Paypal_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.yaml",
     }
   OneDrive_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.yaml",
     }
   Nintendo_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/nintendo.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/nintendo.yaml",
     }
   Xbox_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/xbox.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/xbox.yaml",
     }
   Microsoft_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.yaml",
     }
   AppleProxy:
     {
-      <<: *class,
-      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/AppleProxy/AppleProxy.list",
+      <<: *class-yaml,
+      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/AppleProxy/AppleProxy.yaml",
     }
   Apple_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.yaml",
     }
-  Spotify:
+  Spotify_domain:
     {
-      <<: *class,
-      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Spotify/Spotify.list",
+      <<: *domain,
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.yaml",
     }
   SpeedTest_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.yaml",
     }
   X_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/x.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/x.yaml",
     }
   amazon_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/amazon.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/amazon.yaml",
     }
   ins_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.yaml",
     }
   facebook_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.yaml",
     }
   GFW_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.yaml",
     }
   geolocation-!cn:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.yaml",
     }
   google_ip:
     {
       <<: *ip,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.yaml",
     }
   telegram_ip:
     {
       <<: *ip,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.yaml",
     }
   netflix_ip:
     {
       <<: *ip,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs",
+      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.yaml",
     }
