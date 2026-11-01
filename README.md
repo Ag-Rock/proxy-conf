@@ -11,8 +11,8 @@
 ### 1. Clash / Mihomo / Stash 配置文件与规则集
 | 文件名 | 类型 | 对应策略组 | 说明 |
 | :--- | :--- | :--- | :--- |
-| [`clash.yaml`](./clash.yaml) | 主配置 | 全局 | Mihomo (Clash Meta) 完整主配置文件。顶部含脱敏占位节点（用于通过客户端订阅校验），支持通过本地 `Merge` 或 OpenClash 覆写注入真实节点；内置 Fake-IP、精细化 `nameserver-policy` DoH 分流、QUIC 降级保护及 `.mrs` 高性能规则集。 |
-| [`stash.yaml`](./stash.yaml) | 主配置 | 全局 | Stash (iOS / macOS) 远程订阅专用主配置文件（与 `clash.yaml` 规则 1:1 对齐）。针对 Stash 引擎专门适配了 `follow-rule: true`、拆解展开 68 项独立 `nameserver-policy` DoH 映射、`default-nameserver` 引导解析及全策略组 `lazy: true` 后台省电优化，支持通过本地 `.stoverride`（`#!replace`）注入真实节点。 |
+| [`clash.yaml`](./clash.yaml) | 主配置 | 全局 | Mihomo (Clash Meta) 完整主配置文件。顶部含脱敏占位节点（用于通过客户端订阅校验），支持通过本地 `Merge` 或 OpenClash 覆写注入真实节点；内置 Fake-IP、精细化 `nameserver-policy` DoH 分流、QUIC 降级保护；纯域名与纯 IP 规则集全量采用 `.mrs` 二进制极速基数树（16 域名集 + 3 IP 集），极致节省软路由内存与 CPU。 |
+| [`stash.yaml`](./stash.yaml) | 主配置 | 全局 | Stash (iOS / macOS) 远程订阅专用主配置文件（与 `clash.yaml` 规则 1:1 对齐）。针对 Stash 引擎专门适配了展开版 68 项独立 `nameserver-policy` DoH 映射、`default-nameserver` 引导解析及全策略组 `lazy: true` 后台省电；远程规则集针对 Stash 定制为 `format: yaml` 基数树格式，确保客户端界面准确统计条目数（彻底解决 0 条目问题），支持通过本地 `.stoverride`（`#!replace`）注入真实节点。 |
 | [`AI.yaml`](./AI.yaml) | `classical` | `AI` | 全球人工智能与核心验证分流规则集（与 `QX_AI.list` 保持 1:1 同步）。涵盖 Apple Intelligence、iCloud 专用代理、主流大模型、AI 编程 Agent 及人机验证/OAuth/特性开关域名。 |
 | [`Finance.yaml`](./Finance.yaml) | `classical` | `Banking` | 国际数字银行、欧洲电子钱包、外汇券商、加密货币交易所及银行级 KYC/反欺诈组件规则集（与 `Finance.list` 保持 1:1 同步）。 |
 | [`Private_DIRECT.yaml`](./Private_DIRECT.yaml) | `classical` | `DIRECT` | 个人定制高优先级直连白名单。包含香港金融机构（BOCHK/HSBC HK/ZA Bank/AlipayHK 等）、常用云服务，以及 Windows/Office/Xbox/Switch 满速下载更新 CDN。 |
@@ -207,6 +207,9 @@
        - { name: 🇨🇭 瑞士-3, server: your.ch3.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, network: ws, ws-opts: { path: /ch, headers: { Host: your.ch3.domain } } }
      ```
 
+   - **验证生效**：
+     - 在 Stash 首页启动连接，进入「规则提供者 (Rule Providers)」页面点击刷新，确认全部 24 个规则集均正常显示非零条目数量。
+
 ---
 
 ### 四、Quantumult X 使用方法
@@ -238,4 +241,8 @@ https://raw.githubusercontent.com/Ag-Rock/proxy-conf/main/AllInOne.conf, tag=All
   - `AI.yaml` $\leftrightarrow$ `QX_AI.list`
   - `Finance.yaml` $\leftrightarrow$ `Finance.list`
   - `clash.yaml`（内联规则）$\leftrightarrow$ `stash.yaml`（内联规则）+ `Private_DIRECT.yaml` $\leftrightarrow$ `Private.list`
+- **规则集格式端别适配准则（Rule Providers）**：
+  - **OpenClash / Mihomo (`clash.yaml`)**：纯域名与纯 IP 规则集优先使用 **`format: mrs`** 二进制格式，由 Go 原生加载进基数树，内存占用最小、路由性能最高。
+  - **Stash (`stash.yaml`)**：纯域名规则集统一使用 **`behavior: domain` + `format: yaml`**（切勿混用 `classical`），确保 iOS 界面准确统计条目数，且底层同样享有 Radix Tree 极速查询。
+  - **复合自定义规则**（如 `AgAI`、`AgPrivate`、`Finance`、`AppleProxy`、`AdvertisingLite`）：统一使用 **`behavior: classical` + `format: yaml`**（`*class-yaml`）。
 - **隐私安全规范**：公开仓库中严禁提交任何真实机场订阅链接、服务器域名/IP、UUID 或私钥凭证；所有敏感节点信息均通过客户端本地覆写（Merge / `.stoverride` / 本地配置）注入。
