@@ -79,8 +79,6 @@ payload:
   - DOMAIN-SUFFIX,browser-intake-datadoghq.com
   - DOMAIN-SUFFIX,datadoghq.com
   - DOMAIN-SUFFIX,datadoghq.eu
-  - DOMAIN-SUFFIX,intercom.io
-  - DOMAIN-SUFFIX,intercomcdn.com
   - DOMAIN-SUFFIX,segment.io
   - DOMAIN-SUFFIX,segment.com
   - DOMAIN-SUFFIX,amplitude.com

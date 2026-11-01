@@ -39,13 +39,10 @@ HOST-SUFFIX,paysafe.com,Banking
 # IG Group & 国际经纪商
 HOST-SUFFIX,ig.com,Banking
 
-# ---------------- 2. 银行级安全防欺诈、KYC 合规与客服组件 (保持与银行同 IP) ----------------
+# ---------------- 2. 安全防欺诈与 KYC 组件（共享服务无法按调用应用区分；Intercom 统一走手选主流） ----------------
 HOST-SUFFIX,castle.io,Banking
 HOST-SUFFIX,group-ib.com,Banking
 HOST-SUFFIX,onetrust.com,Banking
-HOST-SUFFIX,intercom.com,Banking
-HOST-SUFFIX,intercom.io,Banking
-HOST-SUFFIX,intercomcdn.com,Banking
 HOST-SUFFIX,sumsub.com,Banking
 HOST-SUFFIX,jumio.com,Banking
 HOST-SUFFIX,onfido.com,Banking

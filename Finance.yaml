@@ -39,13 +39,10 @@ payload:
   # IG Group & 国际经纪商
   - DOMAIN-SUFFIX,ig.com
 
-  # ---------------- 2. 银行级安全防欺诈、KYC 合规与客服组件 (保持与银行同 IP) ----------------
+  # ---------------- 2. 安全防欺诈与 KYC 组件（共享服务无法按调用应用区分；Intercom 统一走手选主流） ----------------
   - DOMAIN-SUFFIX,castle.io
   - DOMAIN-SUFFIX,group-ib.com
   - DOMAIN-SUFFIX,onetrust.com
-  - DOMAIN-SUFFIX,intercom.com
-  - DOMAIN-SUFFIX,intercom.io
-  - DOMAIN-SUFFIX,intercomcdn.com
   - DOMAIN-SUFFIX,sumsub.com
   - DOMAIN-SUFFIX,jumio.com
   - DOMAIN-SUFFIX,onfido.com

@@ -7,8 +7,15 @@
 #   4. 金融账户 -> 欧洲数字银行(N26/iFast/Skrill等)走 Banking，香港金融保持 DIRECT
 # =================================================================
 
+# Intercom 共享客服：集中分流，不归属 AI 或银行专属风控。
+HOST-SUFFIX,intercom.com,🚀 手选主流
+HOST-SUFFIX,intercom.io,🚀 手选主流
+HOST-SUFFIX,intercomcdn.com,🚀 手选主流
+HOST-SUFFIX,intercom-chat.com,🚀 手选主流
+HOST-SUFFIX,intercom-sheets.com,🚀 手选主流
+
 # ---------------- 1. 国外加密 DNS 与 Wi-Fi Calling ----------------
-# 海外 DoH 走 🚀 手选主流 (美国节点)，确保海外域名解析出的 CDN 调度归属地稳定在美国
+# 应用发起的海外 DNS 连接走手选主流；QX 内置 DNS 不保证服从这些规则。
 HOST-SUFFIX,dns.google,🚀 手选主流
 HOST-SUFFIX,1dot1dot1dot1.cloudflare-dns.com,🚀 手选主流
 HOST-SUFFIX,cloudflare-dns.com,🚀 手选主流

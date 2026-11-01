@@ -281,6 +281,7 @@ pr:
       ],
   }
 proxy-groups:
+  # CH+/US+ 保留自动测速；固定出口请在 Banking/PayPal 中直接选择具体节点。
   - {
       name: 🚀 手选主流,
       type: select,
@@ -342,12 +343,18 @@ proxy-groups:
     }
   - {
       name: PayPal,
-      <<: *pr,
+      type: select,
+      proxies: [🇺🇸 US+, 🇺🇸 US, 🇯🇵 JP, 🇭🇰 HK],
+      use: [KKK],
+      filter: "(?i)^(?!.*(?:免费|试用|更新|失联)).*(?:德国|英国|菲律宾|Germany|Frankfurt|United Kingdom|London|Philippines|🇩🇪|🇬🇧|🇵🇭|\\b(?:DE|UK|GB|PH)\\b)",
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/PayPal.png",
     }
   - {
       name: Banking,
-      <<: *pr,
+      type: select,
+      proxies: [🇨🇭 CH+],
+      use: [KKK],
+      filter: "(?i)^(?!.*(?:免费|试用|更新|失联)).*(?:瑞士|德国|英国|法国|荷兰|爱尔兰|Swiss|Switzerland|Germany|Frankfurt|United Kingdom|London|France|Netherlands|Ireland|🇨🇭|🇩🇪|🇬🇧|🇫🇷|🇳🇱|🇮🇪|\\b(?:CH|DE|UK|GB|FR|NL|IE)\\b)",
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Crypto.png",
     }
   - {
@@ -357,7 +364,8 @@ proxy-groups:
     }
   - {
       name: Apple,
-      <<: *pr,
+      type: select,
+      proxies: [DIRECT, 🚀 手选主流, 🇺🇸 US+, 🇨🇭 CH+, 🏴‍☠️ CF, 🇺🇸 US, 🇭🇰 HK, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR, 🏎️ 速度优选, 🚑 故障转移, 🎯 手选节点],
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Apple.png",
     }
   - {
@@ -481,7 +489,7 @@ rules:
   - DOMAIN-SUFFIX,apple-relay.fastly-edge.com,AI
   - DOMAIN-SUFFIX,apple-relay.akamaized.net,AI
   - DOMAIN-SUFFIX,cp4.cloudflare.com,AI
-  # 3. 拦截其余 QUIC 流量（强制降级为 TCP，防止广告通过 UDP 443 穿透及改善代理稳定性）
+  # 3. 拦截其余 UDP 443（支持回退的服务可改用 TCP；可能影响 QUIC/实时通信，不作为广告防绕过保证）
   - AND,((DST-PORT,443),(NETWORK,UDP)),REJECT
   # 4. Antigravity / Google 软件更新与安装包下载剥离至 GMedia 高速组（防走 AI 自建节点导致更新极慢）
   - DOMAIN,download.antigravity.google,GMedia
@@ -491,6 +499,12 @@ rules:
   - DOMAIN-SUFFIX,gvt2.com,GMedia
   - DOMAIN-SUFFIX,storage.googleapis.com,GMedia
   # 5. AI 核心验证、Apple Intelligence、遥测保护与全球 AI 分流 (优先于广告拦截与 Google 通用规则)
+  # Intercom 是共享客服服务，集中分流并先于广告拦截。
+  - DOMAIN-SUFFIX,intercom.com,🚀 手选主流
+  - DOMAIN-SUFFIX,intercom.io,🚀 手选主流
+  - DOMAIN-SUFFIX,intercomcdn.com,🚀 手选主流
+  - DOMAIN-SUFFIX,intercom-chat.com,🚀 手选主流
+  - DOMAIN-SUFFIX,intercom-sheets.com,🚀 手选主流
   - RULE-SET,AgAI,AI
   # 3. 苹果生态深度分流 (美区 Apple ID + 全家桶高速保障双策略组架构，与 Private.list 1:1 对齐)
   # [3A] 美区专属服务与 App Store 店面控制面 -> AppleProxy (默认美国节点，置于 itunes/apps 泛域名之前精准剥离控制面)
@@ -571,7 +585,6 @@ rules:
   - DOMAIN-SUFFIX,gs-loc.apple.com,Apple
 
   # 4. AI 核心验证、Apple Intelligence、遥测保护与全球 AI 分流 (优先于广告拦截与 Google 通用规则)
-  # - RULE-SET,AgAI,AI  guzzoni-apple-com.v.aaplimg.com 在自建 AI 集中，但主规则先用 DOMAIN-SUFFIX,aaplimg.com,Apple 命中，因此它不会进入后面的 AgAI。如果这个域名应走 AI，把精确域名规则移到 aaplimg.com 规则之前即可
   - GEOSITE,category-ai-!cn,AI
 
   # 5. 国际金融、定位服务与防欺诈风控保护 (优先于广告拦截，防止银行风控/客服组件被误杀或定位割裂)

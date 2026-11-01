@@ -80,8 +80,6 @@ HOST-SUFFIX,sentry.io,AI
 HOST-SUFFIX,browser-intake-datadoghq.com,AI
 HOST-SUFFIX,datadoghq.com,AI
 HOST-SUFFIX,datadoghq.eu,AI
-HOST-SUFFIX,intercom.io,AI
-HOST-SUFFIX,intercomcdn.com,AI
 HOST-SUFFIX,segment.io,AI
 HOST-SUFFIX,segment.com,AI
 HOST-SUFFIX,amplitude.com,AI
