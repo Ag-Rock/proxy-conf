@@ -17,8 +17,8 @@ payload:
   - DOMAIN-SUFFIX,aliyuncs.com
   - DOMAIN-SUFFIX,keepersecurity.com
   - DOMAIN-SUFFIX,oyunfor.com
-  - DOMAIN-SUFFIX,oracle.com
-  - DOMAIN-SUFFIX,oraclecloud.com
+  # - DOMAIN-SUFFIX,oracle.com
+  # - DOMAIN-SUFFIX,oraclecloud.com
   - DOMAIN-SUFFIX,hilton.com
   - DOMAIN-SUFFIX,hiltonhonors.com
   - DOMAIN-SUFFIX,marriott.com
