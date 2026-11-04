@@ -163,37 +163,27 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
   nameserver-policy:
+    # 1. 最高优先级：AI 规则集、iCloud Private Relay 与 Apple 定位校验 -> 海外纯净 DoH (防被下方 apple-cn 抢先解析回国内)
     "rule-set:AgAI":
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     "geosite:category-ai-!cn":
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     "+.ai":
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "geosite:cn":
-      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "geosite:apple-cn":
-      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.mask.icloud.com,+.mask-h2.icloud.com,+.mask-api.icloud.com,+.mask.apple-dns.net,+.mask-api.fe.apple-dns.net,+.icloud-och.com,+.apple-relay.apple.com,+.apple-relay.cloudflare.com,+.apple-relay.fastly-edge.com,+.apple-relay.akamaized.net,gspe1-ssl.ls.apple.com,configuration.ls.apple.com":
+    "+.mask.icloud.com,+.mask-h2.icloud.com,+.mask-api.icloud.com,+.mask.apple-dns.net,+.mask-api.fe.apple-dns.net,+.icloud-och.com,+.apple-relay.apple.com,+.apple-relay.cloudflare.com,+.apple-relay.fastly-edge.com,+.apple-relay.akamaized.net,gspe1-ssl.ls.apple.com,gspe19-ssl.ls.apple.com,gspe35-ssl.ls.apple.com,gspe79-ssl.ls.apple.com,configuration.ls.apple.com,iphone-ld.apple.com":
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    # 2. 苹果/微软/主机满速下载 CDN 与大陆域名 -> 国内 DoH
     "+.appldnld.apple.com,+.mesu.apple.com,+.gdmf.apple.com,+.swscan.apple.com,+.swcdn.apple.com,+.swdist.apple.com,+.oscdn.apple.com,+.osrecovery.apple.com,+.mzstatic.com,+.cdn-apple.com,+.aaplimg.com,iosapps.itunes.apple.com,osxapps.itunes.apple.com,upp.itunes.apple.com,supportdownload.apple.com,download.developer.apple.com,+.icloud.com,+.icloud-content.com,+.icloud.com.cn,+.me.com,+.push.apple.com,+.ess.apple.com,+.identity.apple.com,+.gs-loc.apple.com,+.music.apple.com,+.blobstore.apple.com,aod.itunes.apple.com,aod-ssl.itunes.apple.com,audio.itunes.apple.com,audio-ssl.itunes.apple.com,streamingaudio.itunes.apple.com,mvod.itunes.apple.com,musicstatus.itunes.apple.com,play.itunes.apple.com,client-api.itunes.apple.com":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "+.cdn.nintendo.net,+.hac.lp1.d4c.nintendo.net,assets1.xboxlive.com,assets2.xboxlive.com,dlassets.xboxlive.com,dlassets2.xboxlive.com,xvcf1.xboxlive.com,xvcf2.xboxlive.com,+.xboxlive.cn,+.windowsupdate.com,+.delivery.mp.microsoft.com,+.update.microsoft.com,download.microsoft.com,+.officecdn.microsoft.com,+.sfx.ms":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "geosite:cn":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "geosite:apple-cn":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    # 3. 其余非中国大陆域名兜底 -> 海外纯净 DoH
     "geosite:geolocation-!cn":
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-#   # 电信
-#   - 219.148.204.66
-#   - 219.149.6.99
-#   # 移动
-#   # - 211.180.132.108
-#   # - 211.140.197.58
-#   # 联通
-#   # - 202.96.69.38
-#   # - 202.96.64.68
-
-# hosts:
-#   "epdg.epc.mnc260.mcc310.pub.3gppnetwork.org": 208.54.159.227
-#   "ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org": 208.54.2.163
 
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
@@ -325,7 +315,6 @@ proxy-groups:
       <<: *pr,
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Microsoft.png",
     }
-  # - {name: Spotify, <<: *pr, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Spotify.png"}
 
   - {
       name: 🇺🇸 US+,
@@ -385,7 +374,6 @@ proxy-groups:
       name: 🇰🇷 KR,
       type: url-test,
       use: [KKK],
-      # include-all: true,
       tolerance: 50,
       interval: 300,
       filter: "(?=.*(韩|韓|朝|KR|(?i)Korea))^((?!(免费|试用|更新|海外)).)*$",
@@ -427,12 +415,6 @@ rules:
   - DOMAIN-SUFFIX,gvt2.com,GMedia
   - DOMAIN-SUFFIX,storage.googleapis.com,GMedia
   # 5. AI 核心验证、Apple Intelligence、遥测保护与全球 AI 分流 (优先于广告拦截与 Google 通用规则)
-  # Intercom 是共享客服服务，集中分流并先于广告拦截。
-  - DOMAIN-SUFFIX,intercom.com,🚀 手选主流
-  - DOMAIN-SUFFIX,intercom.io,🚀 手选主流
-  - DOMAIN-SUFFIX,intercomcdn.com,🚀 手选主流
-  - DOMAIN-SUFFIX,intercom-chat.com,🚀 手选主流
-  - DOMAIN-SUFFIX,intercom-sheets.com,🚀 手选主流
   - RULE-SET,AgAI,AI
   # 3. 苹果生态深度分流 (美区 Apple ID + 全家桶高速保障双策略组架构，与 Private.list 1:1 对齐)
   # [3A] 美区专属服务与 App Store 店面控制面 -> AppleProxy (默认美国节点，置于 itunes/apps 泛域名之前精准剥离控制面)
@@ -506,9 +488,13 @@ rules:
   - DOMAIN-SUFFIX,identity.apple.com,Apple
   - DOMAIN,time.apple.com,Apple
   - DOMAIN,time-ios.apple.com,Apple
-  # 5) Apple Maps 地图导航与 Wi-Fi/基站辅助快速定位 (gspe1-ssl / configuration 优先走 AI)
+  # 5) Apple Maps 地图导航与 Wi-Fi/基站辅助快速定位 (定位校验接口优先走 AI)
   - DOMAIN,gspe1-ssl.ls.apple.com,AI
+  - DOMAIN,gspe19-ssl.ls.apple.com,AI
+  - DOMAIN,gspe35-ssl.ls.apple.com,AI
+  - DOMAIN,gspe79-ssl.ls.apple.com,AI
   - DOMAIN,configuration.ls.apple.com,AI
+  - DOMAIN,iphone-ld.apple.com,AI
   - DOMAIN-SUFFIX,ls.apple.com,Apple
   - DOMAIN-SUFFIX,gs-loc.apple.com,Apple
 
@@ -682,34 +668,7 @@ rules:
   - GEOSITE,cn,DIRECT
   - GEOIP,cn,DIRECT
   - MATCH,Global
-# ===== Clash for Windows 绕过 =====
-# cfw-bypass:
-#   - localhost
-#   - 127.*
-#   - 10.*
-#   - 172.16.*
-#   - 172.17.*
-#   - 172.18.*
-#   - 172.19.*
-#   - 172.20.*
-#   - 172.21.*
-#   - 172.22.*
-#   - 172.23.*
-#   - 172.24.*
-#   - 172.25.*
-#   - 172.26.*
-#   - 172.27.*
-#   - 172.28.*
-#   - 172.29.*
-#   - 172.30.*
-#   - 172.31.*
-#   - 192.168.*
-#   - <local>
-#   - "*.cn"
-#   - "*.qq.com"
-#   - "*.163.com"
-#   - "*.126.net"
-#   - "*.music.163.com"
+
 # 规则集
 rule-anchor:
   ip:
