@@ -3,7 +3,7 @@
 # 与 QX_AI.list 保持 1:1 完全同步 | 归属策略组: AI
 # =================================================================
 payload:
-  # ---------------- Apple Intelligence & Siri AI & iCloud Private Relay ----------------
+  # ---------------- Apple Intelligence & Siri AI & iCloud Private Relay & 定位校验 ----------------
   - DOMAIN-SUFFIX,apple-relay.apple.com
   - DOMAIN-SUFFIX,apple-relay.cloudflare.com
   - DOMAIN-SUFFIX,apple-relay.fastly-edge.com
@@ -20,7 +20,11 @@ payload:
   - DOMAIN,guzzoni-apple-com.v.aaplimg.com
   - DOMAIN-SUFFIX,smoot.apple.com
   - DOMAIN,gspe1-ssl.ls.apple.com
+  - DOMAIN,gspe19-ssl.ls.apple.com
+  - DOMAIN,gspe35-ssl.ls.apple.com
+  - DOMAIN,gspe79-ssl.ls.apple.com
   - DOMAIN,configuration.ls.apple.com
+  - DOMAIN,iphone-ld.apple.com
 
   # ---------------- 人机验证、OAuth 鉴权、风控指纹、灰度开关与定位检测 (防登录受阻/地区未开放) ----------------
   # 1) Cloudflare Turnstile / Arkose / hCaptcha / reCAPTCHA / Geetest 人机验证
@@ -40,6 +44,7 @@ payload:
   - DOMAIN-SUFFIX,geevisit.com
   # 2) OAuth / SSO 统一身份认证组件 (OpenAI / Claude / Muse / Suno / Cursor 等登录必经)
   - DOMAIN-SUFFIX,auth0.com
+  - DOMAIN-SUFFIX,auth0cdn.com
   - DOMAIN-SUFFIX,okta.com
   - DOMAIN-SUFFIX,oktacdn.com
   - DOMAIN-SUFFIX,workos.com
@@ -70,6 +75,7 @@ payload:
   - DOMAIN-SUFFIX,assetsconfigcdn.org
   - DOMAIN-SUFFIX,oaistatsig.com
   - DOMAIN-SUFFIX,launchdarkly.com
+  - DOMAIN-SUFFIX,launchdarkly.net
   - DOMAIN-SUFFIX,posthog.com
   - DOMAIN-SUFFIX,growthbook.io
   - DOMAIN-SUFFIX,configcat.com
@@ -82,6 +88,12 @@ payload:
   - DOMAIN-SUFFIX,segment.io
   - DOMAIN-SUFFIX,segment.com
   - DOMAIN-SUFFIX,amplitude.com
+  - DOMAIN-SUFFIX,intercom.com
+  - DOMAIN-SUFFIX,intercom.io
+  - DOMAIN-SUFFIX,intercomcdn.com
+  - DOMAIN-SUFFIX,intercom-chat.com
+  - DOMAIN-SUFFIX,intercom-sheets.com
+  - DOMAIN-SUFFIX,crisp.chat
   # 4) 设备指纹、反欺诈风控与前端 GeoIP 地区检测 API (锁定固定美国 IP，防跳 IP 触发风控)
   - DOMAIN-SUFFIX,fpjs.io
   - DOMAIN-SUFFIX,fingerprint.com
@@ -111,15 +123,19 @@ payload:
   - DOMAIN-SUFFIX,wtfismyip.com
   - DOMAIN-SUFFIX,myip.com
 
-  # ---------------- OpenAI / ChatGPT / Sora / SearchGPT ----------------
+  # ---------------- OpenAI / ChatGPT / Sora / SearchGPT / Operator ----------------
   - DOMAIN-SUFFIX,chat.com
   - DOMAIN-SUFFIX,chatgpt.com
+  - DOMAIN-SUFFIX,ab.chatgpt.com
+  - DOMAIN-SUFFIX,ws.chatgpt.com
+  - DOMAIN-SUFFIX,ios.chat.openai.com
   - DOMAIN-SUFFIX,openai.com
   - DOMAIN-SUFFIX,oaistatic.com
   - DOMAIN-SUFFIX,oaiusercontent.com
   - DOMAIN-SUFFIX,sora.com
   - DOMAIN-SUFFIX,searchgpt.com
-  # LiveKit 语音通信通道
+  # LiveKit 实时语音与多模态视频通信通道 (覆盖全部动态子域)
+  - DOMAIN-SUFFIX,livekit.cloud
   - DOMAIN-SUFFIX,chatgpt.livekit.cloud
   - DOMAIN-SUFFIX,host.livekit.cloud
   - DOMAIN-SUFFIX,turn.livekit.cloud
@@ -133,7 +149,7 @@ payload:
   - DOMAIN-KEYWORD,openai
   - DOMAIN-KEYWORD,chatgpt
 
-  # ---------------- Google AI / Gemini / NotebookLM / DeepMind ----------------
+  # ---------------- Google AI / Gemini / NotebookLM / DeepMind / Vertex AI ----------------
   # NotebookLM 核心服务
   - DOMAIN-SUFFIX,notebooklm.google
   - DOMAIN-SUFFIX,notebooklm.google.com
@@ -144,11 +160,15 @@ payload:
   - DOMAIN-SUFFIX,gemini.google
   - DOMAIN-SUFFIX,gemini.google.com
   - DOMAIN-SUFFIX,gemini.gstatic.com
+  - DOMAIN-SUFFIX,gemini-pa.googleapis.com
   - DOMAIN-SUFFIX,bard.google.com
-  # Google AI Studio / MakerSuite
+  - DOMAIN-SUFFIX,bard-frontend-pa.googleapis.com
+  # Google AI Studio / MakerSuite / Vertex AI
   - DOMAIN-SUFFIX,ai.google.dev
   - DOMAIN-SUFFIX,aistudio.google.com
   - DOMAIN-SUFFIX,makersuite.google.com
+  - DOMAIN-SUFFIX,vertexai.google.com
+  - DOMAIN-SUFFIX,aiplatform.googleapis.com
   - DOMAIN-SUFFIX,alkalicore-pa.clients6.google.com
   - DOMAIN-SUFFIX,alkalimakersuite-pa.clients6.google.com
   - DOMAIN-SUFFIX,webchannel-alkalimakersuite-pa.clients6.google.com
@@ -197,7 +217,9 @@ payload:
 
   # ---------------- xAI / Grok ----------------
   - DOMAIN-SUFFIX,x.ai
+  - DOMAIN-SUFFIX,api.x.ai
   - DOMAIN-SUFFIX,grok.com
+  - DOMAIN-SUFFIX,assets.grok.com
   - DOMAIN-SUFFIX,grok.x.com
 
   # ---------------- AI 编程、软件工程 Agent 与 App 构建平台 ----------------
@@ -235,12 +257,13 @@ payload:
   - DOMAIN-SUFFIX,ciciaicdn.com
   - DOMAIN-SUFFIX,dola.com
   - DOMAIN-SUFFIX,gauthmath.com
-  # Augment / Lovable / Bolt.new / v0 / Devin / Google IDX / Firebase Studio
+  # Augment / Lovable / Bolt.new / v0 / Devin / Google IDX / Firebase Studio / Same.new
   - DOMAIN-SUFFIX,augmentcode.com
   - DOMAIN-SUFFIX,lovable.dev
   - DOMAIN-SUFFIX,lovable.app
   - DOMAIN-SUFFIX,gptengineer.app
   - DOMAIN-SUFFIX,bolt.new
+  - DOMAIN-SUFFIX,same.new
   - DOMAIN-SUFFIX,stackblitz.com
   - DOMAIN-SUFFIX,v0.dev
   - DOMAIN-SUFFIX,v0.build
@@ -299,12 +322,13 @@ payload:
   - DOMAIN-SUFFIX,youmind.ai
   - DOMAIN-SUFFIX,youmind.com
   - DOMAIN-SUFFIX,youmind.site
-  # 学术研究 (Consensus / Elicit / Scite / Semantic Scholar)
+  # 学术研究 (Consensus / Elicit / Scite / Semantic Scholar / Connected Papers)
   - DOMAIN-SUFFIX,consensus.app
   - DOMAIN-SUFFIX,elicit.com
   - DOMAIN-SUFFIX,elicit.org
   - DOMAIN-SUFFIX,scite.ai
   - DOMAIN-SUFFIX,semanticscholar.org
+  - DOMAIN-SUFFIX,connectedpapers.com
 
   # ---------------- AI 图像、视频、视觉设计、3D 与数字人多模态 ----------------
   # Muse AI
@@ -360,10 +384,11 @@ payload:
   - DOMAIN-SUFFIX,captions.ai
   - DOMAIN-SUFFIX,descript.com
   - DOMAIN-SUFFIX,twelvelabs.io
-  # 3D AI (Meshy / Tripo / Spline)
+  # 3D AI (Meshy / Tripo / Spline / Rodin)
   - DOMAIN-SUFFIX,meshy.ai
   - DOMAIN-SUFFIX,tripo3d.ai
   - DOMAIN-SUFFIX,spline.design
+  - DOMAIN-SUFFIX,hyper3d.ai
 
   # ---------------- AI 音频、实时语音 Agent 与音乐创作 ----------------
   # Suno / Udio
@@ -413,6 +438,7 @@ payload:
   # Mistral AI / Cohere / AI21 / Writer
   - DOMAIN-SUFFIX,mistral.ai
   - DOMAIN-SUFFIX,mistral.com
+  - DOMAIN-SUFFIX,lechat.ai
   - DOMAIN-SUFFIX,cohere.com
   - DOMAIN-SUFFIX,cohere.ai
   - DOMAIN-SUFFIX,ai21.com
@@ -421,7 +447,7 @@ payload:
   - DOMAIN-SUFFIX,huggingface.co
   - DOMAIN-SUFFIX,hf.co
   - DOMAIN-SUFFIX,hf.space
-  # Ollama / LM Studio / Jan / Poe / Cloudflare AI
+  # Ollama / LM Studio / Jan / Poe / Cloudflare AI / Cherry Studio
   - DOMAIN-SUFFIX,ollama.com
   - DOMAIN-SUFFIX,ollama.ai
   - DOMAIN-SUFFIX,lmstudio.ai
@@ -467,6 +493,7 @@ payload:
   # 评测榜单与 AI 训练平台
   - DOMAIN-SUFFIX,arena.ai
   - DOMAIN-SUFFIX,lmarena.ai
+  - DOMAIN-SUFFIX,chatbotarena.ai
   - DOMAIN-SUFFIX,lmsys.org
   - DOMAIN-SUFFIX,artificialanalysis.ai
   - DOMAIN-SUFFIX,scale.com
@@ -507,27 +534,20 @@ payload:
   - DOMAIN-SUFFIX,envato-static.com
   - DOMAIN-SUFFIX,themeforest.net
 
-  # ---------------- 国内优质大模型服务 (海外版及全局分流) ----------------
+  # ---------------- 国内大模型服务海外版 (仅分流国际站，避免国内备案域名绕美减速) ----------------
   # DeepSeek
   - DOMAIN-SUFFIX,deepseek.com
-  # MiniMax / 海螺 AI / Talkie
+  # MiniMax / 海螺 AI / Talkie 海外版
   - DOMAIN-SUFFIX,minimax.io
-  - DOMAIN-SUFFIX,minimaxi.com
   - DOMAIN-SUFFIX,hailuoai.com
   - DOMAIN-SUFFIX,hailuoai.video
   - DOMAIN-SUFFIX,talkie-ai.com
-  # Moonshot / Kimi
+  # Moonshot / Kimi 海外版
   - DOMAIN-SUFFIX,kimi.ai
-  - DOMAIN-SUFFIX,moonshot.cn
-  # 智谱清言 / GLM / Z.ai
+  # 智谱 GLM 海外版
   - DOMAIN-SUFFIX,z.ai
-  - DOMAIN-SUFFIX,chatglm.cn
-  - DOMAIN-SUFFIX,bigmodel.cn
-  - DOMAIN-SUFFIX,zhipuai.cn
-  # 零一万物 / 万知 (01.AI) & 通义 Qwen 海外版
+  # 零一万物 (01.AI) & 通义 Qwen 海外版
   - DOMAIN-SUFFIX,01.ai
-  - DOMAIN-SUFFIX,lingyiwanwu.com
-  - DOMAIN-SUFFIX,wanzhi.com
   - DOMAIN-SUFFIX,qwenlm.ai
   - DOMAIN-SUFFIX,chat.qwen.ai
 
