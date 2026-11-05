@@ -1,8 +1,9 @@
 # =================================================================
 # AI.yaml - Clash / Mihomo 全球人工智能与核心服务分流规则集
-# 与 QX_AI.list 保持 1:1 完全同步 | 归属策略组: AI
+# 与 QX_AI.list 共享主要业务条目 | 归属策略组: AI
 # =================================================================
 payload:
+  # Apple 条目供跨端共享，Clash / Stash 的 AppleAI / PrivateRelay 前置规则有意覆盖对应域名。
   # ---------------- Apple Intelligence & Siri AI & iCloud Private Relay & 定位校验 ----------------
   - DOMAIN-SUFFIX,apple-relay.apple.com
   - DOMAIN-SUFFIX,apple-relay.cloudflare.com
@@ -88,11 +89,6 @@ payload:
   - DOMAIN-SUFFIX,segment.io
   - DOMAIN-SUFFIX,segment.com
   - DOMAIN-SUFFIX,amplitude.com
-  - DOMAIN-SUFFIX,intercom.com
-  - DOMAIN-SUFFIX,intercom.io
-  - DOMAIN-SUFFIX,intercomcdn.com
-  - DOMAIN-SUFFIX,intercom-chat.com
-  - DOMAIN-SUFFIX,intercom-sheets.com
   - DOMAIN-SUFFIX,crisp.chat
   # 4) 设备指纹、反欺诈风控与前端 GeoIP 地区检测 API (锁定固定美国 IP，防跳 IP 触发风控)
   - DOMAIN-SUFFIX,fpjs.io

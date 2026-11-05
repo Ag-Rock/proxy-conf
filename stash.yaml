@@ -89,9 +89,9 @@ profile:
   store-selected: true
   store-fake-ip: true
 
-# 控制面板
+# 控制面板：公开示例占位。实际监听范围与认证由本地部署及覆写决定。
 external-controller: 0.0.0.0:9090
-secret: "123456"
+secret: "123456" # 公开占位，生产密钥应由本地私有覆写注入
 
 # 流量嗅探(建议启用)
 sniffer:
@@ -166,6 +166,9 @@ dns:
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     "+.ai":
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "cp4.cloudflare.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "guzzoni.apple.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "+.smoot.apple.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     "+.mask.icloud.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     "+.mask-h2.icloud.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     "+.mask-api.icloud.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
@@ -306,22 +309,7 @@ proxy-groups:
   - {
       name: AI,
       type: select,
-      proxies:
-        [
-          🇺🇸 美国-3,
-          🚀 手选主流,
-          🇺🇸 US+,
-          🇨🇭 CH+,
-          🏴‍☠️ CF,
-          🇺🇸 US,
-          🇯🇵 JP,
-          🇼🇸 TW,
-          🇸🇬 SG,
-          🇰🇷 KR,
-          🏎️ 速度优选,
-          🚑 故障转移,
-          🎯 手选节点,
-        ],
+      proxies: [🇺🇸 美国-3, 🚀 手选主流, 🇺🇸 US+, 🇨🇭 CH+, 🏴‍☠️ CF, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR, 🏎️ 速度优选, 🚑 故障转移, 🎯 手选节点],
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/AI.png",
     }
   - {
@@ -339,6 +327,18 @@ proxy-groups:
       use: [KKK],
       filter: "(?i)^(?!.*(?:免费|试用|更新|失联|流量)).*(?:瑞士|德国|英国|法国|荷兰|爱尔兰|Swiss|Switzerland|Germany|Frankfurt|United Kingdom|London|France|Netherlands|Ireland|🇨🇭|🇩🇪|🇬🇧|🇫🇷|🇳🇱|🇮🇪|\\b(?:CH|DE|UK|GB|FR|NL|IE)\\b)",
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Crypto.png",
+    }
+  - {
+      name: AppleAI,
+      type: select,
+      proxies: [🇺🇸 美国-3, 🚀 手选主流, 🇺🇸 US+, 🇨🇭 CH+, 🏴‍☠️ CF, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR, 🏎️ 速度优选, 🚑 故障转移, 🎯 手选节点],
+      icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Apple.png",
+    }
+  - {
+      name: PrivateRelay,
+      type: select,
+      proxies: [🇺🇸 美国-3, 🚀 手选主流, 🇺🇸 US+, 🇨🇭 CH+, 🏴‍☠️ CF, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR, 🏎️ 速度优选, 🚑 故障转移, 🎯 手选节点],
+      icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Apple.png",
     }
   - {
       name: AppleProxy,
@@ -458,31 +458,43 @@ rules:
   # 1. 优先处理本地和私有网络及个人直连白名单
   - GEOSITE,private,DIRECT
   - RULE-SET,AgPrivate,DIRECT
-  # 2. iCloud Private Relay (专用代理) 置于 QUIC 拦截之前，放行 MASQUE/HTTP3 (UDP 443) 隧道与地区校验
-  - DOMAIN-SUFFIX,mask.icloud.com,AI
-  - DOMAIN-SUFFIX,mask-h2.icloud.com,AI
-  - DOMAIN-SUFFIX,mask-api.icloud.com,AI
-  - DOMAIN-SUFFIX,mask.apple-dns.net,AI
-  - DOMAIN-SUFFIX,mask-api.fe.apple-dns.net,AI
-  - DOMAIN-SUFFIX,icloud-och.com,AI
-  - DOMAIN-SUFFIX,apple-relay.apple.com,AI
-  - DOMAIN-SUFFIX,apple-relay.cloudflare.com,AI
-  - DOMAIN-SUFFIX,apple-relay.fastly-edge.com,AI
+  # 2. iCloud Private Relay，仅匹配当前引擎捕获且识别到域名的连接
+  - DOMAIN-SUFFIX,mask.icloud.com,PrivateRelay
+  - DOMAIN-SUFFIX,mask-h2.icloud.com,PrivateRelay
+  - DOMAIN-SUFFIX,mask-api.icloud.com,PrivateRelay
+  # 当前配置的历史关联域名，尚未由 Apple 官方逐一确认
+  - DOMAIN-SUFFIX,mask.apple-dns.net,PrivateRelay
+  - DOMAIN-SUFFIX,mask-api.fe.apple-dns.net,PrivateRelay
+  - DOMAIN-SUFFIX,icloud-och.com,PrivateRelay
+
+  # Apple Intelligence / PCC / Siri
+  - DOMAIN-SUFFIX,apple-relay.cloudflare.com,AppleAI
+  - DOMAIN-SUFFIX,apple-relay.fastly-edge.com,AppleAI
+  - DOMAIN-SUFFIX,cp4.cloudflare.com,AppleAI
+  - DOMAIN-SUFFIX,apple-relay.apple.com,AppleAI
+  - DOMAIN-SUFFIX,guzzoni.apple.com,AppleAI
+  - DOMAIN-SUFFIX,smoot.apple.com,AppleAI
+  # 保留原 AI 优先级；此主机与 AgAI 内的 guzzoni-apple-com.v.aaplimg.com 均待连接日志验证
   - DOMAIN-SUFFIX,apple-relay.akamaized.net,AI
-  - DOMAIN-SUFFIX,cp4.cloudflare.com,AI
-  # 3. 拦截其余 UDP 443（支持回退的服务可改用 TCP；可能影响 QUIC/实时通信，不作为广告防绕过保证）
-  - AND,((DST-PORT,443),(NETWORK,UDP)),REJECT
-  # 4. Antigravity / Google 软件更新与安装包下载剥离至 GMedia 高速组（防走 AI 自建节点导致更新极慢）
+
+  # AppleAI / PrivateRelay 优先匹配，其他 UDP 443 继续按业务分流与广告规则处理
+  # Antigravity / Google 软件更新与安装包下载剥离至 GMedia 高速组（防走 AI 自建节点导致更新极慢）
   - DOMAIN,download.antigravity.google,GMedia
   - DOMAIN,releases.antigravity.google,GMedia
   - DOMAIN-SUFFIX,dl.google.com,GMedia
   - DOMAIN-SUFFIX,gvt1.com,GMedia
   - DOMAIN-SUFFIX,gvt2.com,GMedia
   - DOMAIN-SUFFIX,storage.googleapis.com,GMedia
-  # 5. AI 核心验证、Apple Intelligence、遥测保护与全球 AI 分流 (优先于广告拦截与 Google 通用规则)
+  # Intercom 共享客服与 QX Private.list 对齐，优先于仍缓存旧 AgAI 清单的客户端
+  - DOMAIN-SUFFIX,intercom.com,🚀 手选主流
+  - DOMAIN-SUFFIX,intercom.io,🚀 手选主流
+  - DOMAIN-SUFFIX,intercomcdn.com,🚀 手选主流
+  - DOMAIN-SUFFIX,intercom-chat.com,🚀 手选主流
+  - DOMAIN-SUFFIX,intercom-sheets.com,🚀 手选主流
+  # AI.yaml 保留跨端共享条目，AppleAI / PrivateRelay 前置规则有意覆盖其中对应域名
   - RULE-SET,AgAI,AI
-  # 3. 苹果生态深度分流 (美区 Apple ID + 全家桶高速保障双策略组架构，与 Private.list 1:1 对齐)
-  # [3A] 美区专属服务与 App Store 店面控制面 -> AppleProxy (默认美国节点，置于 itunes/apps 泛域名之前精准剥离控制面)
+  # 3. 苹果生态深度分流 (美区 Apple ID + 全家桶高速保障双策略组架构)
+  # [3A] 美区专属服务与 App Store 店面控制面 -> AppleProxy (首选手选主流，置于 itunes/apps 泛域名之前精准剥离控制面)
   - DOMAIN-SUFFIX,apple.news,AppleProxy
   - DOMAIN,news-edge.apple.com,AppleProxy
   - DOMAIN,news-events.apple.com,AppleProxy
@@ -704,7 +716,7 @@ rules:
   # PayPal
   - RULE-SET,Paypal_domain,PayPal
 
-  # Spotify (音频流走 GMedia，账号与定位走 🚀 手选主流)
+  # Spotify（下列 CDN 直连，其余 Spotify 规则集走 🚀 手选主流）
   - DOMAIN-SUFFIX,spotifycdn.com,DIRECT
   - DOMAIN-SUFFIX,spotifycdn.net,DIRECT
   - DOMAIN-SUFFIX,scdn.co,DIRECT

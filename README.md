@@ -11,16 +11,16 @@
 ### 1. Clash / Mihomo / Stash 配置文件与规则集
 | 文件名 | 类型 | 对应策略组 | 说明 |
 | :--- | :--- | :--- | :--- |
-| [`clash.yaml`](./clash.yaml) | 主配置 | 全局 | Mihomo (Clash Meta) 完整主配置文件。顶部含脱敏占位节点（用于通过客户端订阅校验），支持通过本地 `Merge` 或 OpenClash 覆写注入真实节点；内置 Fake-IP、精细化 `nameserver-policy` DoH 分流、UDP 443 兼容性策略；纯域名与纯 IP 规则集全量采用 `.mrs` 二进制极速基数树（16 域名集 + 3 IP 集），减少文本规则解析开销。 |
-| [`stash.yaml`](./stash.yaml) | 主配置 | 全局 | Stash (iOS / macOS) 远程订阅专用主配置文件（与 `clash.yaml` 规则 1:1 对齐）。针对 Stash 引擎专门适配了展开版 68 项独立 `nameserver-policy` DoH 映射、`default-nameserver` 引导解析及自动检测组 `lazy: true`、600 秒检测间隔；远程规则集针对 Stash 定制为 `format: yaml` 基数树格式，条目加载情况以客户端检查结果为准，支持通过本地 `.stoverride`（`#!replace`）注入真实节点。 |
-| [`AI.yaml`](./AI.yaml) | `classical` | `AI` | 全球人工智能与核心验证分流规则集（与 `QX_AI.list` 保持 1:1 同步）。涵盖 Apple Intelligence、iCloud 专用代理、主流大模型、AI 编程 Agent 及人机验证/OAuth/特性开关域名。 |
+| [`clash.yaml`](./clash.yaml) | 主配置 | 全局 | Mihomo (Clash Meta) 完整主配置文件。顶部含脱敏占位节点（用于通过客户端订阅校验），支持通过本地 `Merge` 或 OpenClash 覆写注入真实节点；内置 Fake-IP、精细化 `nameserver-policy` DoH 分流、UDP 443 按业务规则分流；纯域名与纯 IP 规则集全量采用 `.mrs` 二进制极速基数树（16 域名集 + 3 IP 集），减少文本规则解析开销。 |
+| [`stash.yaml`](./stash.yaml) | 主配置 | 全局 | Stash (iOS / macOS) 远程订阅专用主配置文件（与 `clash.yaml` 规则 1:1 对齐）。针对 Stash 引擎专门适配了独立 `nameserver-policy` DoH 映射、`default-nameserver` 引导解析及自动检测组 `lazy: true`、600 秒检测间隔；远程规则集针对 Stash 定制为 `format: yaml` 基数树格式，条目加载情况以客户端检查结果为准，支持通过本地 `.stoverride`（`#!replace`）注入真实节点。 |
+| [`AI.yaml`](./AI.yaml) | `classical` | `AI` | 全球人工智能与核心验证分流规则集（与 `QX_AI.list` 共享主要业务条目）。涵盖 Apple Intelligence、iCloud 专用代理、主流大模型、AI 编程 Agent 及人机验证/OAuth/特性开关域名。 |
 | [`Finance.yaml`](./Finance.yaml) | `classical` | `Banking` | 国际数字银行、欧洲电子钱包、外汇券商、加密货币交易所及银行级 KYC/反欺诈组件规则集（与 `Finance.list` 保持 1:1 同步）。 |
 | [`Private_DIRECT.yaml`](./Private_DIRECT.yaml) | `classical` | `DIRECT` | 个人定制高优先级直连白名单。包含香港金融机构（BOCHK/HSBC HK/ZA Bank/AlipayHK 等）、常用云服务，以及 Windows/Office/Xbox/Switch 满速下载更新 CDN。 |
 
 ### 2. Quantumult X 规则集与脚本资源
 | 文件名 | 类型 | 对应策略组 | 说明 |
 | :--- | :--- | :--- | :--- |
-| [`QX_AI.list`](./QX_AI.list) | `filter` | `AI` | Quantumult X 全球人工智能与核心服务分流规则集（与 `AI.yaml` 1:1 同步），最高优先级置顶防截胡与防去广告误杀。 |
+| [`QX_AI.list`](./QX_AI.list) | `filter` | `AI` | Quantumult X 全球人工智能与核心服务分流规则集（与 `AI.yaml` 共享主要业务条目，存在端别差异），最高优先级置顶防截胡与防去广告误杀。 |
 | [`Private.list`](./Private.list) | `filter` | 多策略组 | Quantumult X 个人核心定制总表（高优先级 `inserted-resource`）。集成海外加密 DNS、Wi-Fi Calling、防欺诈指纹保护、Apple 双策略组精细分流、全球主流服务「控制面 + 数据面」分离规则及直连白名单（与 YAML 端共享主要业务分流目标；远程通用规则来源及顺序存在端别差异）。 |
 | [`Finance.list`](./Finance.list) | `filter` | `Banking` | Quantumult X 国际数字银行、欧洲电子钱包与加密货币分流规则集（与 `Finance.yaml` 1:1 同步）。 |
 | [`AllInOne.conf`](./AllInOne.conf) | `rewrite` | - | Quantumult X 综合重写（Rewrite）、重定向与去广告规则合集。 |
@@ -35,10 +35,12 @@
 - **控制面（主站 / 登录鉴权 / API / 地区解锁与趋势定位）** ➔ 走 `🚀 手选主流` 或专属策略组（如 `Google`），可手动固定节点以减少出口变化；下层自动测速组仍可能换节点。
 - **数据面（视频流 / 音频流 / 大图 CDN / 软件安装包与更新包）** ➔ 前置剥离至 `GMedia` 大流量媒体组（如 `googlevideo.com`、`nflxvideo.net`、`twimg.com`、`cdninstagram.com`、`fbcdn.net`、`githubusercontent.com`、`dl.google.com` 等），可使用大带宽/低倍率高速节点，避免挤占高价值或自建节点带宽。
 
-### 2. 苹果生态双轨架构（美区 Apple ID + 全家桶满速直连）
+### 2. 苹果生态分流
 将国内基础服务和海外服务分组管理；实际可用性还取决于账户、地区、设备和服务端限制：
-- **`AI` 策略组（智能与隐私隧道）**：承接 Apple Intelligence、Siri AI（`guzzoni.apple.com` / `smoot.apple.com`）、iCloud Private Relay 专用代理（`mask.icloud.com` / `apple-relay.*`，并在全局拦截 UDP 443 前特例放行 MASQUE/QUIC 握手）以及地区准入判定（`gspe1-ssl.ls.apple.com`）。
-- **`AppleProxy` 策略组（美区专属服务与商店控制面）**：精准剥离 Apple News、Apple TV+ 控制面、Apple Podcasts、Stocks 以及 App Store 搜索与探索页面接口（`amp-api-edge.apps.apple.com` / `search.itunes.apple.com` 等），默认走美国节点（Apple TV+ 纯视频流 `hls-svod.itunes.apple.com` 剥离至 `GMedia`）。
+- **`AppleAI`** 负责 Apple Intelligence、私有云计算（PCC）、Siri、听写与搜索。**`PrivateRelay`** 单独处理引擎捕获并识别的 iCloud 专用代理连接。两组首选都是 `🇺🇸 美国-3`，可独立选择出口，`🇺🇸 US+` 为自动测速备选，`DIRECT` 用于手动对照。[Apple 企业网络主机清单](https://support.apple.com/zh-cn/101555)
+- 系统是否启用 Private Relay 取决于设备、网络和 VPN 路由。确认策略命中需要连接日志，系统状态需另外查看。[Apple VPN 与隐私说明](https://www.apple.com/uk/legal/privacy/data/en/vpns/)
+- `AI.yaml` 保留跨端共享的 Apple 条目，Clash / Stash 以专用前置规则覆盖。QX 仍使用原有策略，未随之新增这两个组。未确认归属的 Apple 关联主机继续沿原 AI 路径。
+- **`AppleProxy` 策略组（美区专属服务与商店控制面）**：精准剥离 Apple News、Apple TV+ 控制面、Apple Podcasts、Stocks 以及 App Store 搜索与探索页面接口（`amp-api-edge.apps.apple.com` / `search.itunes.apple.com` 等），默认通过 `🚀 手选主流`，其首项为美国自动测速组，出口可能变化（Apple TV+ 纯视频流 `hls-svod.itunes.apple.com` 剥离至 `GMedia`）。
 - **`Apple` 策略组（高速直连保障全链路）**：涵盖 iOS/macOS 系统与固件更新、App Store 应用安装与增量升级包（`mzstatic.com` / `iosapps.itunes.apple.com`）、Apple Music 无损音频流、iCloud 全家桶（相册/云盘/备忘录/APNs 推送）及 Apple Maps 导航定位，配合国内 DNS 解析优先直连（首选项为 `DIRECT`）。
 
 ### 3. AI 全链路覆盖与防误杀保护
@@ -57,7 +59,7 @@
 
 ### 5. DNS 分流与端别差异
 
-- **Clash / Stash**：保留国内默认 DoH、Apple/CDN 国内解析，以及 AI、Private Relay、海外 geosite 的 Cloudflare/Google DoH。Clash 使用 `respect-rules`；Stash 保留 `follow-rule`、独立映射及引导 DNS。[Stash 官方 DNS 文档](https://stash.wiki/en/features/dns-server)
+- **Clash / Stash**：保留国内默认 DoH 和 Apple/CDN 国内解析，AppleAI、Private Relay、AI 和海外 geosite 使用 Cloudflare/Google DoH。AppleAI 新增 `cp4.cloudflare.com`、`guzzoni.apple.com` 和 `+.smoot.apple.com` 定向解析。Clash 使用 `respect-rules`；Stash 保留 `follow-rule`、独立映射及引导 DNS。[Stash 官方 DNS 文档](https://stash.wiki/en/features/dns-server)
 - **QX 默认解析**：使用阿里、腾讯 DoH；启用 `no-system` / `no-ipv6`。移除配置 DoH 后不会充当默认备用的普通 DNS 条目。Apple、微软和游戏 CDN 的定向 DNS 改为阿里 DoH，补齐根域名和子域名映射。
 - **QX 海外定向解析**：从 QX_AI、Finance、Private 中属于 AI / Banking 的明确域名及手选主流下的五个 Intercom 域名生成 Cloudflare DoH 映射，包括 Private Relay、Apple Intelligence 和 `.ai`。根域名与子域名分别声明，同一上游的重复父子域名会合并。
 - **边界**：QX 的关键词规则、远程通用规则及 geosite 不会被自动转换为 DNS 通配规则；未显式覆盖的域名仍用默认 DoH。代理连接通常由节点端解析目标域名，不能把本地 DNS 查询结果当作最终代理目标 IP。QX 内置 DNS 请求不保证服从普通代理规则，因此不承诺海外 DoH 自动通过节点访问；需要在实际 Wi-Fi/蜂窝网络验证可达性。[QX 官方示例](https://github.com/crossutility/Quantumult-X/blob/master/sample.conf)
@@ -73,7 +75,9 @@
 | `🏎️ 速度优选` | `url-test` | 跨地区全节点自动测速优选，筛选最低延迟可用节点。 |
 | `🚑 故障转移` | `fallback` | 按预设地区优先级顺序进行可用性健康检查与自动容灾切换。 |
 | `🎯 手选节点` | `select` | 手动选择冷门地区或特定单节点（如英国 Wi-Fi Calling 等特定需求）。 |
-| `AI` | `select` | **人工智能与 Apple Intelligence 专属组**。建议固定纯净美国自建节点或原生 IP 节点。 |
+| `AI` | `select` | ChatGPT、Gemini 等 AI 服务与关联验证域名。 |
+| `AppleAI` | `select` | Apple Intelligence、PCC、Siri 与搜索，首选 `🇺🇸 美国-3`。 |
+| `PrivateRelay` | `select` | iCloud Private Relay 相关连接，首选 `🇺🇸 美国-3`。 |
 | `GMedia` | `select` | **大流量流媒体与 CDN 数据面组**。承接视频流、音频流、社媒大图与软件安装包下载。 |
 | `Banking` | `select` | 首选 CH+；组内直接列出三个自建瑞士节点和 KKK 的欧洲节点。 |
 | `PayPal` | `select` | 首选 US+；组内直接列出三个自建美国节点和 KKK 的美、德、英、日、港、菲节点。 |
@@ -224,7 +228,7 @@
 
 私人完整配置为工作区根目录的 `QX_Pro.conf`，不发布到本仓库。Intercom 规则直接引用现有的 `🚀 手选主流`，无需新增策略组。
 
-三个客户端更新后，请检查保存的策略选择：`Apple → DIRECT`、`Banking → CH+`、`PayPal → US+`。新的首项只定义初始选择，不能覆盖客户端已经保存的手动选择。
+Clash / Stash 更新后请检查保存的策略选择，尤其是 `AppleAI`、`PrivateRelay` 和 `Apple`。首项只定义初始选择，客户端可能恢复先前保存的手动选择。
 
 
 在 Quantumult X 配置文件的 `[filter_remote]` 模块顶部按如下顺序引入本仓库的三大核心分流规则（开启 `inserted-resource=true` 确保优先级高于去广告与通用规则）：
@@ -251,36 +255,25 @@ https://raw.githubusercontent.com/Ag-Rock/proxy-conf/main/AllInOne.conf, tag=All
 ## 🔄 维护规范
 
 - `Clash_Pro.yaml` 与 `QX_Pro.conf` 是工作区根目录的私人配置，只保存在本地，不纳入公开仓库。
-- `Clash_Pro.yaml` 保留真实节点与订阅；全局配置、DNS、策略组、主规则和规则提供者定义与公开 `clash.yaml` 同步，作为完整策略定义备份。远程规则集内容仍由对应文件维护，并非离线内嵌快照。
+- `Clash_Pro.yaml` 保留真实节点与订阅；作为本地完整配置备份，更新状态与公开 `clash.yaml` 分开维护。远程规则集内容仍由对应文件维护，并非离线内嵌快照。
 - `stash.yaml` 的主规则和业务策略与 Clash 同步，但保留 flow-style YAML、独立 DNS 映射、`follow-rule`、引导 DNS、600 秒 lazy 检测，以及 YAML 格式规则提供者；不直接用 Mihomo 配置覆盖它。
-- AI.yaml / QX_AI.list、Finance.yaml / Finance.list 保持域名与关键词条目同步；业务规则变动时同步 Private.list 和两个 YAML 主文件，并重新生成 QX DNS。
+- 修改共享业务规则时核对 `AI.yaml` / `QX_AI.list`、`Finance.yaml` / `Finance.list` 和 `Private.list` 的策略与优先级。Intercom 已由 QX 的 `Private.list` 路由到手选主流，两份 YAML 主配置有相同的前置规则，可覆盖尚未刷新的 AgAI 缓存。
 - Mihomo 的纯域名/IP 提供者保留 MRS；Stash 保留 domain/ipcidr + YAML；复合自定义规则保留 classical + YAML。
-- Spotify CDN 已统一为 DIRECT，包括私人 Clash 备份。三端仍有明确差异：QX 默认 GMedia 为速度优选，Clash/Stash 为手选主流；QX 未启用全局 UDP 443 丢弃，Clash/Stash 保留现有拦截与 Private Relay 例外。
-- 更新顺序：先更新远程规则，使 Intercom 指向已有的手选主流，再更新客户端配置以移除旧的 Support 组；避免旧规则仍引用已删除的策略组。
+- Spotify 的显式 CDN 规则走 `DIRECT`，其余 Spotify 规则集走手选主流。QX 与 Clash / Stash 保留各自的 GMedia 默认策略。
 
-在工作区根目录运行（需要 Python 3 和 Ruby/Psych；公开仓库单独克隆时须自行提供两个私人配置）：
+### UDP 443
+
+Clash / Stash 的 UDP 443 由 AppleAI、PrivateRelay、AI、媒体、广告、国内直连和通用兜底规则依次分类。已识别的广告流量仍按广告规则拒绝。UDP 转发取决于节点能力及 TUN、透明代理或 Network Extension 是否捕获流量。QX 保持自身的 UDP 配置。
+
+### 静态验证与上线检查
+
+在公开仓库根目录运行（需要 Ruby / Psych）：
 
 ```sh
-python3 proxy-conf/scripts/sync_qx_dns.py
-python3 proxy-conf/scripts/sync_qx_dns.py --check
-python3 proxy-conf/scripts/validate_configs.py
-git -C proxy-conf diff --check
+ruby scripts/validate_configs.rb
+git diff --check
 ```
 
-### 2026-11-01 验证结果
+本次实测每端有 221 条主规则、26 个策略组、24 个规则提供者。脚本检查主规则同序、组引用、循环、DNS 定向映射和本地域名分流。默认使用最小广告样例，传入下载的 `AdvertisingLite.yaml` 可改用实际条目。Mihomo v1.19.32 已在临时目录通过 `-t`，并以本地模拟上游验证 DNS 策略选择。Stash 原生导入、OpenClash 生效配置、iPhone 系统功能和真实节点 UDP 转发仍需实机验证。
 
-- 私人 `Clash_Pro.yaml` 与公开 `clash.yaml` 均通过本机 Mihomo Meta v1.19.32 的 `-t` 原生配置检查；使用临时测试目录，没有切换正在运行的配置。
-- 三份 YAML 通过解析、24 个策略组的默认值/引用/循环检查、216 条主规则同步检查、手选节点的地区正则样例检查。
-- AI / Finance 两种规则格式一致；Intercom 归属唯一；11 个本地域名分流样例通过。
-- QX 通过策略引用、880 条定向 DoH 模式、国内/海外 DNS 样例和生成区块一致性检查。该检查是静态模型，不等同于 QX 原生解析器。
-- 阿里、腾讯、Cloudflare 三个 DoH 端点在当前电脑网络绕过环境 HTTP 代理查询 `example.com`，均返回合法 DNS 报文（RCODE 0，含 A 记录）；不代表其他网络也可达。
-- 公开配置和文档未包含私人节点 UUID、订阅 URL 或 P12 内容；差异格式检查通过。
-- **尚未完成的实机验证**：Stash/QX 原生导入、手机 Wi-Fi/蜂窝网络、真实节点可达性、各账户登录/支付、Private Relay 与流媒体播放。Stash CLI 只能控制已运行内核，QX 非切换式检查界面本次未能打开；未将这些项目标为通过。
-
-### UDP 443 与后续优化建议
-
-1. 本次保留 UDP 443 行为，只修正“能防广告绕过”的过度表述。若没有 QUIC 故障，后续可评估移除全局拦截；如某服务确实异常，优先缩小到该服务的 UDP 443，避免影响其他 QUIC/实时通信。先在单台设备比较播放、下载和通话，再扩展部署。
-2. QX 的 `udp_drop_list=443` 是全局端口开关，不能照搬 YAML 的逐域名例外；Private Relay 场景继续保持注释。节点不支持 UDP 时仍受 `fallback_udp_policy=reject` 限制。
-3. 金融会话期间优先选择具体节点，不使用跨地区自动切换；Intercom 使用手选主流，不能自动跟随每个业务的不同出口。
-4. 后续按连接日志逐步收窄共享基础设施域名（例如 storage.googleapis.com、auth0.com、sentry.io），避免把其他应用一并分流；控制面与媒体出口分离造成服务异常时，先让该服务两部分使用同一出口复测。
-5. 私人文件继续本地保存，无需因本次检查更换凭证。Mihomo 控制接口仍使用现有设置；桌面无需局域网控制时建议改为回环监听，路由器需要远程控制时应结合访问限制和强密码。
+控制器配置保留公开占位值。部署时需核对实际监听范围、路由器防火墙、仪表盘依赖及本地私有密钥覆写，控制接口安全整改待完成。
