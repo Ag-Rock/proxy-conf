@@ -9,34 +9,40 @@
 ## 📁 仓库文件说明
 
 ### 1. Clash / Mihomo / Stash 配置文件与规则集
-| 文件名 | 类型 | 对应策略组 | 说明 |
-| :--- | :--- | :--- | :--- |
-| [`clash.yaml`](./clash.yaml) | 主配置 | 全局 | Mihomo (Clash Meta) 完整主配置文件。顶部含脱敏占位节点（用于通过客户端订阅校验），支持通过本地 `Merge` 或 OpenClash 覆写注入真实节点；内置 Fake-IP、精细化 `nameserver-policy` DoH 分流、UDP 443 按业务规则分流；纯域名与纯 IP 规则集全量采用 `.mrs` 二进制极速基数树（16 域名集 + 3 IP 集），减少文本规则解析开销。 |
-| [`stash.yaml`](./stash.yaml) | 主配置 | 全局 | Stash (iOS / macOS) 远程订阅专用主配置文件（与 `clash.yaml` 规则 1:1 对齐）。针对 Stash 引擎专门适配了独立 `nameserver-policy` DoH 映射、`default-nameserver` 引导解析及自动检测组 `lazy: true`、600 秒检测间隔；远程规则集针对 Stash 定制为 `format: yaml` 基数树格式，条目加载情况以客户端检查结果为准，支持通过本地 `.stoverride`（`#!replace`）注入真实节点。 |
-| [`AI.yaml`](./AI.yaml) | `classical` | `AI` | 全球人工智能与核心验证分流规则集（与 `QX_AI.list` 共享主要业务条目）。涵盖 Apple Intelligence、iCloud 专用代理、主流大模型、AI 编程 Agent 及人机验证/OAuth/特性开关域名。 |
-| [`Finance.yaml`](./Finance.yaml) | `classical` | `Banking` | 国际数字银行、欧洲电子钱包、外汇券商、加密货币交易所及银行级 KYC/反欺诈组件规则集（与 `Finance.list` 保持 1:1 同步）。 |
-| [`Private_DIRECT.yaml`](./Private_DIRECT.yaml) | `classical` | `DIRECT` | 个人定制高优先级直连白名单。包含香港金融机构（BOCHK/HSBC HK/ZA Bank/AlipayHK 等）、常用云服务，以及 Windows/Office/Xbox/Switch 满速下载更新 CDN。 |
+
+| 文件名                                         | 类型        | 对应策略组 | 说明                                                                                                                                                                                                                                                                                                                                                              |
+| :--------------------------------------------- | :---------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`clash.yaml`](./clash.yaml)                   | 主配置      | 全局       | Mihomo (Clash Meta) 完整主配置文件。顶部含脱敏占位节点（用于通过客户端订阅校验），支持通过本地 `Merge` 或 OpenClash 覆写注入真实节点；内置 Fake-IP、精细化 `nameserver-policy` DoH 分流、UDP 443 按业务规则分流；纯域名与纯 IP 规则集全量采用 `.mrs` 二进制极速基数树（16 域名集 + 3 IP 集），减少文本规则解析开销。                                              |
+| [`stash.yaml`](./stash.yaml)                   | 主配置      | 全局       | Stash (iOS / macOS) 远程订阅专用主配置文件（与 `clash.yaml` 规则 1:1 对齐）。针对 Stash 引擎专门适配了独立 `nameserver-policy` DoH 映射、`default-nameserver` 引导解析及自动检测组 `lazy: true`、600 秒检测间隔；远程规则集针对 Stash 定制为 `format: yaml` 基数树格式，条目加载情况以客户端检查结果为准，支持通过本地 `.stoverride`（`#!replace`）注入真实节点。 |
+| [`AI.yaml`](./AI.yaml)                         | `classical` | `AI`       | 全球人工智能与核心验证分流规则集（与 `QX_AI.list` 共享主要业务条目）。涵盖 Apple Intelligence、iCloud 专用代理、主流大模型、AI 编程 Agent 及人机验证/OAuth/特性开关域名。                                                                                                                                                                                         |
+| [`Finance.yaml`](./Finance.yaml)               | `classical` | `Banking`  | 国际数字银行、欧洲电子钱包、外汇券商、加密货币交易所及银行级 KYC/反欺诈组件规则集（与 `Finance.list` 保持 1:1 同步）。                                                                                                                                                                                                                                            |
+| [`Private_DIRECT.yaml`](./Private_DIRECT.yaml) | `classical` | `DIRECT`   | 个人定制高优先级直连白名单。包含香港金融机构（BOCHK/HSBC HK/ZA Bank/AlipayHK 等）、常用云服务，以及 Windows/Office/Xbox/Switch 满速下载更新 CDN。                                                                                                                                                                                                                 |
 
 ### 2. Quantumult X 规则集与脚本资源
-| 文件名 | 类型 | 对应策略组 | 说明 |
-| :--- | :--- | :--- | :--- |
-| [`QX_AI.list`](./QX_AI.list) | `filter` | `AI` | Quantumult X 全球人工智能与核心服务分流规则集（与 `AI.yaml` 共享主要业务条目，存在端别差异），最高优先级置顶防截胡与防去广告误杀。 |
-| [`Private.list`](./Private.list) | `filter` | 多策略组 | Quantumult X 个人核心定制总表（高优先级 `inserted-resource`）。集成海外加密 DNS、Wi-Fi Calling、防欺诈指纹保护、Apple 双策略组精细分流、全球主流服务「控制面 + 数据面」分离规则及直连白名单（与 YAML 端共享主要业务分流目标；远程通用规则来源及顺序存在端别差异）。 |
-| [`Finance.list`](./Finance.list) | `filter` | `Banking` | Quantumult X 国际数字银行、欧洲电子钱包与加密货币分流规则集（与 `Finance.yaml` 1:1 同步）。 |
-| [`AllInOne.conf`](./AllInOne.conf) | `rewrite` | - | Quantumult X 综合重写（Rewrite）、重定向与去广告规则合集。 |
-| [`resource-parser.js`](./resource-parser.js) | `script` | - | 资源解析器脚本（©Shawn），支持多格式节点订阅解析、筛选重命名及跨平台分流/重写规则转换。 |
+
+| 文件名                                       | 类型      | 对应策略组 | 说明                                                                                                                                                                                                                                                                |
+| :------------------------------------------- | :-------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`QX_AI.list`](./QX_AI.list)                 | `filter`  | `AI`       | Quantumult X 全球人工智能与核心服务分流规则集（与 `AI.yaml` 共享主要业务条目，存在端别差异），最高优先级置顶防截胡与防去广告误杀。                                                                                                                                  |
+| [`Private.list`](./Private.list)             | `filter`  | 多策略组   | Quantumult X 个人核心定制总表（高优先级 `inserted-resource`）。集成海外加密 DNS、Wi-Fi Calling、防欺诈指纹保护、Apple 双策略组精细分流、全球主流服务「控制面 + 数据面」分离规则及直连白名单（与 YAML 端共享主要业务分流目标；远程通用规则来源及顺序存在端别差异）。 |
+| [`Finance.list`](./Finance.list)             | `filter`  | `Banking`  | Quantumult X 国际数字银行、欧洲电子钱包与加密货币分流规则集（与 `Finance.yaml` 1:1 同步）。                                                                                                                                                                         |
+| [`AllInOne.conf`](./AllInOne.conf)           | `rewrite` | -          | Quantumult X 综合重写（Rewrite）、重定向与去广告规则合集。                                                                                                                                                                                                          |
+| [`resource-parser.js`](./resource-parser.js) | `script`  | -          | 资源解析器脚本（©Shawn），支持多格式节点订阅解析、筛选重命名及跨平台分流/重写规则转换。                                                                                                                                                                             |
 
 ---
 
 ## 🏗️ 核心分流架构设计
 
 ### 1. 控制面与数据面分离（锁定位 + 省流量 + 跑满速）
+
 针对 YouTube、Netflix、Telegram、GitHub、Google、X (Twitter)、Instagram、Facebook、Reddit、Discord、TikTok、Amazon、Adobe 等全球高频服务，采用**控制面与数据面剥离**设计：
+
 - **控制面（主站 / 登录鉴权 / API / 地区解锁与趋势定位）** ➔ 走 `🚀 手选主流` 或专属策略组（如 `Google`），可手动固定节点以减少出口变化；下层自动测速组仍可能换节点。
 - **数据面（视频流 / 音频流 / 大图 CDN / 软件安装包与更新包）** ➔ 前置剥离至 `GMedia` 大流量媒体组（如 `googlevideo.com`、`nflxvideo.net`、`twimg.com`、`cdninstagram.com`、`fbcdn.net`、`githubusercontent.com`、`dl.google.com` 等），可使用大带宽/低倍率高速节点，避免挤占高价值或自建节点带宽。
 
 ### 2. 苹果生态分流
+
 将国内基础服务和海外服务分组管理；实际可用性还取决于账户、地区、设备和服务端限制：
+
 - **`AppleAI`** 负责 Apple Intelligence、私有云计算（PCC）、Siri、听写与搜索。**`PrivateRelay`** 单独处理引擎捕获并识别的 iCloud 专用代理连接。两组首选都是 `🇺🇸 美国-3`，可独立选择出口，`🇺🇸 US+` 为自动测速备选，`DIRECT` 用于手动对照。[Apple 企业网络主机清单](https://support.apple.com/zh-cn/101555)
 - 系统是否启用 Private Relay 取决于设备、网络和 VPN 路由。确认策略命中需要连接日志，系统状态需另外查看。[Apple VPN 与隐私说明](https://www.apple.com/uk/legal/privacy/data/en/vpns/)
 - `AI.yaml` 保留跨端共享的 Apple 条目，Clash / Stash 以专用前置规则覆盖。QX 仍使用原有策略，未随之新增这两个组。未确认归属的 Apple 关联主机继续沿原 AI 路径。
@@ -44,7 +50,9 @@
 - **`Apple` 策略组（高速直连保障全链路）**：涵盖 iOS/macOS 系统与固件更新、App Store 应用安装与增量升级包（`mzstatic.com` / `iosapps.itunes.apple.com`）、Apple Music 无损音频流、iCloud 全家桶（相册/云盘/备忘录/APNs 推送）及 Apple Maps 导航定位，配合国内 DNS 解析优先直连（首选项为 `DIRECT`）。
 
 ### 3. AI 全链路覆盖与防误杀保护
+
 `AI.yaml` 与 `QX_AI.list` 均置于**广告拦截（`REJECT`）与通用规则之前**，解决 AI 服务常见的“登录死循环”、“人机验证失败”与“地区不支持”问题：
+
 - **底层鉴权与风控白名单**：完整收录 Cloudflare Turnstile / Arkose Labs / hCaptcha / reCAPTCHA 人机验证，Auth0 / Okta / Clerk / WorkOS / Supabase 等 OAuth 统一身份认证组件，以及 Statsig / LaunchDarkly / Datadog / Sentry 等特性开关（Feature Flags）与核心遥测域名，防止被去广告规则误杀导致前端默认判定“所在地区未开放”。
 - **全品类 AI 覆盖**：涵盖 OpenAI (ChatGPT/Sora/LiveKit)、Google AI (Gemini/NotebookLM/AI Studio/DeepMind)、Anthropic (Claude)、xAI (Grok)、AI 编程与软件工程 Agent（Cursor / Windsurf / Copilot / Antigravity / Trae / Devin / Lovable / Bolt / v0 等）、AI 搜索与学术（Perplexity / Genspark / Felo / Consensus）、多模态生成（Midjourney / Runway / Luma / Suno / ElevenLabs）、推理算力平台（OpenRouter / Groq / Hugging Face）及全球 `.ai` 顶级域名兜底。
 
@@ -69,28 +77,28 @@
 
 ## 🎯 策略组架构一览
 
-| 策略组名称 | 类型 | 核心用途说明 |
-| :--- | :--- | :--- |
-| `🚀 手选主流` | `select` | **核心主策略组**。聚合各地区自动测速组与自建节点组，供主流海外控制面与定位服务调用（建议默认选美国）。 |
-| `🏎️ 速度优选` | `url-test` | 跨地区全节点自动测速优选，筛选最低延迟可用节点。 |
-| `🚑 故障转移` | `fallback` | 按预设地区优先级顺序进行可用性健康检查与自动容灾切换。 |
-| `🎯 手选节点` | `select` | 手动选择冷门地区或特定单节点（如英国 Wi-Fi Calling 等特定需求）。 |
-| `AI` | `select` | ChatGPT、Gemini 等 AI 服务与关联验证域名。 |
-| `AppleAI` | `select` | Apple Intelligence、PCC、Siri 与搜索，首选 `🇺🇸 美国-3`。 |
-| `PrivateRelay` | `select` | iCloud Private Relay 相关连接，首选 `🇺🇸 美国-3`。 |
-| `GMedia` | `select` | **大流量流媒体与 CDN 数据面组**。承接视频流、音频流、社媒大图与软件安装包下载。 |
-| `Banking` | `select` | 首选 CH+；组内直接列出三个自建瑞士节点和 KKK 的欧洲节点。 |
-| `PayPal` | `select` | 首选 US+；组内直接列出三个自建美国节点和 KKK 的美、德、英、日、港、菲节点。 |
-| `AppleProxy` | `select` | Apple 美区专属服务（News / TV+ 控制面 / 美区商店搜索）策略组。 |
-| `Apple` | `select` | Apple 国内高速保障服务（系统更新 / App 下载 / iCloud / Music）策略组，首选项为 `DIRECT`。 |
-| `Google` | `select` | Google 搜索、YouTube 主站控制面与 API 服务策略组。 |
-| `Microsoft` | `select` | 微软国际服务与账户策略组（系统更新与 Office CDN 已前置直连）。 |
-| `OneDrive` | `select` | OneDrive 云盘同步专属策略组。 |
-| `Game` | `select` | 任天堂 Switch 与 Xbox 联机大厅策略组（游戏本体下载 CDN 已前置直连）。 |
-| `Global` | `select` | 其余未命中细分规则的海外流量兜底策略组。 |
-| `🇺🇸 US+` / `🇨🇭 CH+` | `url-test` | 美国 / 瑞士自建节点自动测速组（可能切换节点）。 |
-| `🇺🇸 US` / `🇭🇰 HK` / `🇯🇵 JP` / `🇼🇸 TW` / `🇸🇬 SG` / `🇰🇷 KR` | `url-test` | 机场订阅对应国家/地区正则筛选自动测速组（自动剔除免费/试用/失联/高倍率节点）。 |
-| `🏴‍☠️ CF` | `url-test` | 优选备份节点自动测速组。 |
+| 策略组名称                                                | 类型       | 核心用途说明                                                                                           |
+| :-------------------------------------------------------- | :--------- | :----------------------------------------------------------------------------------------------------- |
+| `🚀 手选主流`                                             | `select`   | **核心主策略组**。聚合各地区自动测速组与自建节点组，供主流海外控制面与定位服务调用（建议默认选美国）。 |
+| `🏎️ 速度优选`                                             | `url-test` | 跨地区全节点自动测速优选，筛选最低延迟可用节点。                                                       |
+| `🚑 故障转移`                                             | `fallback` | 按预设地区优先级顺序进行可用性健康检查与自动容灾切换。                                                 |
+| `🎯 手选节点`                                             | `select`   | 手动选择冷门地区或特定单节点（如英国 Wi-Fi Calling 等特定需求）。                                      |
+| `AI`                                                      | `select`   | ChatGPT、Gemini 等 AI 服务与关联验证域名。                                                             |
+| `AppleAI`                                                 | `select`   | Apple Intelligence、PCC、Siri 与搜索，首选 `🇺🇸 美国-3`。                                               |
+| `PrivateRelay`                                            | `select`   | iCloud Private Relay 相关连接。                                                                        |
+| `GMedia`                                                  | `select`   | **大流量流媒体与 CDN 数据面组**。承接视频流、音频流、社媒大图与软件安装包下载。                        |
+| `Banking`                                                 | `select`   | 首选 CH+；组内直接列出三个自建瑞士节点和 KKK 的欧洲节点。                                              |
+| `PayPal`                                                  | `select`   | 首选 US+；组内直接列出三个自建美国节点和 KKK 的美、德、英、日、港、菲节点。                            |
+| `AppleProxy`                                              | `select`   | Apple 美区专属服务（News / TV+ 控制面 / 美区商店搜索）策略组。                                         |
+| `Apple`                                                   | `select`   | Apple 国内高速保障服务（系统更新 / App 下载 / iCloud / Music）策略组，首选项为 `DIRECT`。              |
+| `Google`                                                  | `select`   | Google 搜索、YouTube 主站控制面与 API 服务策略组。                                                     |
+| `Microsoft`                                               | `select`   | 微软国际服务与账户策略组（系统更新与 Office CDN 已前置直连）。                                         |
+| `OneDrive`                                                | `select`   | OneDrive 云盘同步专属策略组。                                                                          |
+| `Game`                                                    | `select`   | 任天堂 Switch 与 Xbox 联机大厅策略组（游戏本体下载 CDN 已前置直连）。                                  |
+| `Global`                                                  | `select`   | 其余未命中细分规则的海外流量兜底策略组。                                                               |
+| `🇺🇸 US+` / `🇨🇭 CH+`                                       | `url-test` | 美国 / 瑞士自建节点自动测速组（可能切换节点）。                                                        |
+| `🇺🇸 US` / `🇭🇰 HK` / `🇯🇵 JP` / `🇼🇸 TW` / `🇸🇬 SG` / `🇰🇷 KR` | `url-test` | 机场订阅对应国家/地区正则筛选自动测速组（自动剔除免费/试用/失联/高倍率节点）。                         |
+| `🏴‍☠️ CF`                                                   | `url-test` | 优选备份节点自动测速组。                                                                               |
 
 ---
 
@@ -100,12 +108,14 @@
 
 1. **导入订阅配置**
    在客户端新建远程配置（Profiles），填入本仓库 `clash.yaml` 的 Raw 链接：
+
    ```text
    https://raw.githubusercontent.com/Ag-Rock/proxy-conf/main/clash.yaml
    ```
 
 2. **配置全局 Merge 覆写（注入真实节点）**
    由于公开仓库中的 `clash.yaml` 顶部使用的是 `127.0.0.1` 脱敏占位节点，请在客户端的 **「全局扩展覆写配置 (Merge)」** 中填入你的真实订阅与自建节点（会自动覆盖顶部的占位配置）：
+
    ```yaml
    # Clash Verge Merge 覆写示例
    proxy-providers:
@@ -133,12 +143,76 @@
        proxy: 🚀 手选主流
 
    proxies:
-     - { name: 🇺🇸 美国-1, server: your.us1.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, client-fingerprint: chrome, network: ws, ws-opts: { path: /us, headers: { Host: your.us1.domain } } }
-     - { name: 🇺🇸 美国-2, server: your.us2.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, client-fingerprint: chrome, network: ws, ws-opts: { path: /us, headers: { Host: your.us2.domain } } }
-     - { name: 🇺🇸 美国-3, server: your.us3.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, client-fingerprint: chrome, network: ws, ws-opts: { path: /us, headers: { Host: your.us3.domain } } }
-     - { name: 🇨🇭 瑞士-1, server: your.ch1.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, client-fingerprint: chrome, network: ws, ws-opts: { path: /ch, headers: { Host: your.ch1.domain } } }
-     - { name: 🇨🇭 瑞士-2, server: your.ch2.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, client-fingerprint: chrome, network: ws, ws-opts: { path: /ch, headers: { Host: your.ch2.domain } } }
-     - { name: 🇨🇭 瑞士-3, server: your.ch3.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, client-fingerprint: chrome, network: ws, ws-opts: { path: /ch, headers: { Host: your.ch3.domain } } }
+     - {
+         name: 🇺🇸 美国-1,
+         server: your.us1.domain,
+         port: 443,
+         type: vmess,
+         uuid: your-uuid,
+         alterId: 0,
+         cipher: auto,
+         udp: true,
+         tls: true,
+         client-fingerprint: chrome,
+         network: ws,
+         ws-opts: { path: /us, headers: { Host: your.us1.domain } },
+       }
+     - {
+         name: 🇺🇸 美国-2,
+         server: your.us2.domain,
+         port: 443,
+         type: vmess,
+         uuid: your-uuid,
+         alterId: 0,
+         cipher: auto,
+         udp: true,
+         tls: true,
+         client-fingerprint: chrome,
+         network: ws,
+         ws-opts: { path: /us, headers: { Host: your.us2.domain } },
+       }
+     - {
+         name: 🇺🇸 美国-3,
+         server: your.us3.domain,
+         port: 443,
+         type: vmess,
+         uuid: your-uuid,
+         alterId: 0,
+         cipher: auto,
+         udp: true,
+         tls: true,
+         client-fingerprint: chrome,
+         network: ws,
+         ws-opts: { path: /us, headers: { Host: your.us3.domain } },
+       }
+     - {
+         name: 🇨🇭 瑞士-1,
+         server: your.ch1.domain,
+         port: 443,
+         type: vmess,
+         uuid: your-uuid,
+         alterId: 0,
+         cipher: auto,
+         udp: true,
+         tls: true,
+         client-fingerprint: chrome,
+         network: ws,
+         ws-opts: { path: /ch, headers: { Host: your.ch1.domain } },
+       }
+     - {
+         name: 🇨🇭 瑞士-2,
+         server: your.ch2.domain,
+         port: 443,
+         type: vmess,
+         uuid: your-uuid,
+         alterId: 0,
+         cipher: auto,
+         udp: true,
+         tls: true,
+         client-fingerprint: chrome,
+         network: ws,
+         ws-opts: { path: /ch, headers: { Host: your.ch2.domain } },
+       }
    ```
 
 ---
@@ -170,6 +244,7 @@
 
 2. **配置本地 `.stoverride` 覆写（注入真实节点）**：
    - 在 Stash 的 `覆写 (Override)` 中新建本地覆写（或放入 `iCloud Drive/Stash/Overrides/local_nodes.stoverride`）并启用，通过 `#!replace` 完整替换 `stash.yaml` 顶部的 `127.0.0.1` 脱敏占位节点：
+
      ```yaml
      name: 私人节点注入 (Local Nodes)
      desc: 替换 GitHub 公开 stash.yaml 中的 127.0.0.1 占位节点与机场订阅，敏感信息仅保存在本地
@@ -211,12 +286,71 @@
            timeout: 10000
 
      proxies: #!replace
-       - { name: 🇺🇸 美国-1, server: your.us1.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, network: ws, ws-opts: { path: /us, headers: { Host: your.us1.domain } } }
-       - { name: 🇺🇸 美国-2, server: your.us2.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, network: ws, ws-opts: { path: /us, headers: { Host: your.us2.domain } } }
-       - { name: 🇺🇸 美国-3, server: your.us3.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, network: ws, ws-opts: { path: /us, headers: { Host: your.us3.domain } } }
-       - { name: 🇨🇭 瑞士-1, server: your.ch1.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, network: ws, ws-opts: { path: /ch, headers: { Host: your.ch1.domain } } }
-       - { name: 🇨🇭 瑞士-2, server: your.ch2.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, network: ws, ws-opts: { path: /ch, headers: { Host: your.ch2.domain } } }
-       - { name: 🇨🇭 瑞士-3, server: your.ch3.domain, port: 443, type: vmess, uuid: your-uuid, alterId: 0, cipher: auto, udp: true, tls: true, network: ws, ws-opts: { path: /ch, headers: { Host: your.ch3.domain } } }
+       - {
+           name: 🇺🇸 美国-1,
+           server: your.us1.domain,
+           port: 443,
+           type: vmess,
+           uuid: your-uuid,
+           alterId: 0,
+           cipher: auto,
+           udp: true,
+           tls: true,
+           network: ws,
+           ws-opts: { path: /us, headers: { Host: your.us1.domain } },
+         }
+       - {
+           name: 🇺🇸 美国-2,
+           server: your.us2.domain,
+           port: 443,
+           type: vmess,
+           uuid: your-uuid,
+           alterId: 0,
+           cipher: auto,
+           udp: true,
+           tls: true,
+           network: ws,
+           ws-opts: { path: /us, headers: { Host: your.us2.domain } },
+         }
+       - {
+           name: 🇺🇸 美国-3,
+           server: your.us3.domain,
+           port: 443,
+           type: vmess,
+           uuid: your-uuid,
+           alterId: 0,
+           cipher: auto,
+           udp: true,
+           tls: true,
+           network: ws,
+           ws-opts: { path: /us, headers: { Host: your.us3.domain } },
+         }
+       - {
+           name: 🇨🇭 瑞士-1,
+           server: your.ch1.domain,
+           port: 443,
+           type: vmess,
+           uuid: your-uuid,
+           alterId: 0,
+           cipher: auto,
+           udp: true,
+           tls: true,
+           network: ws,
+           ws-opts: { path: /ch, headers: { Host: your.ch1.domain } },
+         }
+       - {
+           name: 🇨🇭 瑞士-2,
+           server: your.ch2.domain,
+           port: 443,
+           type: vmess,
+           uuid: your-uuid,
+           alterId: 0,
+           cipher: auto,
+           udp: true,
+           tls: true,
+           network: ws,
+           ws-opts: { path: /ch, headers: { Host: your.ch2.domain } },
+         }
      ```
 
    - **验证生效**：
@@ -229,7 +363,6 @@
 私人完整配置为工作区根目录的 `QX_Pro.conf`，不发布到本仓库。Intercom 规则直接引用现有的 `🚀 手选主流`，无需新增策略组。
 
 Clash / Stash 更新后请检查保存的策略选择，尤其是 `AppleAI`、`PrivateRelay` 和 `Apple`。首项只定义初始选择，客户端可能恢复先前保存的手动选择。
-
 
 在 Quantumult X 配置文件的 `[filter_remote]` 模块顶部按如下顺序引入本仓库的三大核心分流规则（开启 `inserted-resource=true` 确保优先级高于去广告与通用规则）：
 
@@ -245,6 +378,7 @@ https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Quant
 ```
 
 重写模块可在 `[rewrite_remote]` 中引用：
+
 ```ini
 [rewrite_remote]
 https://raw.githubusercontent.com/Ag-Rock/proxy-conf/main/AllInOne.conf, tag=AllInOne, update-interval=345600, opt-parser=false, enabled=true

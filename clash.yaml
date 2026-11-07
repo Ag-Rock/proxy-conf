@@ -49,15 +49,6 @@ proxies:
       alterId: 0,
       cipher: auto,
     }
-  - {
-      name: 🇨🇭 瑞士-3,
-      server: 127.0.0.1,
-      port: 443,
-      type: vmess,
-      uuid: 00000000-0000-0000-0000-000000000000,
-      alterId: 0,
-      cipher: auto,
-    }
 # ===== 全局配置 =====
 port: 7890
 socks-port: 7891
@@ -280,8 +271,7 @@ proxy-groups:
     }
   - {
       name: PrivateRelay,
-      type: select,
-      proxies: [🇺🇸 美国-3, 🚀 手选主流, 🇺🇸 US+, 🇨🇭 CH+, 🏴‍☠️ CF, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR, 🏎️ 速度优选, 🚑 故障转移, 🎯 手选节点],
+      <<: *pr,
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Apple.png",
     }
   - {
@@ -291,8 +281,7 @@ proxy-groups:
     }
   - {
       name: Apple,
-      type: select,
-      proxies: [DIRECT, 🚀 手选主流, 🇺🇸 US+, 🇨🇭 CH+, 🏴‍☠️ CF, 🇺🇸 US, 🇭🇰 HK, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR, 🏎️ 速度优选, 🚑 故障转移, 🎯 手选节点],
+      <<: *pr,
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Apple.png",
     }
   - {
@@ -328,7 +317,7 @@ proxy-groups:
       type: url-test,
       tolerance: 50,
       interval: 300,
-      proxies: [🇨🇭 瑞士-1, 🇨🇭 瑞士-2, 🇨🇭 瑞士-3],
+      proxies: [🇨🇭 瑞士-1, 🇨🇭 瑞士-2],
     }
   - {
       name: 🇺🇸 US,
