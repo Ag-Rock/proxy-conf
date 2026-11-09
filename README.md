@@ -186,6 +186,20 @@
          ws-opts: { path: /us, headers: { Host: your.us3.domain } },
        }
      - {
+         name: 🇺🇸 美国-4,
+         server: your.us4.domain,
+         port: 443,
+         type: vmess,
+         uuid: your-uuid,
+         alterId: 0,
+         cipher: auto,
+         udp: true,
+         tls: true,
+         client-fingerprint: chrome,
+         network: ws,
+         ws-opts: { path: /us, headers: { Host: your.us4.domain } },
+       }
+     - {
          name: 🇨🇭 瑞士-1,
          server: your.ch1.domain,
          port: 443,
@@ -324,6 +338,19 @@
            tls: true,
            network: ws,
            ws-opts: { path: /us, headers: { Host: your.us3.domain } },
+         }
+       - {
+           name: 🇺🇸 美国-4,
+           server: your.us3.domain,
+           port: 443,
+           type: vmess,
+           uuid: your-uuid,
+           alterId: 0,
+           cipher: auto,
+           udp: true,
+           tls: true,
+           network: ws,
+           ws-opts: { path: /us, headers: { Host: your.us4.domain } },
          }
        - {
            name: 🇨🇭 瑞士-1,
