@@ -32,6 +32,15 @@ proxies:
       cipher: auto,
     }
   - {
+      name: 🇺🇸 美国-Oracle-WARP,
+      server: 127.0.0.1,
+      port: 443,
+      type: vmess,
+      uuid: 00000000-0000-0000-0000-000000000000,
+      alterId: 0,
+      cipher: auto,
+    }
+  - {
       name: 🇨🇭 瑞士-1,
       server: 127.0.0.1,
       port: 443,
@@ -367,7 +376,7 @@ proxy-groups:
       lazy: true,
       tolerance: 50,
       interval: 600,
-      proxies: [🇺🇸 美国-1, 🇺🇸 美国-2, 🇺🇸 美国-3],
+      proxies: [🇺🇸 美国-1, 🇺🇸 美国-2, 🇺🇸 美国-3, 🇺🇸 美国-Oracle-WARP],
     }
   - {
       name: 🇨🇭 CH+,
