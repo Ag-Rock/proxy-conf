@@ -43,7 +43,7 @@
 
 将国内基础服务和海外服务分组管理；实际可用性还取决于账户、地区、设备和服务端限制：
 
-- **`AppleAI`** 负责 Apple Intelligence、私有云计算（PCC）、Siri、听写与搜索。**`PrivateRelay`** 单独处理引擎捕获并识别的 iCloud 专用代理连接。两组首选都是 `🇺🇸 美国-3`，可独立选择出口，`🇺🇸 US+` 为自动测速备选，`DIRECT` 用于手动对照。[Apple 企业网络主机清单](https://support.apple.com/zh-cn/101555)
+- **`AppleAI`** 负责 Apple Intelligence、私有云计算（PCC）、Siri、听写与搜索，首选 `🇺🇸 US+`，候选策略包含 `🇺🇸 US+`、`🇨🇭 CH+`、`🇺🇸 US`、`🇯🇵 JP`、`🇼🇸 TW`、`🇸🇬 SG`、`🇰🇷 KR`。**`PrivateRelay`** 单独处理引擎捕获并识别的 iCloud 专用代理连接。[Apple 企业网络主机清单](https://support.apple.com/zh-cn/101555)
 - 系统是否启用 Private Relay 取决于设备、网络和 VPN 路由。确认策略命中需要连接日志，系统状态需另外查看。[Apple VPN 与隐私说明](https://www.apple.com/uk/legal/privacy/data/en/vpns/)
 - `AI.yaml` 保留跨端共享的 Apple 条目，Clash / Stash 以专用前置规则覆盖。QX 仍使用原有策略，未随之新增这两个组。未确认归属的 Apple 关联主机继续沿原 AI 路径。
 - **`AppleProxy` 策略组（美区专属服务与商店控制面）**：精准剥离 Apple News、Apple TV+ 控制面、Apple Podcasts、Stocks 以及 App Store 搜索与探索页面接口（`amp-api-edge.apps.apple.com` / `search.itunes.apple.com` 等），默认通过 `🚀 手选主流`，其首项为美国自动测速组，出口可能变化（Apple TV+ 纯视频流 `hls-svod.itunes.apple.com` 剥离至 `GMedia`）。
@@ -58,8 +58,8 @@
 
 ### 4. 金融出口与共享客服
 
-- **Banking**：首选 `🇨🇭 CH+`。在 Banking 内直接筛选瑞士、德国、英国、法国、荷兰、爱尔兰等节点；也可直接选择三个自建瑞士节点。
-- **PayPal**：首选 `🇺🇸 US+`。在 PayPal 内直接筛选美国、德国、英国、日本、香港、菲律宾节点。可用地区取决于 KKK 订阅实际提供的节点及名称；筛选组不会凭空生成节点。
+- **Banking**：首选 `🇨🇭 CH+`（由自建瑞士节点自动测速优选）。在 Banking 内直接筛选 KKK 机场的瑞士、德国、英国、法国、荷兰、爱尔兰等欧洲节点。
+- **PayPal**：首选 `🇺🇸 US+`（由自建美国节点自动测速优选）。在 PayPal 内直接筛选美国、德国、英国、日本、香港、菲律宾节点。可用地区取决于 KKK 订阅实际提供的节点及名称；筛选组不会凭空生成节点。
 - **固定出口**：CH+ / US+ 仍是自动测速组，不能保证固定 IP。需要保持同一出口时，选择具体节点，直接在 Banking / PayPal 中选定节点；节点供应商本身也可能更换出口。没有新增跨地区自动故障切换。
 - **Intercom**：`intercom.io` 用于客服组件及接口，`intercomcdn.com` 用于脚本、附件和媒体；不是银行专属风控域名。两者连同 `intercom.com`、`intercom-chat.com`、`intercom-sheets.com` 统一使用 `🚀 手选主流`，从 AI / Finance 清单移出，并先于广告规则匹配。[Intercom 官方说明](https://www.intercom.com/help/en/articles/12292300-resolving-content-security-policy-csp-errors)
 - **共享客服的边界**：Intercom 直接使用手选主流，不另建策略组。仅靠共享域名无法识别调用它的银行或 AI 应用，也无法自动保持各应用同 IP。
@@ -83,12 +83,12 @@
 | `🏎️ 速度优选`                                             | `url-test` | 跨地区全节点自动测速优选，筛选最低延迟可用节点。                                                       |
 | `🚑 故障转移`                                             | `fallback` | 按预设地区优先级顺序进行可用性健康检查与自动容灾切换。                                                 |
 | `🎯 手选节点`                                             | `select`   | 手动选择冷门地区或特定单节点（如英国 Wi-Fi Calling 等特定需求）。                                      |
-| `AI`                                                      | `select`   | ChatGPT、Gemini 等 AI 服务与关联验证域名。                                                             |
-| `AppleAI`                                                 | `select`   | Apple Intelligence、PCC、Siri 与搜索，首选 `🇺🇸 美国-3`。                                               |
+| `AI`                                                      | `select`   | ChatGPT、Gemini 等全球 AI 服务与关联验证域名，首选 `🇺🇸 US+`（候选：`🇺🇸 US+`、`🇨🇭 CH+`、`🇺🇸 US`、`🇯🇵 JP`、`🇼🇸 TW`、`🇸🇬 SG`、`🇰🇷 KR`）。 |
+| `AppleAI`                                                 | `select`   | Apple Intelligence、PCC、Siri 与搜索，首选 `🇺🇸 US+`（候选：`🇺🇸 US+`、`🇨🇭 CH+`、`🇺🇸 US`、`🇯🇵 JP`、`🇼🇸 TW`、`🇸🇬 SG`、`🇰🇷 KR`）。 |
 | `PrivateRelay`                                            | `select`   | iCloud Private Relay 相关连接。                                                                        |
 | `GMedia`                                                  | `select`   | **大流量流媒体与 CDN 数据面组**。承接视频流、音频流、社媒大图与软件安装包下载。                        |
-| `Banking`                                                 | `select`   | 首选 CH+；组内直接列出三个自建瑞士节点和 KKK 的欧洲节点。                                              |
-| `PayPal`                                                  | `select`   | 首选 US+；组内直接列出三个自建美国节点和 KKK 的美、德、英、日、港、菲节点。                            |
+| `Banking`                                                 | `select`   | 首选 `🇨🇭 CH+`；组内直接筛选 KKK 机场的欧洲节点（瑞士、德国、英国、法国、荷兰、爱尔兰等）。              |
+| `PayPal`                                                  | `select`   | 首选 `🇺🇸 US+`；组内聚合美、德、英、日、港、菲等地区筛选节点。                                           |
 | `AppleProxy`                                              | `select`   | Apple 美区专属服务（News / TV+ 控制面 / 美区商店搜索）策略组。                                         |
 | `Apple`                                                   | `select`   | Apple 国内高速保障服务（系统更新 / App 下载 / iCloud / Music）策略组，首选项为 `DIRECT`。              |
 | `Google`                                                  | `select`   | Google 搜索、YouTube 主站控制面与 API 服务策略组。                                                     |
@@ -96,7 +96,7 @@
 | `OneDrive`                                                | `select`   | OneDrive 云盘同步专属策略组。                                                                          |
 | `Game`                                                    | `select`   | 任天堂 Switch 与 Xbox 联机大厅策略组（游戏本体下载 CDN 已前置直连）。                                  |
 | `Global`                                                  | `select`   | 其余未命中细分规则的海外流量兜底策略组。                                                               |
-| `🇺🇸 US+` / `🇨🇭 CH+`                                       | `url-test` | 美国 / 瑞士自建节点自动测速组（可能切换节点）。                                                        |
+| `🇺🇸 US+` / `🇨🇭 CH+`                                       | `url-test` | 美国（4 个自建节点）/ 瑞士（2 个自建节点）自动测速组（按延迟自动优选）。                                |
 | `🇺🇸 US` / `🇭🇰 HK` / `🇯🇵 JP` / `🇼🇸 TW` / `🇸🇬 SG` / `🇰🇷 KR` | `url-test` | 机场订阅对应国家/地区正则筛选自动测速组（自动剔除免费/试用/失联/高倍率节点）。                         |
 | `🏴‍☠️ CF`                                                   | `url-test` | 优选备份节点自动测速组。                                                                               |
 
@@ -341,7 +341,7 @@
          }
        - {
            name: 🇺🇸 美国-4,
-           server: your.us3.domain,
+           server: your.us4.domain,
            port: 443,
            type: vmess,
            uuid: your-uuid,

@@ -99,11 +99,11 @@ configs.each_with_index do |config, index|
     check((used - config.fetch('proxy-providers').keys).empty?, "missing proxy provider in #{name}")
     visit(name, groups, {}, done)
   end
-  { 'AppleAI' => [US, '🇺🇸 美国-1', '🇺🇸 美国-2', '🇺🇸 US+', 'DIRECT'],
-    'PrivateRelay' => [US, '🇺🇸 US+', 'DIRECT'] }.each do |name, refs|
+  { 'AppleAI' => ['🇺🇸 US+', '🇨🇭 CH+', '🇺🇸 US', '🇯🇵 JP', '🇼🇸 TW', '🇸🇬 SG', '🇰🇷 KR'],
+    'AI' => ['🇺🇸 US+', '🇨🇭 CH+', '🇺🇸 US', '🇯🇵 JP', '🇼🇸 TW', '🇸🇬 SG', '🇰🇷 KR'] }.each do |name, refs|
     check(groups.fetch(name).values_at('type', 'proxies') == ['select', refs], "#{name} candidates")
   end
-  { 'AI' => US, 'Apple' => 'DIRECT', 'AppleProxy' => MAIN }.each do |name, first|
+  { 'AI' => '🇺🇸 US+', 'AppleAI' => '🇺🇸 US+', 'Apple' => MAIN, 'AppleProxy' => MAIN }.each do |name, first|
     check(groups.fetch(name).fetch('proxies').first == first, "#{name} default")
   end
   check(rules.first(2) == %w[GEOSITE,private,DIRECT RULE-SET,AgPrivate,DIRECT], 'private precedence')

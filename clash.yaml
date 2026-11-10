@@ -253,7 +253,7 @@ proxy-groups:
   - {
       name: AI,
       type: select,
-      proxies: [🇺🇸 美国-3, 🇺🇸 美国-4, 🇨🇭 瑞士-2, 🚀 手选主流, 🇺🇸 US+, 🇨🇭 CH+, 🏴‍☠️ CF, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR, 🏎️ 速度优选, 🚑 故障转移, 🎯 手选节点],
+      proxies: [🇺🇸 US+, 🇨🇭 CH+, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR],
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/AI.png",
     }
   - {
@@ -275,7 +275,7 @@ proxy-groups:
   - {
       name: AppleAI,
       type: select,
-      proxies: [🇺🇸 美国-3, 🇺🇸 美国-4, 🇨🇭 瑞士-2, 🚀 手选主流, 🇺🇸 US+, 🇨🇭 CH+, 🏴‍☠️ CF, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR, 🏎️ 速度优选, 🚑 故障转移, 🎯 手选节点],
+      proxies: [🇺🇸 US+, 🇨🇭 CH+, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR],
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Apple.png",
     }
   - {
