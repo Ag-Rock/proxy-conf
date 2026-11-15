@@ -388,6 +388,9 @@ proxy-groups:
 # 规则匹配
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
+  # 6. 广告拦截（置于核心白名单、AI 与银行风控保护之后，优先于普通代理规则）
+  - GEOSITE,category-ads-all,REJECT
+  - RULE-SET,AdvertisingLite,REJECT
   # 1. 优先处理本地和私有网络及个人直连白名单
   - GEOSITE,private,DIRECT
   - RULE-SET,AgPrivate,DIRECT
@@ -525,10 +528,6 @@ rules:
   - DOMAIN-SUFFIX,paypalobjects.com,PayPal
   - DOMAIN-SUFFIX,braintreegateway.com,PayPal
   - DOMAIN-SUFFIX,braintree-api.com,PayPal
-
-  # 6. 广告拦截（置于核心白名单、AI 与银行风控保护之后，优先于普通代理规则）
-  - GEOSITE,category-ads-all,REJECT
-  - RULE-SET,AdvertisingLite,REJECT
 
   # 7. 极速匹配常用全球服务 (数据面 GMedia + 控制面 🚀 手选主流)
   # GitHub (大文件/Raw走 GMedia，主站走 🚀 手选主流)
