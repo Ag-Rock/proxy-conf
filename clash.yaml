@@ -704,18 +704,18 @@ rule-anchor:
       format: yaml,
       proxy: 🚀 手选主流,
     }
-  class:
-    &class-yaml {
+  class-text:
+    &class-text {
       type: http,
       interval: 86400,
       behavior: classical,
-      format: yaml,
+      format: text,
       proxy: 🚀 手选主流,
     }
 rule-providers:
   AdvertisingLite:
     {
-      <<: *class,
+      <<: *class-text,
       url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/AdvertisingLite/AdvertisingLite.list",
     }
   AgPrivate:

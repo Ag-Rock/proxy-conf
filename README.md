@@ -51,8 +51,9 @@
 
 ### 3. AI 全链路覆盖与防误杀保护
 
-`AI.yaml` 与 `QX_AI.list` 均置于**广告拦截（`REJECT`）与通用规则之前**，解决 AI 服务常见的“登录死循环”、“人机验证失败”与“地区不支持”问题：
+全球人工智能与核心验证分流规则集（`AI.yaml` / `QX_AI.list`）提供全品类 AI 及底层鉴权覆盖，解决常见的“登录死循环”、“人机验证失败”与“地区不支持”问题：
 
+- **规则优先级调整**：在 `clash.yaml` 与 `stash.yaml` 中，已将广告拦截规则（`GEOSITE,category-ads-all,REJECT` 与 `RULE-SET,AdvertisingLite,REJECT`）提升至 `rules` 最前，优先切断已知的广告与遥测追踪流量；AI 核心业务与验证域名由后续的 `AgAI` 规则集承接。在 Quantumult X 端，仍保持 `QX_AI.list` 置顶以防范第三方去广告规则误杀的端别差异。
 - **底层鉴权与风控白名单**：完整收录 Cloudflare Turnstile / Arkose Labs / hCaptcha / reCAPTCHA 人机验证，Auth0 / Okta / Clerk / WorkOS / Supabase 等 OAuth 统一身份认证组件，以及 Statsig / LaunchDarkly / Datadog / Sentry 等特性开关（Feature Flags）与核心遥测域名，防止被去广告规则误杀导致前端默认判定“所在地区未开放”。
 - **全品类 AI 覆盖**：涵盖 OpenAI (ChatGPT/Sora/LiveKit)、Google AI (Gemini/NotebookLM/AI Studio/DeepMind)、Anthropic (Claude)、xAI (Grok)、AI 编程与软件工程 Agent（Cursor / Windsurf / Copilot / Antigravity / Trae / Devin / Lovable / Bolt / v0 等）、AI 搜索与学术（Perplexity / Genspark / Felo / Consensus）、多模态生成（Midjourney / Runway / Luma / Suno / ElevenLabs）、推理算力平台（OpenRouter / Groq / Hugging Face）及全球 `.ai` 顶级域名兜底。
 
@@ -77,28 +78,28 @@
 
 ## 🎯 策略组架构一览
 
-| 策略组名称                                                | 类型       | 核心用途说明                                                                                           |
-| :-------------------------------------------------------- | :--------- | :----------------------------------------------------------------------------------------------------- |
-| `🚀 手选主流`                                             | `select`   | **核心主策略组**。聚合各地区自动测速组与自建节点组，供主流海外控制面与定位服务调用（建议默认选美国）。 |
-| `🏎️ 速度优选`                                             | `url-test` | 跨地区全节点自动测速优选，筛选最低延迟可用节点。                                                       |
-| `🚑 故障转移`                                             | `fallback` | 按预设地区优先级顺序进行可用性健康检查与自动容灾切换。                                                 |
-| `🎯 手选节点`                                             | `select`   | 手动选择冷门地区或特定单节点（如英国 Wi-Fi Calling 等特定需求）。                                      |
+| 策略组名称                                                | 类型       | 核心用途说明                                                                                                                           |
+| :-------------------------------------------------------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| `🚀 手选主流`                                             | `select`   | **核心主策略组**。聚合各地区自动测速组与自建节点组，供主流海外控制面与定位服务调用（建议默认选美国）。                                 |
+| `🏎️ 速度优选`                                             | `url-test` | 跨地区全节点自动测速优选，筛选最低延迟可用节点。                                                                                       |
+| `🚑 故障转移`                                             | `fallback` | 按预设地区优先级顺序进行可用性健康检查与自动容灾切换。                                                                                 |
+| `🎯 手选节点`                                             | `select`   | 手动选择冷门地区或特定单节点（如英国 Wi-Fi Calling 等特定需求）。                                                                      |
 | `AI`                                                      | `select`   | ChatGPT、Gemini 等全球 AI 服务与关联验证域名，首选 `🇺🇸 US+`（候选：`🇺🇸 US+`、`🇨🇭 CH+`、`🇺🇸 US`、`🇯🇵 JP`、`🇼🇸 TW`、`🇸🇬 SG`、`🇰🇷 KR`）。 |
-| `AppleAI`                                                 | `select`   | Apple Intelligence、PCC、Siri 与搜索，首选 `🇺🇸 US+`（候选：`🇺🇸 US+`、`🇨🇭 CH+`、`🇺🇸 US`、`🇯🇵 JP`、`🇼🇸 TW`、`🇸🇬 SG`、`🇰🇷 KR`）。 |
-| `PrivateRelay`                                            | `select`   | iCloud Private Relay 相关连接。                                                                        |
-| `GMedia`                                                  | `select`   | **大流量流媒体与 CDN 数据面组**。承接视频流、音频流、社媒大图与软件安装包下载。                        |
-| `Banking`                                                 | `select`   | 首选 `🇨🇭 CH+`；组内直接筛选 KKK 机场的欧洲节点（瑞士、德国、英国、法国、荷兰、爱尔兰等）。              |
-| `PayPal`                                                  | `select`   | 首选 `🇺🇸 US+`；组内聚合美、德、英、日、港、菲等地区筛选节点。                                           |
-| `AppleProxy`                                              | `select`   | Apple 美区专属服务（News / TV+ 控制面 / 美区商店搜索）策略组。                                         |
-| `Apple`                                                   | `select`   | Apple 国内高速保障服务（系统更新 / App 下载 / iCloud / Music）策略组，首选项为 `DIRECT`。              |
-| `Google`                                                  | `select`   | Google 搜索、YouTube 主站控制面与 API 服务策略组。                                                     |
-| `Microsoft`                                               | `select`   | 微软国际服务与账户策略组（系统更新与 Office CDN 已前置直连）。                                         |
-| `OneDrive`                                                | `select`   | OneDrive 云盘同步专属策略组。                                                                          |
-| `Game`                                                    | `select`   | 任天堂 Switch 与 Xbox 联机大厅策略组（游戏本体下载 CDN 已前置直连）。                                  |
-| `Global`                                                  | `select`   | 其余未命中细分规则的海外流量兜底策略组。                                                               |
-| `🇺🇸 US+` / `🇨🇭 CH+`                                       | `url-test` | 美国（4 个自建节点）/ 瑞士（2 个自建节点）自动测速组（按延迟自动优选）。                                |
-| `🇺🇸 US` / `🇭🇰 HK` / `🇯🇵 JP` / `🇼🇸 TW` / `🇸🇬 SG` / `🇰🇷 KR` | `url-test` | 机场订阅对应国家/地区正则筛选自动测速组（自动剔除免费/试用/失联/高倍率节点）。                         |
-| `🏴‍☠️ CF`                                                   | `url-test` | 优选备份节点自动测速组。                                                                               |
+| `AppleAI`                                                 | `select`   | Apple Intelligence、PCC、Siri 与搜索，首选 `🇺🇸 US+`（候选：`🇺🇸 US+`、`🇨🇭 CH+`、`🇺🇸 US`、`🇯🇵 JP`、`🇼🇸 TW`、`🇸🇬 SG`、`🇰🇷 KR`）。         |
+| `PrivateRelay`                                            | `select`   | iCloud Private Relay 相关连接。                                                                                                        |
+| `GMedia`                                                  | `select`   | **大流量流媒体与 CDN 数据面组**。承接视频流、音频流、社媒大图与软件安装包下载。                                                        |
+| `Banking`                                                 | `select`   | 首选 `🇨🇭 CH+`；组内直接筛选 KKK 机场的欧洲节点（瑞士、德国、英国、法国、荷兰、爱尔兰等）。                                             |
+| `PayPal`                                                  | `select`   | 首选 `🇺🇸 US+`；组内聚合美、德、英、日、港、菲等地区筛选节点。                                                                          |
+| `AppleProxy`                                              | `select`   | Apple 美区专属服务（News / TV+ 控制面 / 美区商店搜索）策略组。                                                                         |
+| `Apple`                                                   | `select`   | Apple 国内高速保障服务（系统更新 / App 下载 / iCloud / Music）策略组，首选项为 `DIRECT`。                                              |
+| `Google`                                                  | `select`   | Google 搜索、YouTube 主站控制面与 API 服务策略组。                                                                                     |
+| `Microsoft`                                               | `select`   | 微软国际服务与账户策略组（系统更新与 Office CDN 已前置直连）。                                                                         |
+| `OneDrive`                                                | `select`   | OneDrive 云盘同步专属策略组。                                                                                                          |
+| `Game`                                                    | `select`   | 任天堂 Switch 与 Xbox 联机大厅策略组（游戏本体下载 CDN 已前置直连）。                                                                  |
+| `Global`                                                  | `select`   | 其余未命中细分规则的海外流量兜底策略组。                                                                                               |
+| `🇺🇸 US+` / `🇨🇭 CH+`                                       | `url-test` | 美国（4 个自建节点）/ 瑞士（2 个自建节点）自动测速组（按延迟自动优选）。                                                               |
+| `🇺🇸 US` / `🇭🇰 HK` / `🇯🇵 JP` / `🇼🇸 TW` / `🇸🇬 SG` / `🇰🇷 KR` | `url-test` | 机场订阅对应国家/地区正则筛选自动测速组（自动剔除免费/试用/失联/高倍率节点）。                                                         |
+| `🏴‍☠️ CF`                                                   | `url-test` | 优选备份节点自动测速组。                                                                                                               |
 
 ---
 
@@ -424,7 +425,22 @@ https://raw.githubusercontent.com/Ag-Rock/proxy-conf/main/AllInOne.conf, tag=All
 
 ### UDP 443
 
-Clash / Stash 的 UDP 443 由 AppleAI、PrivateRelay、AI、媒体、广告、国内直连和通用兜底规则依次分类。已识别的广告流量仍按广告规则拒绝。UDP 转发取决于节点能力及 TUN、透明代理或 Network Extension 是否捕获流量。QX 保持自身的 UDP 配置。
+Clash / Stash 的 UDP 443 由置顶的广告拦截规则优先处理，随后由 AppleAI、PrivateRelay、AI、媒体、国内直连和通用兜底规则依次分类。已识别的广告流量直接按 REJECT 拒绝。UDP 转发取决于节点能力及 TUN、透明代理或 Network Extension 是否捕获流量。QX 保持自身的 UDP 配置。
+
+### 实机排查结论与 iOS / OpenClash 最佳实践
+
+针对近期在 iOS 设备（iPhone）、软路由 OpenClash 网关及移动漫游场景下的实机排查与对照测试，验证沉淀了以下三个独立结论与长期配置建议：
+
+1. **广告拦截问题（OpenClash 大陆 IP 绕过）**：
+   - **结论**：OpenClash 的「绕过中国大陆 IP」机制会使匹配到境内 IP / CDN 的广告与追踪请求直接通过底层网络直连，绕过了内核的 `rules` 规则匹配，从而显著削弱了广告过滤效果。关闭「绕过大陆 IP」（全量交由内核规则判定）后，广告过滤明显改善。
+2. **Claude App 连通性故障根因**：
+   - **结论**：iOS 端 Claude App 的连接故障与系统设置中的 **Connectivity Assist（无线局域网助理）** 启用状态直接相关。Wi-Fi 波动引发双通道并发竞争，易触发服务商严格的风控异常；关闭 Connectivity Assist 后应用恢复正常。
+3. **Private Relay（iCloud 专用代理）影响边界**：
+   - **结论**：Private Relay 并不是本次 Claude App 故障的必要条件；开启与关闭状态下 Claude 均可正常运行。但开启 Private Relay 会在 Safari 层面绕过本地路由器 DNS / Fake-IP 劫持，进而可能会影响 Safari 网页浏览时的路由器级广告过滤效果。
+
+#### 💡 长期稳定部署建议
+- **设备端配置**：建议将**「家庭 Wi-Fi 关闭 Connectivity Assist（无线局域网助理）」**作为 iPhone 的长期稳定系统设置，规避双网卡并发竞争引发的高敏感应用网络阻断。
+- **架构保留**：继续保留当前的**「家庭 OpenClash 透明代理网关 + 外出自动无缝切换 Stash」**协同架构（基于 Wi-Fi SSID 自动切换），兼顾家庭网络免客户端配置与移动漫游体验。
 
 ### 静态验证与上线检查
 
@@ -435,6 +451,6 @@ ruby scripts/validate_configs.rb
 git diff --check
 ```
 
-本次实测每端有 221 条主规则、26 个策略组、24 个规则提供者。脚本检查主规则同序、组引用、循环、DNS 定向映射和本地域名分流。默认使用最小广告样例，传入下载的 `AdvertisingLite.yaml` 可改用实际条目。Mihomo v1.19.32 已在临时目录通过 `-t`，并以本地模拟上游验证 DNS 策略选择。Stash 原生导入、OpenClash 生效配置、iPhone 系统功能和真实节点 UDP 转发仍需实机验证。
+本次实测每端有 221 条主规则、26 个策略组、24 个规则提供者。脚本检查主规则同序、组引用、循环、DNS 定向映射和本地域名分流。默认使用最小广告样例，传入下载的 `AdvertisingLite.list` 可改用实际条目。Mihomo v1.19.32 已在临时目录通过 `-t`，并以本地模拟上游验证 DNS 策略选择。Stash 原生导入、OpenClash 生效配置、iPhone 系统功能和真实节点 UDP 转发仍需实机验证。
 
 控制器配置保留公开占位值。部署时需核对实际监听范围、路由器防火墙、仪表盘依赖及本地私有密钥覆写，控制接口安全整改待完成。
