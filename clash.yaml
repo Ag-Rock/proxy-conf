@@ -332,7 +332,7 @@ proxy-groups:
       type: url-test,
       tolerance: 50,
       interval: 300,
-      proxies: [🇺🇸 美国-1, 🇺🇸 美国-2, 🇺🇸 美国-3, 🇺🇸 美国-4],
+      proxies: [🇺🇸 美国-3hy, 🇺🇸 美国-1, 🇺🇸 美国-2, 🇺🇸 美国-3, 🇺🇸 美国-4],
     }
   - {
       name: 🇨🇭 CH+,

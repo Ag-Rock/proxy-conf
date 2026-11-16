@@ -455,7 +455,7 @@ proxy-groups:
       lazy: true,
       tolerance: 50,
       interval: 600,
-      proxies: [🇺🇸 美国-1, 🇺🇸 美国-2, 🇺🇸 美国-3, 🇺🇸 美国-4],
+      proxies: [🇺🇸 美国-3hy, 🇺🇸 美国-1, 🇺🇸 美国-2, 🇺🇸 美国-3, 🇺🇸 美国-4],
     }
   - {
       name: 🇨🇭 CH+,
