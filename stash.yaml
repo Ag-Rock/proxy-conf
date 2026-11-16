@@ -5,6 +5,16 @@ proxy-providers:
   CF.art: { type: http, url: "https://example.com", interval: 86400 }
 proxies:
   - {
+      name: "🇺🇸 美国-3hy",
+      type: hysteria2,
+      server: www.abc.com,
+      port: 443,
+      password: "000",
+      sni: "www.abc.com",
+      alpn: [h3],
+      skip-cert-verify: false,
+    }
+  - {
       name: 🇺🇸 美国-1,
       server: 127.0.0.1,
       port: 443,
@@ -166,77 +176,146 @@ dns:
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     "+.ai":
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "cp4.cloudflare.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "guzzoni.apple.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "+.smoot.apple.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "+.mask.icloud.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "+.mask-h2.icloud.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "+.mask-api.icloud.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "+.mask.apple-dns.net": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "+.mask-api.fe.apple-dns.net": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "+.icloud-och.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "+.apple-relay.apple.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "+.apple-relay.cloudflare.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "+.apple-relay.fastly-edge.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "+.apple-relay.akamaized.net": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "gspe1-ssl.ls.apple.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "gspe19-ssl.ls.apple.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "gspe35-ssl.ls.apple.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "gspe79-ssl.ls.apple.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "configuration.ls.apple.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "iphone-ld.apple.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "cp4.cloudflare.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "guzzoni.apple.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "+.smoot.apple.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "+.mask.icloud.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "+.mask-h2.icloud.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "+.mask-api.icloud.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "+.mask.apple-dns.net":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "+.mask-api.fe.apple-dns.net":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "+.icloud-och.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "+.apple-relay.apple.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "+.apple-relay.cloudflare.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "+.apple-relay.fastly-edge.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "+.apple-relay.akamaized.net":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "gspe1-ssl.ls.apple.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "gspe19-ssl.ls.apple.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "gspe35-ssl.ls.apple.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "gspe79-ssl.ls.apple.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "configuration.ls.apple.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "iphone-ld.apple.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     # 2. Apple 系统更新、App Store、Apple Music、iCloud 全家桶 CDN -> 国内 DoH 保障满速直连
-    "+.appldnld.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.mesu.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.gdmf.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.swscan.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.swcdn.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.swdist.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.oscdn.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.osrecovery.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.mzstatic.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.cdn-apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.aaplimg.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "iosapps.itunes.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "osxapps.itunes.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "upp.itunes.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "supportdownload.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "download.developer.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.icloud.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.icloud-content.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.icloud.com.cn": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.me.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.push.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.ess.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.identity.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.gs-loc.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.music.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.blobstore.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "aod.itunes.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "aod-ssl.itunes.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "audio.itunes.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "audio-ssl.itunes.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "streamingaudio.itunes.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "mvod.itunes.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "musicstatus.itunes.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "play.itunes.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "client-api.itunes.apple.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.appldnld.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.mesu.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.gdmf.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.swscan.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.swcdn.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.swdist.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.oscdn.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.osrecovery.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.mzstatic.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.cdn-apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.aaplimg.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "iosapps.itunes.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "osxapps.itunes.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "upp.itunes.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "supportdownload.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "download.developer.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.icloud.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.icloud-content.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.icloud.com.cn":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.me.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.push.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.ess.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.identity.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.gs-loc.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.music.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.blobstore.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "aod.itunes.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "aod-ssl.itunes.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "audio.itunes.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "audio-ssl.itunes.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "streamingaudio.itunes.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "mvod.itunes.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "musicstatus.itunes.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "play.itunes.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "client-api.itunes.apple.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     # Nintendo / Xbox / Microsoft 满速下载 CDN -> 国内 DoH
-    "+.cdn.nintendo.net": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.hac.lp1.d4c.nintendo.net": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "assets1.xboxlive.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "assets2.xboxlive.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "dlassets.xboxlive.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "dlassets2.xboxlive.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "xvcf1.xboxlive.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "xvcf2.xboxlive.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.xboxlive.cn": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.windowsupdate.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.delivery.mp.microsoft.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.update.microsoft.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "download.microsoft.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.officecdn.microsoft.com": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.sfx.ms": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.cdn.nintendo.net":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.hac.lp1.d4c.nintendo.net":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "assets1.xboxlive.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "assets2.xboxlive.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "dlassets.xboxlive.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "dlassets2.xboxlive.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "xvcf1.xboxlive.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "xvcf2.xboxlive.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.xboxlive.cn":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.windowsupdate.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.delivery.mp.microsoft.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.update.microsoft.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "download.microsoft.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.officecdn.microsoft.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.sfx.ms":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "geosite:cn":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "geosite:apple-cn":
@@ -745,20 +824,9 @@ rules:
 
 # 规则集
 rule-anchor:
-  ip:
-    &ip {
-      type: http,
-      interval: 86400,
-      behavior: ipcidr,
-      format: yaml,
-    }
+  ip: &ip { type: http, interval: 86400, behavior: ipcidr, format: yaml }
   domain:
-    &domain {
-      type: http,
-      interval: 86400,
-      behavior: domain,
-      format: yaml,
-    }
+    &domain { type: http, interval: 86400, behavior: domain, format: yaml }
   class-yaml:
     &class-yaml {
       type: http,

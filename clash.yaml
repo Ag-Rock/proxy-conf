@@ -5,6 +5,16 @@ proxy-providers:
   CF.art: { type: http, url: "https://example.com", interval: 86400 }
 proxies:
   - {
+      name: "🇺🇸 美国-3hy",
+      type: hysteria2,
+      server: www.abc.com,
+      port: 443,
+      password: "000",
+      sni: "www.abc.com",
+      alpn: [h3],
+      skip-cert-verify: false,
+    }
+  - {
       name: 🇺🇸 美国-1,
       server: 127.0.0.1,
       port: 443,
@@ -170,9 +180,12 @@ dns:
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     "+.ai":
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "cp4.cloudflare.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "guzzoni.apple.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "+.smoot.apple.com": ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "cp4.cloudflare.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "guzzoni.apple.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    "+.smoot.apple.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     "+.mask.icloud.com,+.mask-h2.icloud.com,+.mask-api.icloud.com,+.mask.apple-dns.net,+.mask-api.fe.apple-dns.net,+.icloud-och.com,+.apple-relay.apple.com,+.apple-relay.cloudflare.com,+.apple-relay.fastly-edge.com,+.apple-relay.akamaized.net,gspe1-ssl.ls.apple.com,gspe19-ssl.ls.apple.com,gspe35-ssl.ls.apple.com,gspe79-ssl.ls.apple.com,configuration.ls.apple.com,iphone-ld.apple.com":
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     # 2. 苹果/微软/主机满速下载 CDN 与大陆域名 -> 国内 DoH
