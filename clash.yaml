@@ -1,7 +1,6 @@
 # ===== GitHub 公开配置顶部脱敏占位（用于通过 Clash Verge 订阅校验，真实连接由本地 Merge 覆盖） =====
 proxy-providers:
   KKK: { type: http, url: "https://example.com", interval: 86400 }
-  CF.live: { type: http, url: "https://example.com", interval: 86400 }
   CF.art: { type: http, url: "https://example.com", interval: 86400 }
 proxies:
   - {
@@ -383,7 +382,7 @@ proxy-groups:
       name: 🏴‍☠️ CF,
       type: url-test,
       url: "https://www.gstatic.com/generate_204",
-      use: [CF.live, CF.art],
+      use: [CF.art],
       tolerance: 50,
       interval: 300,
     }
@@ -574,10 +573,10 @@ rules:
   - IP-CIDR,208.67.220.220/32,🚀 手选主流,no-resolve
 
   # 9. Wi-Fi Calling 自定义规则
-  - DOMAIN-SUFFIX,epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🇺🇸 US
-  - DOMAIN-SUFFIX,ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🇺🇸 US
-  - IP-CIDR,208.54.159.227/32,🇺🇸 US,no-resolve
-  - IP-CIDR,208.54.2.163/32,🇺🇸 US,no-resolve
+  - DOMAIN-SUFFIX,epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🚀 手选主流
+  - DOMAIN-SUFFIX,ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🚀 手选主流
+  - IP-CIDR,208.54.159.227/32,🚀 手选主流,no-resolve
+  - IP-CIDR,208.54.2.163/32,🚀 手选主流,no-resolve
   - IP-CIDR,87.194.0.0/19,🎯 手选节点
   - IP-CIDR,87.194.88.0/23,🎯 手选节点
   - DOMAIN-SUFFIX,epdg.epc.mnc010.mcc234.pub.3gppnetwork.org,🎯 手选节点
