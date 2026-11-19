@@ -107,6 +107,8 @@ sniffer:
   skip-domain:
     - "+.apple.com"
     - "+.icloud.com"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
 
 # ===== TUN 模式 =====
 tun:
@@ -143,9 +145,19 @@ dns:
     - "+.srv.nintendo.net"
     - "+.nintendo.net"
     - "+.xboxlive.com"
+    - "+.xboxlive.cn"
     - "+.msftconnecttest.com"
     - "+.msftncsi.com"
     - "teredo.ipv6.microsoft.com"
+    - "+.live.com"
+    - "+.microsoftonline.com"
+    - "+.msauth.net"
+    - "+.msftauth.net"
+    - "+.windowsupdate.com"
+    - "+.delivery.mp.microsoft.com"
+    - "+.emdl.ws.microsoft.com"
+    - "+.update.microsoft.com"
+    - "download.microsoft.com"
   default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
@@ -203,7 +215,11 @@ dns:
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     "iphone-ld.apple.com":
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    # 2. Apple 系统更新、App Store、Apple Music、iCloud 全家桶 CDN -> 国内 DoH 保障满速直连
+    "location.microsoft.com":
+      ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+    # 2. 个人直连白名单、Apple 系统更新、App Store、Apple Music、iCloud 全家桶 CDN -> 国内 DoH 保障满速直连
+    "rule-set:AgPrivate":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "+.appldnld.apple.com":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "+.mesu.apple.com":
@@ -274,28 +290,38 @@ dns:
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "client-api.itunes.apple.com":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    # Nintendo / Xbox / Microsoft 满速下载 CDN -> 国内 DoH
+    # Nintendo / Xbox / Microsoft 服务、登录认证与满速下载 CDN & Spotify 直连 CDN -> 国内 DoH
     "+.cdn.nintendo.net":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "+.hac.lp1.d4c.nintendo.net":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "assets1.xboxlive.com":
+    "+.xboxlive.com":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "assets2.xboxlive.com":
+    "+.xbox.com":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "dlassets.xboxlive.com":
+    "+.xboxservices.com":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "dlassets2.xboxlive.com":
-      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "xvcf1.xboxlive.com":
-      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "xvcf2.xboxlive.com":
+    "+.gamepass.com":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "+.xboxlive.cn":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.msftconnecttest.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.msftncsi.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.live.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.microsoftonline.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.msauth.net":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.msftauth.net":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "+.windowsupdate.com":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "+.delivery.mp.microsoft.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.emdl.ws.microsoft.com":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "+.update.microsoft.com":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
@@ -304,6 +330,22 @@ dns:
     "+.officecdn.microsoft.com":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "+.sfx.ms":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.spotifycdn.com":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.spotifycdn.net":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.scdn.co":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.audio-ak-spotify-com.akamaized.net":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.audio4-ak-spotify-com.akamaized.net":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.heads4-ak-spotify-com.akamaized.net":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "geosite:microsoft":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "geosite:xbox":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "geosite:cn":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
@@ -414,7 +456,24 @@ proxy-groups:
     }
   - {
       name: Apple,
-      <<: *pr,
+      type: select,
+      proxies:
+        [
+          DIRECT,
+          🚀 手选主流,
+          🇺🇸 US+,
+          🇨🇭 CH+,
+          🏴‍☠️ CF,
+          🇺🇸 US,
+          🇭🇰 HK,
+          🇯🇵 JP,
+          🇼🇸 TW,
+          🇸🇬 SG,
+          🇰🇷 KR,
+          🏎️ 速度优选,
+          🚑 故障转移,
+          🎯 手选节点,
+        ],
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Apple.png",
     }
   - {
@@ -521,9 +580,6 @@ proxy-groups:
 # 规则匹配
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
-  # 6. 广告拦截（置于核心白名单、AI 与银行风控保护之后，优先于普通代理规则）
-  - GEOSITE,category-ads-all,REJECT
-  - RULE-SET,AdvertisingLite,REJECT
   # 1. 优先处理本地和私有网络及个人直连白名单
   - GEOSITE,private,DIRECT
   - RULE-SET,AgPrivate,DIRECT
@@ -634,13 +690,7 @@ rules:
   - DOMAIN-SUFFIX,identity.apple.com,Apple
   - DOMAIN,time.apple.com,Apple
   - DOMAIN,time-ios.apple.com,Apple
-  # 5) Apple Maps 地图导航与 Wi-Fi/基站辅助快速定位 (定位校验接口优先走 AI)
-  - DOMAIN,gspe1-ssl.ls.apple.com,AI
-  - DOMAIN,gspe19-ssl.ls.apple.com,AI
-  - DOMAIN,gspe35-ssl.ls.apple.com,AI
-  - DOMAIN,gspe79-ssl.ls.apple.com,AI
-  - DOMAIN,configuration.ls.apple.com,AI
-  - DOMAIN,iphone-ld.apple.com,AI
+  # 5) Apple Maps 地图导航与 Wi-Fi/基站辅助快速定位 (定位校验接口 gspe*-ssl / configuration / iphone-ld 已由上方 AgAI 优先路由至 AI)
   - DOMAIN-SUFFIX,ls.apple.com,Apple
   - DOMAIN-SUFFIX,gs-loc.apple.com,Apple
 
@@ -661,6 +711,10 @@ rules:
   - DOMAIN-SUFFIX,paypalobjects.com,PayPal
   - DOMAIN-SUFFIX,braintreegateway.com,PayPal
   - DOMAIN-SUFFIX,braintree-api.com,PayPal
+
+  # 6. 广告拦截（置于核心白名单、AI 与银行风控保护之后，优先于普通代理规则）
+  - GEOSITE,category-ads-all,REJECT
+  - RULE-SET,AdvertisingLite,REJECT
 
   # 7. 极速匹配常用全球服务 (数据面 GMedia + 控制面 🚀 手选主流)
   # GitHub (大文件/Raw走 GMedia，主站走 🚀 手选主流)
@@ -705,7 +759,6 @@ rules:
 
   # 9. Wi-Fi Calling 自定义规则
   - DOMAIN-SUFFIX,epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🚀 手选主流
-  - DOMAIN-SUFFIX,ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🚀 手选主流
   - IP-CIDR,208.54.159.227/32,🚀 手选主流,no-resolve
   - IP-CIDR,208.54.2.163/32,🚀 手选主流,no-resolve
   - IP-CIDR,87.194.0.0/19,🎯 手选节点

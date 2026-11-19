@@ -35,8 +35,6 @@ payload:
   - DOMAIN-SUFFIX,static.cloudflareinsights.com
   - DOMAIN-SUFFIX,cloudflareinsights.com
   - DOMAIN-SUFFIX,arkoselabs.com
-  - DOMAIN-SUFFIX,client-api.arkoselabs.com
-  - DOMAIN-SUFFIX,openai-api.arkoselabs.com
   - DOMAIN-SUFFIX,funcaptcha.com
   - DOMAIN-SUFFIX,funcaptcha.co
   - DOMAIN-SUFFIX,hcaptcha.com
@@ -67,9 +65,7 @@ payload:
   - DOMAIN-SUFFIX,identrust.com
   # 3) 特性开关 (Feature Flags / 地区准入判定) 与核心遥测 (防被去广告 REJECT 导致默认判定地区未开放)
   - DOMAIN-SUFFIX,statsig.com
-  - DOMAIN-SUFFIX,api.statsig.com
   - DOMAIN-SUFFIX,statsigapi.net
-  - DOMAIN-SUFFIX,events.statsigapi.net
   - DOMAIN-SUFFIX,featuregates.org
   - DOMAIN-SUFFIX,featureassets.org
   - DOMAIN-SUFFIX,prodregistryv2.org
@@ -90,13 +86,9 @@ payload:
   - DOMAIN-SUFFIX,segment.com
   - DOMAIN-SUFFIX,amplitude.com
   - DOMAIN-SUFFIX,crisp.chat
-  # 4) 设备指纹、反欺诈风控与前端 GeoIP 地区检测 API (锁定固定美国 IP，防跳 IP 触发风控)
-  - DOMAIN-SUFFIX,fpjs.io
-  - DOMAIN-SUFFIX,fingerprint.com
+  # 4) 设备指纹、反欺诈风控与前端 GeoIP 地区检测 API (锁定固定美国 IP，防跳 IP 触发风控；castle.io 归属 Finance/Banking，fpjs/fingerprint/maxmind 归属主规则手选主流)
   - DOMAIN-SUFFIX,fpnpmcdn.net
-  - DOMAIN-SUFFIX,castle.io
   - DOMAIN-SUFFIX,sardine.ai
-  - DOMAIN-SUFFIX,maxmind.com
   - DOMAIN-SUFFIX,geoip-js.com
   - DOMAIN-SUFFIX,ipqualityscore.com
   - DOMAIN-SUFFIX,seon.io
@@ -122,8 +114,6 @@ payload:
   # ---------------- OpenAI / ChatGPT / Sora / SearchGPT / Operator ----------------
   - DOMAIN-SUFFIX,chat.com
   - DOMAIN-SUFFIX,chatgpt.com
-  - DOMAIN-SUFFIX,ab.chatgpt.com
-  - DOMAIN-SUFFIX,ws.chatgpt.com
   - DOMAIN-SUFFIX,ios.chat.openai.com
   - DOMAIN-SUFFIX,openai.com
   - DOMAIN-SUFFIX,oaistatic.com
@@ -132,9 +122,6 @@ payload:
   - DOMAIN-SUFFIX,searchgpt.com
   # LiveKit 实时语音与多模态视频通信通道 (覆盖全部动态子域)
   - DOMAIN-SUFFIX,livekit.cloud
-  - DOMAIN-SUFFIX,chatgpt.livekit.cloud
-  - DOMAIN-SUFFIX,host.livekit.cloud
-  - DOMAIN-SUFFIX,turn.livekit.cloud
   # CDN & 静态存储
   - DOMAIN-SUFFIX,openai.com.cdn.cloudflare.net
   - DOMAIN,openaiapi-site.azureedge.net
@@ -213,9 +200,7 @@ payload:
 
   # ---------------- xAI / Grok ----------------
   - DOMAIN-SUFFIX,x.ai
-  - DOMAIN-SUFFIX,api.x.ai
   - DOMAIN-SUFFIX,grok.com
-  - DOMAIN-SUFFIX,assets.grok.com
   - DOMAIN-SUFFIX,grok.x.com
 
   # ---------------- AI 编程、软件工程 Agent 与 App 构建平台 ----------------
@@ -240,7 +225,6 @@ payload:
   - DOMAIN-SUFFIX,bingapis.com
   - DOMAIN-SUFFIX,bing.com
   - DOMAIN,copilot-proxy.githubusercontent.com
-  - DOMAIN,copilot-workspace.githubnext.com
   - DOMAIN,copilotprodattachments.blob.core.windows.net
   - DOMAIN,copilot-telemetry-service.githubusercontent.com
   - DOMAIN,copilot-telemetry.githubusercontent.com

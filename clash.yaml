@@ -122,6 +122,8 @@ sniffer:
   skip-domain:
     - "+.apple.com"
     - "+.icloud.com"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
 
 # ===== TUN 模式 =====
 tun:
@@ -157,9 +159,19 @@ dns:
     - "+.srv.nintendo.net"
     - "+.nintendo.net"
     - "+.xboxlive.com"
+    - "+.xboxlive.cn"
     - "+.msftconnecttest.com"
     - "+.msftncsi.com"
     - "teredo.ipv6.microsoft.com"
+    - "+.live.com"
+    - "+.microsoftonline.com"
+    - "+.msauth.net"
+    - "+.msftauth.net"
+    - "+.windowsupdate.com"
+    - "+.delivery.mp.microsoft.com"
+    - "+.emdl.ws.microsoft.com"
+    - "+.update.microsoft.com"
+    - "download.microsoft.com"
   default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
@@ -185,12 +197,20 @@ dns:
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
     "+.smoot.apple.com":
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    "+.mask.icloud.com,+.mask-h2.icloud.com,+.mask-api.icloud.com,+.mask.apple-dns.net,+.mask-api.fe.apple-dns.net,+.icloud-och.com,+.apple-relay.apple.com,+.apple-relay.cloudflare.com,+.apple-relay.fastly-edge.com,+.apple-relay.akamaized.net,gspe1-ssl.ls.apple.com,gspe19-ssl.ls.apple.com,gspe35-ssl.ls.apple.com,gspe79-ssl.ls.apple.com,configuration.ls.apple.com,iphone-ld.apple.com":
+    "+.mask.icloud.com,+.mask-h2.icloud.com,+.mask-api.icloud.com,+.mask.apple-dns.net,+.mask-api.fe.apple-dns.net,+.icloud-och.com,+.apple-relay.apple.com,+.apple-relay.cloudflare.com,+.apple-relay.fastly-edge.com,+.apple-relay.akamaized.net,gspe1-ssl.ls.apple.com,gspe19-ssl.ls.apple.com,gspe35-ssl.ls.apple.com,gspe79-ssl.ls.apple.com,configuration.ls.apple.com,iphone-ld.apple.com,location.microsoft.com":
       ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
-    # 2. 苹果/微软/主机满速下载 CDN 与大陆域名 -> 国内 DoH
+    # 2. 个人直连白名单、苹果/微软/Xbox/主机服务与满速 CDN、Spotify 直连 CDN 及大陆域名 -> 国内 DoH (毫秒级解析防超时，且保障 DIRECT 直连命中国内/亚太节点)
+    "rule-set:AgPrivate":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "+.appldnld.apple.com,+.mesu.apple.com,+.gdmf.apple.com,+.swscan.apple.com,+.swcdn.apple.com,+.swdist.apple.com,+.oscdn.apple.com,+.osrecovery.apple.com,+.mzstatic.com,+.cdn-apple.com,+.aaplimg.com,iosapps.itunes.apple.com,osxapps.itunes.apple.com,upp.itunes.apple.com,supportdownload.apple.com,download.developer.apple.com,+.icloud.com,+.icloud-content.com,+.icloud.com.cn,+.me.com,+.push.apple.com,+.ess.apple.com,+.identity.apple.com,+.gs-loc.apple.com,+.music.apple.com,+.blobstore.apple.com,aod.itunes.apple.com,aod-ssl.itunes.apple.com,audio.itunes.apple.com,audio-ssl.itunes.apple.com,streamingaudio.itunes.apple.com,mvod.itunes.apple.com,musicstatus.itunes.apple.com,play.itunes.apple.com,client-api.itunes.apple.com":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
-    "+.cdn.nintendo.net,+.hac.lp1.d4c.nintendo.net,assets1.xboxlive.com,assets2.xboxlive.com,dlassets.xboxlive.com,dlassets2.xboxlive.com,xvcf1.xboxlive.com,xvcf2.xboxlive.com,+.xboxlive.cn,+.windowsupdate.com,+.delivery.mp.microsoft.com,+.update.microsoft.com,download.microsoft.com,+.officecdn.microsoft.com,+.sfx.ms":
+    "+.cdn.nintendo.net,+.hac.lp1.d4c.nintendo.net,+.xboxlive.com,+.xbox.com,+.xboxservices.com,+.gamepass.com,+.xboxlive.cn,+.msftconnecttest.com,+.msftncsi.com,+.live.com,+.microsoftonline.com,+.msauth.net,+.msftauth.net,+.windowsupdate.com,+.delivery.mp.microsoft.com,+.emdl.ws.microsoft.com,+.update.microsoft.com,download.microsoft.com,+.officecdn.microsoft.com,+.sfx.ms":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "+.spotifycdn.com,+.spotifycdn.net,+.scdn.co,+.audio-ak-spotify-com.akamaized.net,+.audio4-ak-spotify-com.akamaized.net,+.heads4-ak-spotify-com.akamaized.net":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "geosite:microsoft":
+      ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+    "geosite:xbox":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
     "geosite:cn":
       ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
@@ -302,7 +322,24 @@ proxy-groups:
     }
   - {
       name: Apple,
-      <<: *pr,
+      type: select,
+      proxies:
+        [
+          DIRECT,
+          🚀 手选主流,
+          🇺🇸 US+,
+          🇨🇭 CH+,
+          🏴‍☠️ CF,
+          🇺🇸 US,
+          🇭🇰 HK,
+          🇯🇵 JP,
+          🇼🇸 TW,
+          🇸🇬 SG,
+          🇰🇷 KR,
+          🏎️ 速度优选,
+          🚑 故障转移,
+          🎯 手选节点,
+        ],
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Apple.png",
     }
   - {
@@ -400,9 +437,6 @@ proxy-groups:
 # 规则匹配
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
-  # 6. 广告拦截（置于核心白名单、AI 与银行风控保护之后，优先于普通代理规则）
-  - GEOSITE,category-ads-all,REJECT
-  - RULE-SET,AdvertisingLite,REJECT
   # 1. 优先处理本地和私有网络及个人直连白名单
   - GEOSITE,private,DIRECT
   - RULE-SET,AgPrivate,DIRECT
@@ -513,13 +547,7 @@ rules:
   - DOMAIN-SUFFIX,identity.apple.com,Apple
   - DOMAIN,time.apple.com,Apple
   - DOMAIN,time-ios.apple.com,Apple
-  # 5) Apple Maps 地图导航与 Wi-Fi/基站辅助快速定位 (定位校验接口优先走 AI)
-  - DOMAIN,gspe1-ssl.ls.apple.com,AI
-  - DOMAIN,gspe19-ssl.ls.apple.com,AI
-  - DOMAIN,gspe35-ssl.ls.apple.com,AI
-  - DOMAIN,gspe79-ssl.ls.apple.com,AI
-  - DOMAIN,configuration.ls.apple.com,AI
-  - DOMAIN,iphone-ld.apple.com,AI
+  # 5) Apple Maps 地图导航与 Wi-Fi/基站辅助快速定位 (定位校验接口 gspe*-ssl / configuration / iphone-ld 已由上方 AgAI 优先路由至 AI)
   - DOMAIN-SUFFIX,ls.apple.com,Apple
   - DOMAIN-SUFFIX,gs-loc.apple.com,Apple
 
@@ -540,6 +568,10 @@ rules:
   - DOMAIN-SUFFIX,paypalobjects.com,PayPal
   - DOMAIN-SUFFIX,braintreegateway.com,PayPal
   - DOMAIN-SUFFIX,braintree-api.com,PayPal
+
+  # 6. 广告拦截（置于核心白名单、AI 与银行风控保护之后，优先于普通代理规则）
+  - GEOSITE,category-ads-all,REJECT
+  - RULE-SET,AdvertisingLite,REJECT
 
   # 7. 极速匹配常用全球服务 (数据面 GMedia + 控制面 🚀 手选主流)
   # GitHub (大文件/Raw走 GMedia，主站走 🚀 手选主流)
@@ -584,7 +616,6 @@ rules:
 
   # 9. Wi-Fi Calling 自定义规则
   - DOMAIN-SUFFIX,epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🚀 手选主流
-  - DOMAIN-SUFFIX,ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🚀 手选主流
   - IP-CIDR,208.54.159.227/32,🚀 手选主流,no-resolve
   - IP-CIDR,208.54.2.163/32,🚀 手选主流,no-resolve
   - IP-CIDR,87.194.0.0/19,🎯 手选节点

@@ -34,10 +34,9 @@ IP-CIDR,208.67.222.222/32,🚀 手选主流,no-resolve
 IP-CIDR,208.67.220.220/32,🚀 手选主流,no-resolve
 
 # 美国 T-Mobile / Ultra Mobile Wi-Fi Calling
-HOST-SUFFIX,epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🇺🇸 US
-HOST-SUFFIX,ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🇺🇸 US
-IP-CIDR,208.54.159.227/32,🇺🇸 US,no-resolve
-IP-CIDR,208.54.2.163/32,🇺🇸 US,no-resolve
+HOST-SUFFIX,epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,🚀 手选主流
+IP-CIDR,208.54.159.227/32,🚀 手选主流,no-resolve
+IP-CIDR,208.54.2.163/32,🚀 手选主流,no-resolve
 
 # ---------------- 2. 定位服务与防欺诈风控保护 (锁定美国定位) ----------------
 # 浏览器与操作系统网络定位 API (location.googleapis.com 已由下方 googleapis.com 覆盖)
@@ -140,9 +139,13 @@ HOST-SUFFIX,ess.apple.com,Apple
 HOST-SUFFIX,identity.apple.com,Apple
 HOST,time.apple.com,Apple
 HOST,time-ios.apple.com,Apple
-# 5) Apple Maps 地图导航与 Wi-Fi/基站辅助快速定位 (gspe1-ssl / configuration 优先走 AI)
+# 5) Apple Maps 地图导航与 Wi-Fi/基站辅助快速定位 (gspe*-ssl / configuration / iphone-ld 已置顶于 QX_AI.list 走 AI)
 HOST,gspe1-ssl.ls.apple.com,AI
+HOST,gspe19-ssl.ls.apple.com,AI
+HOST,gspe35-ssl.ls.apple.com,AI
+HOST,gspe79-ssl.ls.apple.com,AI
 HOST,configuration.ls.apple.com,AI
+HOST,iphone-ld.apple.com,AI
 HOST-SUFFIX,ls.apple.com,Apple
 HOST-SUFFIX,gs-loc.apple.com,Apple
 
@@ -276,8 +279,8 @@ HOST-SUFFIX,aliyuncs.com,DIRECT
 HOST-SUFFIX,firebaselogging-pa.googleapis.com,DIRECT
 HOST-SUFFIX,keepersecurity.com,DIRECT
 HOST-SUFFIX,oyunfor.com,DIRECT
-HOST-SUFFIX,oracle.com,DIRECT
-HOST-SUFFIX,oraclecloud.com,DIRECT
+# HOST-SUFFIX,oracle.com,DIRECT
+# HOST-SUFFIX,oraclecloud.com,DIRECT
 HOST-SUFFIX,hilton.com,DIRECT
 HOST-SUFFIX,hiltonhonors.com,DIRECT
 HOST-SUFFIX,marriott.com,DIRECT
@@ -286,11 +289,16 @@ HOST-SUFFIX,hp.com,DIRECT
 HOST-SUFFIX,speedtest.net,DIRECT
 HOST-SUFFIX,udemy.com,DIRECT
 HOST-SUFFIX,openvsx.eclipsecontent.org,DIRECT
-# 微软 (Windows/Office)、Xbox 与任天堂 (Switch) 游戏下载及系统更新 CDN 强制 DIRECT (跑满国内宽带，省代理流量)
+# 微软 (Windows/Office)、Xbox 与任天堂 (Switch) 联网探测、游戏下载及系统更新 CDN 强制 DIRECT (跑满国内宽带，省代理流量)
+HOST-SUFFIX,msftconnecttest.com,DIRECT
+HOST-SUFFIX,msftncsi.com,DIRECT
 HOST-SUFFIX,cdn.nintendo.net,DIRECT
 HOST-SUFFIX,hac.lp1.d4c.nintendo.net,DIRECT
 HOST,assets1.xboxlive.com,DIRECT
 HOST,assets2.xboxlive.com,DIRECT
+HOST,d1.xboxlive.com,DIRECT
+HOST,d2.xboxlive.com,DIRECT
+HOST,x1.xboxlive.com,DIRECT
 HOST,dlassets.xboxlive.com,DIRECT
 HOST,dlassets2.xboxlive.com,DIRECT
 HOST,xvcf1.xboxlive.com,DIRECT
@@ -298,6 +306,7 @@ HOST,xvcf2.xboxlive.com,DIRECT
 HOST-SUFFIX,xboxlive.cn,DIRECT
 HOST-SUFFIX,windowsupdate.com,DIRECT
 HOST-SUFFIX,delivery.mp.microsoft.com,DIRECT
+HOST-SUFFIX,emdl.ws.microsoft.com,DIRECT
 HOST-SUFFIX,update.microsoft.com,DIRECT
 HOST,download.microsoft.com,DIRECT
 HOST-SUFFIX,officecdn.microsoft.com,DIRECT

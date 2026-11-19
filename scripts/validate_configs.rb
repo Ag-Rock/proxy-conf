@@ -103,7 +103,7 @@ configs.each_with_index do |config, index|
     'AI' => ['🇺🇸 US+', '🇨🇭 CH+', '🇺🇸 US', '🇯🇵 JP', '🇼🇸 TW', '🇸🇬 SG', '🇰🇷 KR'] }.each do |name, refs|
     check(groups.fetch(name).values_at('type', 'proxies') == ['select', refs], "#{name} candidates")
   end
-  { 'AI' => '🇺🇸 US+', 'AppleAI' => '🇺🇸 US+', 'Apple' => MAIN, 'AppleProxy' => MAIN }.each do |name, first|
+  { 'AI' => '🇺🇸 US+', 'AppleAI' => '🇺🇸 US+', 'Apple' => 'DIRECT', 'AppleProxy' => MAIN }.each do |name, first|
     check(groups.fetch(name).fetch('proxies').first == first, "#{name} default")
   end
   check(rules.first(2) == %w[GEOSITE,private,DIRECT RULE-SET,AgPrivate,DIRECT], 'private precedence')
@@ -165,7 +165,12 @@ cases = [
   ['paypalobjects.com', 'TCP/443', 'PayPal'],
   ['bochk.com', 'TCP/443', 'DIRECT'],
   ['spotifycdn.com', 'TCP/443', 'DIRECT'],
-  ['castle.io', 'TCP/443', 'AI']
+  ['castle.io', 'TCP/443', 'Banking'],
+  ['fpjs.io', 'TCP/443', MAIN],
+  ['fingerprint.com', 'TCP/443', MAIN],
+  ['maxmind.com', 'TCP/443', MAIN],
+  ['msftconnecttest.com', 'TCP/80', 'DIRECT'],
+  ['dns.msftncsi.com', 'TCP/80', 'DIRECT']
 ]
 INTERCOM.each do |host|
   cases << [host, 'TCP/443', MAIN]

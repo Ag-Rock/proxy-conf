@@ -14,15 +14,15 @@
 | :--------------------------------------------- | :---------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`clash.yaml`](./clash.yaml)                   | 主配置      | 全局       | Mihomo (Clash Meta) 完整主配置文件。顶部含脱敏占位节点（用于通过客户端订阅校验），支持通过本地 `Merge` 或 OpenClash 覆写注入真实节点；内置 Fake-IP、精细化 `nameserver-policy` DoH 分流、UDP 443 按业务规则分流；纯域名与纯 IP 规则集全量采用 `.mrs` 二进制极速基数树（16 域名集 + 3 IP 集），减少文本规则解析开销。                                              |
 | [`stash.yaml`](./stash.yaml)                   | 主配置      | 全局       | Stash (iOS / macOS) 远程订阅专用主配置文件（与 `clash.yaml` 规则 1:1 对齐）。针对 Stash 引擎专门适配了独立 `nameserver-policy` DoH 映射、`default-nameserver` 引导解析及自动检测组 `lazy: true`、600 秒检测间隔；远程规则集针对 Stash 定制为 `format: yaml` 基数树格式，条目加载情况以客户端检查结果为准，支持通过本地 `.stoverride`（`#!replace`）注入真实节点。 |
-| [`AI.yaml`](./AI.yaml)                         | `classical` | `AI`       | 全球人工智能与核心验证分流规则集（与 `QX_AI.list` 共享主要业务条目）。涵盖 Apple Intelligence、iCloud 专用代理、主流大模型、AI 编程 Agent 及人机验证/OAuth/特性开关域名。                                                                                                                                                                                         |
+| [`AI.yaml`](./AI.yaml)                         | `classical` | `AI`       | 全球人工智能与核心验证分流规则集（与 `QX_AI.list` 1:1 完全同步）。涵盖 Apple Intelligence、iCloud 专用代理、主流大模型、AI 编程 Agent 及人机验证/OAuth/特性开关域名。                                                                                                                                                                                             |
 | [`Finance.yaml`](./Finance.yaml)               | `classical` | `Banking`  | 国际数字银行、欧洲电子钱包、外汇券商、加密货币交易所及银行级 KYC/反欺诈组件规则集（与 `Finance.list` 保持 1:1 同步）。                                                                                                                                                                                                                                            |
-| [`Private_DIRECT.yaml`](./Private_DIRECT.yaml) | `classical` | `DIRECT`   | 个人定制高优先级直连白名单。包含香港金融机构（BOCHK/HSBC HK/ZA Bank/AlipayHK 等）、常用云服务，以及 Windows/Office/Xbox/Switch 满速下载更新 CDN。                                                                                                                                                                                                                 |
+| [`Private_DIRECT.yaml`](./Private_DIRECT.yaml) | `classical` | `DIRECT`   | 个人定制高优先级直连白名单。包含香港金融机构（BOCHK/HSBC HK/ZA Bank/AlipayHK 等）、常用云服务，以及微软联网探测（`msftconnecttest.com` / `msftncsi.com`）与 Windows/Office/Xbox/Switch 满速下载更新 CDN。                                                                                                                                                                     |
 
 ### 2. Quantumult X 规则集与脚本资源
 
 | 文件名                                       | 类型      | 对应策略组 | 说明                                                                                                                                                                                                                                                                |
 | :------------------------------------------- | :-------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [`QX_AI.list`](./QX_AI.list)                 | `filter`  | `AI`       | Quantumult X 全球人工智能与核心服务分流规则集（与 `AI.yaml` 共享主要业务条目，存在端别差异），最高优先级置顶防截胡与防去广告误杀。                                                                                                                                  |
+| [`QX_AI.list`](./QX_AI.list)                 | `filter`  | `AI`       | Quantumult X 全球人工智能与核心服务分流规则集（与 `AI.yaml` 1:1 完全同步），最高优先级置顶防截胡与防去广告误杀。                                                                                                                                                |
 | [`Private.list`](./Private.list)             | `filter`  | 多策略组   | Quantumult X 个人核心定制总表（高优先级 `inserted-resource`）。集成海外加密 DNS、Wi-Fi Calling、防欺诈指纹保护、Apple 双策略组精细分流、全球主流服务「控制面 + 数据面」分离规则及直连白名单（与 YAML 端共享主要业务分流目标；远程通用规则来源及顺序存在端别差异）。 |
 | [`Finance.list`](./Finance.list)             | `filter`  | `Banking`  | Quantumult X 国际数字银行、欧洲电子钱包与加密货币分流规则集（与 `Finance.yaml` 1:1 同步）。                                                                                                                                                                         |
 | [`AllInOne.conf`](./AllInOne.conf)           | `rewrite` | -          | Quantumult X 综合重写（Rewrite）、重定向与去广告规则合集。                                                                                                                                                                                                          |
@@ -53,7 +53,7 @@
 
 全球人工智能与核心验证分流规则集（`AI.yaml` / `QX_AI.list`）提供全品类 AI 及底层鉴权覆盖，解决常见的“登录死循环”、“人机验证失败”与“地区不支持”问题：
 
-- **规则优先级调整**：在 `clash.yaml` 与 `stash.yaml` 中，已将广告拦截规则（`GEOSITE,category-ads-all,REJECT` 与 `RULE-SET,AdvertisingLite,REJECT`）提升至 `rules` 最前，优先切断已知的广告与遥测追踪流量；AI 核心业务与验证域名由后续的 `AgAI` 规则集承接。在 Quantumult X 端，仍保持 `QX_AI.list` 置顶以防范第三方去广告规则误杀的端别差异。
+- **规则优先级保护**：在 `clash.yaml`、`stash.yaml` 与 Quantumult X 中，直连白名单（`AgPrivate`）、AI 核心验证（`AgAI` / `AppleAI` / `PrivateRelay`）、Apple 生态以及国际金融风控保护（`Finance`）均**置于广告拦截规则（`GEOSITE,category-ads-all,REJECT` 与 `RULE-SET,AdvertisingLite,REJECT`）之前**，防止 AI 遥测、特性开关或银行风控/客服组件被去广告规则提前误杀；随后由广告拦截规则切断常规广告追踪流量。
 - **底层鉴权与风控白名单**：完整收录 Cloudflare Turnstile / Arkose Labs / hCaptcha / reCAPTCHA 人机验证，Auth0 / Okta / Clerk / WorkOS / Supabase 等 OAuth 统一身份认证组件，以及 Statsig / LaunchDarkly / Datadog / Sentry 等特性开关（Feature Flags）与核心遥测域名，防止被去广告规则误杀导致前端默认判定“所在地区未开放”。
 - **全品类 AI 覆盖**：涵盖 OpenAI (ChatGPT/Sora/LiveKit)、Google AI (Gemini/NotebookLM/AI Studio/DeepMind)、Anthropic (Claude)、xAI (Grok)、AI 编程与软件工程 Agent（Cursor / Windsurf / Copilot / Antigravity / Trae / Devin / Lovable / Bolt / v0 等）、AI 搜索与学术（Perplexity / Genspark / Felo / Consensus）、多模态生成（Midjourney / Runway / Luma / Suno / ElevenLabs）、推理算力平台（OpenRouter / Groq / Hugging Face）及全球 `.ai` 顶级域名兜底。
 
@@ -68,7 +68,11 @@
 
 ### 5. DNS 分流与端别差异
 
-- **Clash / Stash**：保留国内默认 DoH 和 Apple/CDN 国内解析，AppleAI、Private Relay、AI 和海外 geosite 使用 Cloudflare/Google DoH。AppleAI 新增 `cp4.cloudflare.com`、`guzzoni.apple.com` 和 `+.smoot.apple.com` 定向解析。Clash 使用 `respect-rules`；Stash 保留 `follow-rule`、独立映射及引导 DNS。[Stash 官方 DNS 文档](https://stash.wiki/en/features/dns-server)
+- **Clash / Stash**：
+  - **海外纯净 DoH（第 1 优先级与兜底）**：`rule-set:AgAI`、`geosite:category-ai-!cn`、`+.ai`、AppleAI（含 `cp4.cloudflare.com`、`guzzoni.apple.com`、`+.smoot.apple.com`）、iCloud Private Relay、Apple 定位校验（`gspe*-ssl.ls.apple.com`）与 `location.microsoft.com` 置顶使用 Cloudflare / Google DoH；其余未命中国内规则的非大陆域名由底部 `geosite:geolocation-!cn` 兜底使用海外 DoH。
+  - **国内高速 DoH（直连白名单、Apple / 微软 / Xbox 主机与流媒体直连 CDN）**：`rule-set:AgPrivate`、Apple 国内高速服务与 CDN、微软及 Xbox 全系服务（`geosite:microsoft`、`geosite:xbox`、`+.xboxlive.com`、`+.live.com`、`+.microsoftonline.com`、`+.msauth.net`、`+.msftauth.net` 等）、联网探测（`+.msftconnecttest.com`、`+.msftncsi.com`）、主机游戏满速下载 CDN 以及 Spotify 直连音频流 CDN（`+.spotifycdn.com`、`+.scdn.co` 等）统一使用阿里 / 腾讯 DoH 解析。
+  - **Xbox 主机与 Microsoft 直连/代理双模兼容**：将微软账户登录、Xbox 服务与下载 CDN 纳入 `fake-ip-filter` 与国内 DoH，并在 `sniffer.skip-domain` 中跳过 `msftconnecttest.com` / `msftncsi.com` 明文探测（保留 `xboxlive.com` 嗅探）。既消除 OpenClash 开启 `respect-rules: true` 时因跨代理 DoH 握手延迟导致的 Xbox「DNS 无法解析服务器名称」报错，又保障 `Microsoft` 策略组选 `DIRECT` 时直连国内/亚太低延迟节点秒登录 Microsoft 账户，`Game` 策略组选 `🇯🇵 JP` 时正常分流至日服商店与联机。
+  - Clash 使用 `respect-rules`；Stash 保留 `follow-rule`、独立展开映射及引导 DNS。[Stash 官方 DNS 文档](https://stash.wiki/en/features/dns-server)
 - **QX 默认解析**：使用阿里、腾讯 DoH；启用 `no-system` / `no-ipv6`。移除配置 DoH 后不会充当默认备用的普通 DNS 条目。Apple、微软和游戏 CDN 的定向 DNS 改为阿里 DoH，补齐根域名和子域名映射。
 - **QX 海外定向解析**：从 QX_AI、Finance、Private 中属于 AI / Banking 的明确域名及手选主流下的五个 Intercom 域名生成 Cloudflare DoH 映射，包括 Private Relay、Apple Intelligence 和 `.ai`。根域名与子域名分别声明，同一上游的重复父子域名会合并。
 - **边界**：QX 的关键词规则、远程通用规则及 geosite 不会被自动转换为 DNS 通配规则；未显式覆盖的域名仍用默认 DoH。代理连接通常由节点端解析目标域名，不能把本地 DNS 查询结果当作最终代理目标 IP。QX 内置 DNS 请求不保证服从普通代理规则，因此不承诺海外 DoH 自动通过节点访问；需要在实际 Wi-Fi/蜂窝网络验证可达性。[QX 官方示例](https://github.com/crossutility/Quantumult-X/blob/master/sample.conf)
@@ -425,7 +429,7 @@ https://raw.githubusercontent.com/Ag-Rock/proxy-conf/main/AllInOne.conf, tag=All
 
 ### UDP 443
 
-Clash / Stash 的 UDP 443 由置顶的广告拦截规则优先处理，随后由 AppleAI、PrivateRelay、AI、媒体、国内直连和通用兜底规则依次分类。已识别的广告流量直接按 REJECT 拒绝。UDP 转发取决于节点能力及 TUN、透明代理或 Network Extension 是否捕获流量。QX 保持自身的 UDP 配置。
+Clash / Stash 的 UDP 443 由置顶的直连白名单（`private` / `AgPrivate`）、PrivateRelay、AppleAI、AI、Apple 生态与金融风控保护规则优先匹配，随后经广告拦截规则（`category-ads-all` / `AdvertisingLite`）过滤已识别的广告流量（按 `REJECT` 拒绝），其余流量由媒体、国内直连和通用兜底规则依次分类。UDP 转发取决于节点能力及 TUN、透明代理或 Network Extension 是否捕获流量。QX 保持自身的 UDP 配置。
 
 ### 实机排查结论与 iOS / OpenClash 最佳实践
 
@@ -451,6 +455,6 @@ ruby scripts/validate_configs.rb
 git diff --check
 ```
 
-本次实测每端有 221 条主规则、26 个策略组、24 个规则提供者。脚本检查主规则同序、组引用、循环、DNS 定向映射和本地域名分流。默认使用最小广告样例，传入下载的 `AdvertisingLite.list` 可改用实际条目。Mihomo v1.19.32 已在临时目录通过 `-t`，并以本地模拟上游验证 DNS 策略选择。Stash 原生导入、OpenClash 生效配置、iPhone 系统功能和真实节点 UDP 转发仍需实机验证。
+本次实测每端有 214 条主规则、26 个策略组、24 个规则提供者。脚本检查主规则同序、组引用、循环、DNS 定向映射和本地域名分流（共 39 项分流断言）。默认使用最小广告样例，传入下载的 `AdvertisingLite.list` 可改用实际条目。Mihomo v1.19.32 已在临时目录通过 `-t`，并以本地模拟上游验证 DNS 策略选择。Stash 原生导入、OpenClash 生效配置、iPhone 系统功能和真实节点 UDP 转发仍需实机验证。
 
 控制器配置保留公开占位值。部署时需核对实际监听范围、路由器防火墙、仪表盘依赖及本地私有密钥覆写，控制接口安全整改待完成。
