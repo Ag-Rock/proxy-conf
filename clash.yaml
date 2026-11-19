@@ -145,6 +145,8 @@ dns:
   fake-ip-filter:
     - "+.local"
     - "+.lan"
+    - "+.yinlei.live"
+    - "+.yinlei.art"
     - "localhost.ptlogin2.qq.com"
     - "*.stun.*.*"
     - "*.stun.*.*.*"
