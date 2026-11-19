@@ -368,15 +368,17 @@ proxy-groups:
   - {
       name: 🇺🇸 US+,
       type: url-test,
+      lazy: true,
       tolerance: 50,
-      interval: 300,
+      interval: 600,
       proxies: [🇺🇸 美国-1, 🇺🇸 美国-2, 🇺🇸 美国-3, 🇺🇸 美国-4, 🇺🇸 美国-1VM],
     }
   - {
       name: 🇨🇭 CH+,
       type: url-test,
+      lazy: true,
       tolerance: 50,
-      interval: 300,
+      interval: 600,
       proxies: [🇨🇭 瑞士-1, 🇨🇭 瑞士-2],
     }
   - {
