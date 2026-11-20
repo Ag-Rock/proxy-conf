@@ -57,16 +57,6 @@ proxies:
       alterId: 0,
       cipher: auto,
     }
-  - {
-      name: 🇺🇸 美国-1VM,
-      type: vmess,
-      server: 127.0.0.1,
-      port: 8444,
-      uuid: 00000000-0000-0000-0000-000000000000,
-      alterId: 0,
-      cipher: auto,
-      udp: true,
-    }
 # ===== 全局配置 =====
 port: 7890
 socks-port: 7891
@@ -371,7 +361,7 @@ proxy-groups:
       lazy: true,
       tolerance: 50,
       interval: 600,
-      proxies: [🇺🇸 美国-1, 🇺🇸 美国-2, 🇺🇸 美国-3, 🇺🇸 美国-4, 🇺🇸 美国-1VM],
+      proxies: [🇺🇸 美国-1, 🇺🇸 美国-2, 🇺🇸 美国-3, 🇺🇸 美国-4],
     }
   - {
       name: 🇨🇭 CH+,
