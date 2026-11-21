@@ -99,15 +99,17 @@ configs.each_with_index do |config, index|
     check((used - config.fetch('proxy-providers').keys).empty?, "missing proxy provider in #{name}")
     visit(name, groups, {}, done)
   end
-  { 'AppleAI' => ['🇺🇸 US+', '🇨🇭 CH+', '🇺🇸 US', '🇯🇵 JP', '🇼🇸 TW', '🇸🇬 SG', '🇰🇷 KR'],
-    'AI' => ['🇺🇸 US+', '🇨🇭 CH+', '🇺🇸 US', '🇯🇵 JP', '🇼🇸 TW', '🇸🇬 SG', '🇰🇷 KR'] }.each do |name, refs|
+  { 'AppleAI' => [MAIN, '🇺🇸 US+', '🇨🇭 CH+', '🇺🇸 US', '🇯🇵 JP', '🇼🇸 TW', '🇸🇬 SG', '🇰🇷 KR'],
+    'AI' => ['🇺🇸 US+', '🇨🇭 CH+', '🇺🇸 US', '🇯🇵 JP', '🇼🇸 TW', '🇸🇬 SG', '🇰🇷 KR'],
+    'GMedia' => ['🏴‍☠️ CF', '🇺🇸 US', '🇯🇵 JP', '🇭🇰 HK', '🇼🇸 TW', '🇸🇬 SG', '🇰🇷 KR'],
+    'Apple' => ['DIRECT', '🇺🇸 US+', '🇨🇭 CH+', '🇺🇸 US', '🇭🇰 HK', '🇯🇵 JP', '🎯 手选节点'] }.each do |name, refs|
     check(groups.fetch(name).values_at('type', 'proxies') == ['select', refs], "#{name} candidates")
   end
-  { 'AI' => '🇺🇸 US+', 'AppleAI' => '🇺🇸 US+', 'Apple' => 'DIRECT', 'AppleProxy' => MAIN }.each do |name, first|
+  { 'AI' => '🇺🇸 US+', 'AppleAI' => MAIN, 'Apple' => 'DIRECT', 'AppleProxy' => MAIN, 'GMedia' => '🏴‍☠️ CF' }.each do |name, first|
     check(groups.fetch(name).fetch('proxies').first == first, "#{name} default")
   end
   check(rules.first(2) == %w[GEOSITE,private,DIRECT RULE-SET,AgPrivate,DIRECT], 'private precedence')
-  check(rules.last == 'MATCH,Global', 'MATCH fallback')
+  check(rules.last == "MATCH,#{MAIN}", 'MATCH fallback')
   ad_index = rules.index('GEOSITE,category-ads-all,REJECT')
   ai_index = rules.index('RULE-SET,AgAI,AI')
   finance_index = rules.index('RULE-SET,Finance,Banking')
@@ -160,7 +162,7 @@ cases = [
   ['play-edge.itunes.apple.com', 'TCP/443', 'AppleProxy'],
   ['hls-svod.itunes.apple.com', 'TCP/443', 'GMedia'],
   ['music.apple.com', 'TCP/443', 'Apple'],
-  ['unlisted-overseas.example', 'UDP/443', 'Global'],
+  ['unlisted-overseas.example', 'UDP/443', MAIN],
   ['wise.com', 'TCP/443', 'Banking'],
   ['paypalobjects.com', 'TCP/443', 'PayPal'],
   ['bochk.com', 'TCP/443', 'DIRECT'],

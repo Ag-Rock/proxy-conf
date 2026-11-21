@@ -229,8 +229,6 @@ pr:
         🇼🇸 TW,
         🇸🇬 SG,
         🇰🇷 KR,
-        🏎️ 速度优选,
-        🚑 故障转移,
         🎯 手选节点,
         DIRECT,
       ],
@@ -243,35 +241,31 @@ proxy-groups:
       proxies: [🇺🇸 US+, 🇨🇭 CH+, 🇺🇸 US, 🇭🇰 HK, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR],
     }
   - {
-      name: 🏎️ 速度优选,
-      type: url-test,
-      use: [KKK],
-      lazy: true,
-      tolerance: 50,
-      interval: 300,
-      filter: "(?=.*(美|US|(?i)States|American|港|HK|(?i)Hong|日本|JP|🇯🇵|(?i)Japan|台|TW|(?i)Taiwan|新|狮|獅|SG|(?i)Singapore|韩|韓|朝|KR|(?i)Korea))^((?!(免费|试用|更新|海外|失联|流量)).)*$",
-    }
-  - {
-      name: 🚑 故障转移,
-      type: fallback,
-      interval: 300,
-      proxies: [🇺🇸 US+, 🇨🇭 CH+, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR, 🇭🇰 HK],
-    }
-  - {
       name: 🎯 手选节点,
       type: select,
       use: [KKK],
       include-all: false,
       filter: "^((?!(美|US|日本|JP|🇯🇵|台|TW|港|HK|韩|韓|朝|KR|新加坡|狮|獅|SG|瑞士|免费|试用|更新|海外|失联|流量)).)*$",
     }
-  - {
-      name: Global,
-      <<: *pr,
-      icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Global.png",
-    }
+  # - {
+  #     name: 🏎️ 速度优选,
+  #     type: url-test,
+  #     use: [KKK],
+  #     lazy: true,
+  #     tolerance: 50,
+  #     interval: 300,
+  #     filter: "(?=.*(美|US|(?i)States|American|港|HK|(?i)Hong|日本|JP|🇯🇵|(?i)Japan|台|TW|(?i)Taiwan|新|狮|獅|SG|(?i)Singapore|韩|韓|朝|KR|(?i)Korea))^((?!(免费|试用|更新|海外|失联|流量)).)*$",
+  #   }
+  # - {
+  #     name: 🚑 故障转移,
+  #     type: fallback,
+  #     interval: 300,
+  #     proxies: [🇺🇸 US+, 🇨🇭 CH+, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR, 🇭🇰 HK],
+  #   }
   - {
       name: GMedia,
-      <<: *pr,
+      type: select,
+      proxies: [🏴‍☠️ CF, 🇺🇸 US, 🇯🇵 JP, 🇭🇰 HK, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR],
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Pornhub.png",
     }
   - {
@@ -299,7 +293,7 @@ proxy-groups:
   - {
       name: AppleAI,
       type: select,
-      proxies: [🇺🇸 US+, 🇨🇭 CH+, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR],
+      proxies: [🚀 手选主流, 🇺🇸 US+, 🇨🇭 CH+, 🇺🇸 US, 🇯🇵 JP, 🇼🇸 TW, 🇸🇬 SG, 🇰🇷 KR],
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Apple.png",
     }
   - {
@@ -316,22 +310,7 @@ proxy-groups:
       name: Apple,
       type: select,
       proxies:
-        [
-          DIRECT,
-          🚀 手选主流,
-          🇺🇸 US+,
-          🇨🇭 CH+,
-          🏴‍☠️ CF,
-          🇺🇸 US,
-          🇭🇰 HK,
-          🇯🇵 JP,
-          🇼🇸 TW,
-          🇸🇬 SG,
-          🇰🇷 KR,
-          🏎️ 速度优选,
-          🚑 故障转移,
-          🎯 手选节点,
-        ],
+        [DIRECT, 🇺🇸 US+, 🇨🇭 CH+, 🇺🇸 US, 🇭🇰 HK, 🇯🇵 JP, 🎯 手选节点 ],
       icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/refs/heads/main/Icon/Color/Large/Apple.png",
     }
   - {
@@ -703,9 +682,9 @@ rules:
   - RULE-SET,Nintendo_domain,Game
   - RULE-SET,Xbox_domain,Game
   - RULE-SET,Microsoft_domain,Microsoft
-  - RULE-SET,SpeedTest_domain,Global
-  - RULE-SET,GFW_domain,Global
-  - RULE-SET,geolocation-!cn,Global
+  - RULE-SET,SpeedTest_domain,🚀 手选主流
+  - RULE-SET,GFW_domain,🚀 手选主流
+  - RULE-SET,geolocation-!cn,🚀 手选主流
 
   # 15. IP 规则与国内直连兜底
   - RULE-SET,google_ip,Google,no-resolve
@@ -713,7 +692,7 @@ rules:
   - RULE-SET,telegram_ip,GMedia,no-resolve
   - GEOSITE,cn,DIRECT
   - GEOIP,cn,DIRECT
-  - MATCH,Global
+  - MATCH,🚀 手选主流
 
 # 规则集
 rule-anchor:
